@@ -15,7 +15,7 @@ class GameController {
   drawText() {
     ctx.fillStyle = 'red';
     ctx.font = '48px serif';
-    ctx.fillText('Hello world', this.x, canvas.height / 2);
+    ctx.fillText('goodbye world', this.x, canvas.height / 2);
   }
 
   clearScreen() {
