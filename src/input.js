@@ -46,25 +46,26 @@ class InputControl {
   }
 
   getKey() {
-    document.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      let touch = e.touches[0];
+    document.addEventListener(
+      "touchstart",
+      e => {
+        e.preventDefault();
+        let touch = e.touches[0];
 
-      if (touch.pageX < 100) {
-        this.pressLeft();
-      }
-      else if (touch.pageX >= 100 && touch.pageX < 400) {
-        this.pressRight();
-      }
-      else if (touch.pageX >= 400 && touch.pageX < 850) {
-        this.pressZ();
-      }
-      else if (touch.pageX >= 850) {
-        this.pressX();
-      }
-    }, false);
+        if (touch.pageX < 100) {
+          this.pressLeft();
+        } else if (touch.pageX >= 100 && touch.pageX < 400) {
+          this.pressRight();
+        } else if (touch.pageX >= 400 && touch.pageX < 850) {
+          this.pressZ();
+        } else if (touch.pageX >= 850) {
+          this.pressX();
+        }
+      },
+      false
+    );
 
-    let touchEnd = (e) => {
+    let touchEnd = e => {
       e.preventDefault();
 
       this.releaseLeft();
@@ -73,75 +74,75 @@ class InputControl {
       this.releaseX();
     };
 
-    document.addEventListener('touchend', touchEnd, false);
-    document.addEventListener('touchcancel', touchEnd, false);
+    document.addEventListener("touchend", touchEnd, false);
+    document.addEventListener("touchcancel", touchEnd, false);
 
-    let keydown = (event) => {
+    let keydown = event => {
       switch (event.which) {
-      case this.LEFT_KEY:
-        this.pressLeft();
-        break;
-      case this.RIGHT_KEY:
-        this.pressRight();
-        break;
-      case this.UP_KEY:
-        this.pressUp();
-        break;
-      case this.DOWN_KEY:
-        this.pressDown();
-        break;
-      case this.Z_KEY:
-        this.pressZ();
-        break;
-      case this.DVORAK_Z_KEY:
-        this.pressZ();
-        break;
-      case this.DVORAK_Z_KEY_FIREFOX:
-        this.pressZ();
-        break;
-      case this.X_KEY:
-        this.pressX();
-        break;
-      case this.DVORAK_X_KEY:
-        this.pressX();
-        break;
+        case this.LEFT_KEY:
+          this.pressLeft();
+          break;
+        case this.RIGHT_KEY:
+          this.pressRight();
+          break;
+        case this.UP_KEY:
+          this.pressUp();
+          break;
+        case this.DOWN_KEY:
+          this.pressDown();
+          break;
+        case this.Z_KEY:
+          this.pressZ();
+          break;
+        case this.DVORAK_Z_KEY:
+          this.pressZ();
+          break;
+        case this.DVORAK_Z_KEY_FIREFOX:
+          this.pressZ();
+          break;
+        case this.X_KEY:
+          this.pressX();
+          break;
+        case this.DVORAK_X_KEY:
+          this.pressX();
+          break;
       }
     };
 
-    let keyup = (event) => {
+    let keyup = event => {
       switch (event.which) {
-      case this.LEFT_KEY:
-        this.releaseLeft();
-        break;
-      case this.RIGHT_KEY:
-        this.releaseRight();
-        break;
-      case this.DOWN_KEY:
-        this.releaseDown();
-        break;
-      case this.UP_KEY:
-        this.releaseUp();
-        break;
-      case this.Z_KEY:
-        this.releaseZ();
-        break;
-      case this.DVORAK_Z_KEY:
-        this.releaseZ();
-        break;
-      case this.DVORAK_Z_KEY_FIREFOX:
-        this.releaseZ();
-        break;
-      case this.X_KEY:
-        this.releaseX();
-        break;
-      case this.DVORAK_X_KEY:
-        this.releaseX();
-        break;
+        case this.LEFT_KEY:
+          this.releaseLeft();
+          break;
+        case this.RIGHT_KEY:
+          this.releaseRight();
+          break;
+        case this.DOWN_KEY:
+          this.releaseDown();
+          break;
+        case this.UP_KEY:
+          this.releaseUp();
+          break;
+        case this.Z_KEY:
+          this.releaseZ();
+          break;
+        case this.DVORAK_Z_KEY:
+          this.releaseZ();
+          break;
+        case this.DVORAK_Z_KEY_FIREFOX:
+          this.releaseZ();
+          break;
+        case this.X_KEY:
+          this.releaseX();
+          break;
+        case this.DVORAK_X_KEY:
+          this.releaseX();
+          break;
       }
     };
 
-    document.addEventListener('keydown', keydown, false);
-    document.addEventListener('keyup', keyup, false);
+    document.addEventListener("keydown", keydown, false);
+    document.addEventListener("keyup", keyup, false);
   }
 
   pressLeft() {
