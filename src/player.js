@@ -6,8 +6,18 @@ class Player {
   }
 
   update(control) {
-    let horizontal = control.right - control.left;
-    let vertical = control.down - control.up;
+    this.updateX(control);
+    this.updateY(control);
+  }
+
+  draw() {
+    ctx.fillStyle = "red";
+    ctx.fillRect(this.x, this.y, 20, 20);
+  }
+
+  updateX(control) {
+    const horizontal = control.right - control.left;
+    const vertical = control.down - control.up;
     if (horizontal) {
       this.x += this.moveSpeed * horizontal;
     } else if (vertical) {
@@ -15,8 +25,7 @@ class Player {
     }
   }
 
-  draw() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x, this.y, 20, 20);
+  updateY(control) {
+
   }
 }

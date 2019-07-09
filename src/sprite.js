@@ -1,32 +1,3 @@
-class Block {
-  constructor(x, y, sprite, colors) {
-    this.x = x;
-    this.y = y;
-    this.frame = 0;
-    this.colors = colors;
-    this.sprite = sprite;
-  }
-
-  draw() {
-    const pixelSize = 5;
-    let img = this.sprite[this.frame];
-    for (let row = 0; row < img.length; row++) {
-      let currentrow = img[row];
-      for (let col = 0; col < currentrow.length; col++) {
-        if (currentrow[col] == ".") continue;
-        let color = currentrow[col];
-        ctx.fillStyle = this.colors[color];
-        ctx.fillRect(this.x + col * pixelSize, this.y + row * pixelSize, pixelSize, pixelSize);
-      }
-    }
-  }
-  increaseFrame() {
-    this.frame++;
-    this.frame %= 2;
-  }
-}
-
-
 const colors = {
   c1: [0, "#a80020", "#f83800", "#f8d878", "#f8b800"],
   c2: [0, "#f8d878", "#00a800", "#006800", "#f83800"]
@@ -36,6 +7,8 @@ const sprite = {
   pallet: {
     a: colors.c1,
     b: colors.c2,
+    c: 0,
+    d: 0
   },
 
   img: {
@@ -86,3 +59,5 @@ const sprite = {
     ]
   }
 };
+
+}
