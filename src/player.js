@@ -1,18 +1,17 @@
 class Player {
   constructor(x, y) {
+    this.moveSpeed = 2
     this.x = x;
     this.y = y;
   }
 
   update(control) {
-    if (control.right) {
-      this.x += 1;
-    } else if (control.left) {
-      this.x -= 1;
-    } else if (control.up) {
-      this.y -= 1;
-    } else if (control.down) {
-      this.y += 1;
+	let horizontal = control.right - control.left;
+	let vertical   = control.down  - control.up  ;
+    if (horizontal) {
+      this.x += this.moveSpeed * horizontal;
+    }else if (vertical){
+      this.y += this.moveSpeed * vertical;
     }
   }
 
