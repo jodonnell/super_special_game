@@ -1,21 +1,16 @@
 class GameController {
-  constructor() {
-    this.x = 20;
+  constructor(control) {
+    this.control = control;
+    this.player = new Player(200, 200);
   }
 
   update() {
-    this.x = Math.floor(Math.random() * canvas.width);
+    this.player.update(this.control);
   }
 
   draw() {
     this.clearScreen();
-    this.drawText();
-  }
-
-  drawText() {
-    ctx.fillStyle = 'red';
-    ctx.font = '48px serif';
-    ctx.fillText('goodbye world', this.x, canvas.height / 2);
+    this.player.draw();
   }
 
   clearScreen() {
