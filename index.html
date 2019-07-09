@@ -25,12 +25,13 @@
        requestAnimationFrame(mainloop);
      }
 
+     canvas.width = 800;
+     canvas.height = 600;
+
      const input = new InputControl()
      const gameController = new GameController(input);
      mainloop();
 
-     canvas.width = window.innerWidth - 20;
-     canvas.height = window.innerHeight - 20;
     </script>
   </body>
 </HTML>

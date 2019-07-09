@@ -16,7 +16,12 @@ class Block {
         if (currentrow[col] == ".") continue;
         let color = currentrow[col];
         ctx.fillStyle = this.colors[color];
-        ctx.fillRect(this.x + col * pixelSize, this.y + row * pixelSize, pixelSize, pixelSize);
+        ctx.fillRect(
+          this.x + col * pixelSize,
+          this.y + row * pixelSize,
+          pixelSize,
+          pixelSize
+        );
       }
     }
   }
@@ -25,64 +30,3 @@ class Block {
     this.frame %= 2;
   }
 }
-
-
-const colors = {
-  c1: [0, "#a80020", "#f83800", "#f8d878", "#f8b800"],
-  c2: [0, "#f8d878", "#00a800", "#006800", "#f83800"]
-};
-
-const sprite = {
-  pallet: {
-    a: colors.c1,
-    b: colors.c2,
-  },
-
-  img: {
-    brick: [
-      [
-        "11111111",
-        "22433331",
-        "11242431",
-        "33124231",
-        "24311111",
-        "22143331",
-        "24124241",
-        "22122221"
-      ],
-      [
-        "11111111",
-        "21413131",
-        "11141411",
-        "31114131",
-        "14111111",
-        "21113131",
-        "14121211",
-        "21112121"
-      ]
-    ],
-
-    hero: [
-      [
-        "..1111..",
-        "..1414..",
-        "3332223.",
-        "13322233",
-        "2.2222.1",
-        "..2223.2",
-        "..3..33.",
-        "...3.33."
-      ],
-      [
-        "..1111..",
-        "..1414..",
-        ".3222333",
-        "33222331",
-        "1.2222.2",
-        "2.3222..",
-        ".33..3..",
-        ".33.3..."
-      ]
-    ]
-  }
-};

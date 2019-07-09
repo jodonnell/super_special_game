@@ -7,7 +7,7 @@ class Player {
 
   update(control) {
     this.updateX(control);
-    this.updateY(control);
+    this.updateY();
   }
 
   draw() {
@@ -17,15 +17,12 @@ class Player {
 
   updateX(control) {
     const horizontal = control.right - control.left;
-    const vertical = control.down - control.up;
-    if (horizontal) {
-      this.x += this.moveSpeed * horizontal;
-    } else if (vertical) {
-      this.y += this.moveSpeed * vertical;
-    }
+    this.x += this.moveSpeed * horizontal;
   }
 
-  updateY(control) {
-
+  updateY() {
+    if (this.y < canvas.height - 60) {
+      this.y += 4;
+    }
   }
 }
