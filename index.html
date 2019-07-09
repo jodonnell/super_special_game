@@ -1,0 +1,31 @@
+<HTML>
+  <body>
+    <style>
+     canvas {
+         background:#f0f0f0;
+         user-select:none;
+     }
+    </style>
+
+    <canvas id='gamewindow'></canvas>
+
+    <script src='src/gameController.js'></script>
+    <script>
+     var canvas = document.getElementById('gamewindow');
+     var ctx = canvas.getContext('2d');
+
+     function mainloop(){
+       gameController.update();
+       gameController.draw();
+
+       requestAnimationFrame(mainloop);
+     }
+
+     const gameController = new GameController();
+     mainloop();
+
+     canvas.width = window.innerWidth;
+     canvas.height = window.innerHeight;
+    </script>
+  </body>
+</HTML>
