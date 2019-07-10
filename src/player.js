@@ -1,9 +1,10 @@
 class Player {
   constructor(x, y) {
-    this.moveSpeed = 2;
+    //this.moveSpeed = 2;
     this.x = x;
     this.y = y;
     this.verticalSpeed = 0;
+    this.xSpeed = 0;
   }
 
   update(control) {
@@ -17,8 +18,11 @@ class Player {
   }
 
   updateX(control) {
+    const speedmax = 4, vel = .2 ;
     const horizontal = control.right - control.left;
-    this.x += this.moveSpeed * horizontal;
+    this.xSpeed = clamp(this.xSpeed + vel * horizontal,-speedmax,speedmax)
+    if (!horizontal) this.xSpeed = 0
+    this.x += Math.floor(this.xSpeed);
   }
 
   updateY(control) {
