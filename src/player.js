@@ -3,6 +3,7 @@ class Player {
     this.moveSpeed = 2;
     this.x = x;
     this.y = y;
+    this.verticalSpeed = 0;
   }
 
   update(control) {
@@ -21,8 +22,9 @@ class Player {
   }
 
   updateY() {
-    if (this.y < canvas.height - 60) {
-      this.y += 4;
-    }
+    let grav = .5, speedMax = 10;
+    this.verticalSpeed = Math.min(this.verticalSpeed+grav, speedMax) 
+    this.y = Math.min(this.y + this.verticalSpeed, canvas.height - 60)
+    
   }
 }
