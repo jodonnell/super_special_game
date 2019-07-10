@@ -22,9 +22,10 @@ class Player {
   }
 
   updateY(control) {
-    let grav = .5, speedMax = 10;
-    this.verticalSpeed = Math.min(this.verticalSpeed+grav, speedMax) 
-    this.y = Math.min(this.y + this.verticalSpeed, canvas.height - 60)
-    if (this.y == canvas.height - 60 && control.x) this.verticalSpeed = -10
+    const gravity = 0.5;
+    const speedMax = 10;
+    this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
+    this.y = Math.min(this.y + this.verticalSpeed, canvas.height - 60);
+    if (this.y == canvas.height - 60 && control.x) this.verticalSpeed = -10;
   }
 }
