@@ -26,30 +26,36 @@ class Player {
 
   updateX(control, walls) {
     const speedmax = 4;
-    const vel = 0.2;
+    const vel = 0.4;
     const horizontal = control.right - control.left;
     this.xSpeed = clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = toZero(this.xSpeed,1);
-    this.x += Math.floor(this.xSpeed);
-
-    if (CollisionDetector.doesCollideWithSprites(this, walls)) {
-      this.x -= Math.floor(this.xSpeed);
+   
+    if (CollisionDetector.doesCollideWithSprites(Math.floor(this.xSpeed),0,this, walls)) {
+      while (!CollisionDetector.doesCollideWithSprites(horizontal,0,this, walls)){
+	this.x += horizontal
+	}
+      this.xSpeed=0
     }
+    this.x += Math.floor(this.xSpeed);
   }
 
   updateY(control, walls) {
     const gravity = 0.5;
     const speedMax = 10;
     this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
-
-    this.y = this.y + this.verticalSpeed;
-
-    if (CollisionDetector.doesCollideWithSprites(this, walls)) {
-      this.y = this.y - this.verticalSpeed;
+   
+    if (CollisionDetector.doesCollideWithSprites(0,Math.floor(this.verticalSpeed),this, walls)) {
+      const ydir = Math.sign(this.verticalSpeed)
+      while(!CollisionDetector.doesCollideWithSprites(0,ydir,this, walls)){
+	this.y += ydir
+	}
       this.verticalSpeed = 0;
     }
-
+    this.y += Math.floor(this.verticalSpeed);	
     if (this.y >= canvas.height - 64 && control.x) this.verticalSpeed = -10;
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4 
   }
+
+
 }

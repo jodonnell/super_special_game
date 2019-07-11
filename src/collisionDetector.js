@@ -1,44 +1,18 @@
 class CollisionDetector {
-  static doesCollideWithSprites(sprite, sprites) {
+  static doesCollideWithSprites(x,y,sprite, sprites) {
     return sprites.find(otherSprite => {
-      return this.doesCollideWith(sprite, otherSprite);
+      return this.doesCollideWith(x,y,sprite, otherSprite);
     });
   }
 
-  static doesCollideWith(spriteA, spriteB) {
+  static doesCollideWith(x,y,spriteA, spriteB) {
+	
+
     if (spriteA === spriteB) {
       return false;
     }
-
-    const topLeftPointIn =
-      spriteA.x > spriteB.x &&
-      spriteA.x < spriteB.rightSide() &&
-      spriteA.y > spriteB.y &&
-      spriteA.y < spriteB.bottomSide();
-
-    const topRightPointIn =
-      spriteA.rightSide() > spriteB.x &&
-      spriteA.rightSide() < spriteB.rightSide() &&
-      spriteA.y > spriteB.y &&
-      spriteA.y < spriteB.bottomSide();
-
-    const bottomLeftPointIn =
-      spriteA.x > spriteB.x &&
-      spriteA.x < spriteB.rightSide() &&
-      spriteA.bottomSide() > spriteB.y &&
-      spriteA.bottomSide() < spriteB.bottomSide();
-
-    const bottomRightPointIn =
-      spriteA.rightSide() > spriteB.x &&
-      spriteA.rightSide() < spriteB.rightSide() &&
-      spriteA.bottomSide() > spriteB.y &&
-      spriteA.bottomSide() < spriteB.bottomSide();
-
-    return (
-      topLeftPointIn ||
-      topRightPointIn ||
-      bottomLeftPointIn ||
-      bottomRightPointIn
-    );
+    	if (spriteA.rightSide() + x < spriteB.x || spriteA.x + x > spriteB.rightSide()) return 0 
+	if (spriteA.y + y > spriteB.bottomSide() || spriteA.bottomSide() + y < spriteB.y) return 0 
+        return 1
   }
 }
