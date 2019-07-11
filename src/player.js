@@ -18,10 +18,11 @@ class Player {
   }
 
   updateX(control) {
-    const speedmax = 4, vel = .2 ;
+    const speedmax = 4,
+      vel = 0.2;
     const horizontal = control.right - control.left;
-    this.xSpeed = clamp(this.xSpeed + vel * horizontal,-speedmax,speedmax)
-    if (!horizontal) this.xSpeed = 0
+    this.xSpeed = clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
+    if (!horizontal) this.xSpeed = 0;
     this.x += Math.floor(this.xSpeed);
   }
 
