@@ -50,6 +50,6 @@ class Player {
     }
 
     if (this.y >= canvas.height - 64 && control.x) this.verticalSpeed = -10;
-    if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = 0 
+    if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4 
   }
 }
