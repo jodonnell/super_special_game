@@ -1,13 +1,22 @@
 <HTML>
   <body>
     <style>
+     #canvasContainer {
+         display: flex;
+         width: 100%;
+         height: 100%;
+         justify-content: center;
+     }
      canvas {
          background:#f0f0f0;
          user-select:none;
+         align-self: center;
      }
     </style>
 
-    <canvas id='gamewindow'></canvas>
+    <div id='canvasContainer'>
+      <canvas id='gamewindow'></canvas>
+    </div>
     <script src='src/helpers.js'></script>
     <script src='src/gameController.js'></script>
     <script src='src/player.js'></script>
