@@ -29,7 +29,7 @@ class Player {
     const vel = 0.2;
     const horizontal = control.right - control.left;
     this.xSpeed = clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
-    if (!horizontal) this.xSpeed = 0;
+    if (!horizontal) this.xSpeed = toZero(this.xSpeed,1);
     this.x += Math.floor(this.xSpeed);
 
     if (CollisionDetector.doesCollideWithSprites(this, walls)) {
@@ -49,6 +49,7 @@ class Player {
       this.verticalSpeed = 0;
     }
 
-    if (this.y == canvas.height - 60 && control.x) this.verticalSpeed = -10;
+    if (this.y >= canvas.height - 64 && control.x) this.verticalSpeed = -10;
+    if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = 0 
   }
 }
