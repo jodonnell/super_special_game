@@ -6,7 +6,7 @@ class GameController {
   }
 
   update() {
-    this.player.update(this.control);
+    this.player.update(this.control, this.walls);
   }
 
   draw() {
@@ -21,7 +21,7 @@ class GameController {
 
   createWalls() {
     const numWallsToFillBottom = canvas.width / 40;
-    return [...Array(numWallsToFillBottom).keys()].map(x => {
+    const walls = this.range(numWallsToFillBottom).map(x => {
       return new Block(
         x * 40,
         canvas.height - 40,
@@ -29,5 +29,14 @@ class GameController {
         sprite.pallet.a
       );
     });
+
+    walls.push(
+      new Block(260, canvas.height - 80, sprite.img.brick, sprite.pallet.a)
+    );
+    return walls;
+  }
+
+  range(num) {
+    return [...Array(num).keys()];
   }
 }
