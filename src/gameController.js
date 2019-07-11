@@ -22,17 +22,10 @@ class GameController {
   createWalls() {
     const numWallsToFillBottom = canvas.width / 40;
     const walls = this.range(numWallsToFillBottom).map(x => {
-      return new Block(
-        x * 40,
-        canvas.height - 40,
-        sprite.img.brick,
-        sprite.pallet.a
-      );
+      return new Block(x * 40, canvas.height - 40, sprite.img.brick, sprite.pallet.a);
     });
 
-    walls.push(
-      new Block(260, canvas.height - 80, sprite.img.brick, sprite.pallet.a)
-    );
+    walls.push(new Block(260, canvas.height - 80, sprite.img.brick, sprite.pallet.a));
     return walls;
   }
 

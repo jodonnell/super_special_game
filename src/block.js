@@ -17,12 +17,7 @@ class Block {
         let color = currentrow[col];
         ctx.fillStyle = this.colors[color];
 
-        ctx.fillRect(
-          this.x + col * pixelSize,
-          this.y + row * pixelSize,
-          pixelSize,
-          pixelSize
-        );
+        ctx.fillRect(this.x + col * pixelSize, this.y + row * pixelSize, pixelSize, pixelSize);
       }
     }
   }
