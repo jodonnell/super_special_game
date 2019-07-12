@@ -1,16 +1,16 @@
 class CollisionDetector {
-  static doesCollideWithSprites(x, y, sprite, sprites) {
+  static willCollideWithSprites(projectedVelocityX, projectedVelocityY, sprite, sprites) {
     return sprites.find(otherSprite => {
-      return this.doesCollideWith(x, y, sprite, otherSprite);
+      return this.willCollideWith(projectedVelocityX, projectedVelocityY, sprite, otherSprite);
     });
   }
 
-  static doesCollideWith(x, y, spriteA, spriteB) {
+  static willCollideWith(projectedVelocityX, projectedVelocityY, spriteA, spriteB) {
     if (spriteA === spriteB) {
       return false;
     }
-    if (spriteA.rightSide() + x < spriteB.x || spriteA.x + x > spriteB.rightSide()) return 0;
-    if (spriteA.y + y > spriteB.bottomSide() || spriteA.bottomSide() + y < spriteB.y) return 0;
-    return 1;
+    if (spriteA.rightSide() + projectedVelocityX < spriteB.x || spriteA.x + projectedVelocityX > spriteB.rightSide()) return false;
+    if (spriteA.y + projectedVelocityY > spriteB.bottomSide() || spriteA.bottomSide() + projectedVelocityY < spriteB.y) return false;
+    return true;
   }
 }

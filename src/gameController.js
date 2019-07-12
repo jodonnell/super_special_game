@@ -26,6 +26,8 @@ class GameController {
     });
 
     walls.push(new Block(260, canvas.height - 80, sprite.img.brick, sprite.pallet.a));
+    walls.push(new Block(280, canvas.height - 160, sprite.img.brick, sprite.pallet.a));
+    walls.push(new Block(200, canvas.height - 200, sprite.img.brick, sprite.pallet.a));
     return walls;
   }
 
