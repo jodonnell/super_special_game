@@ -4,6 +4,7 @@ class Player {
     this.y = y;
     this.verticalSpeed = 0;
     this.xSpeed = 0;
+    this.color = sprite.pallet.a
   }
 
   update(control, walls) {
@@ -13,8 +14,11 @@ class Player {
   }
 
   draw() {
-    ctx.fillStyle = "red";
+    ctx.fillStyle = this.color[2];
     ctx.fillRect(this.x, this.y, 20, 20);
+    ctx.fillStyle = this.color[3];
+    ctx.fillRect(this.x+4, this.y+4,4,8)
+    ctx.fillRect(this.x+12, this.y+4,4,8)
   }
 
   rightSide() {
@@ -33,11 +37,12 @@ class Player {
     if (!horizontal) this.xSpeed = toZero(this.xSpeed, 1);
 
     if (CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls)) {
-      while (!CollisionDetector.willCollideWithSprites(horizontal, 0, this, walls)) {
-        this.x += horizontal;
+      const xdir = Math.sign(this.xSpeed)
+      while (!CollisionDetector.willCollideWithSprites(xdir, 0, this, walls)) {
+        this.x += xdir;
       }
       this.xSpeed = 0;
-    }
+    }else
     this.x += Math.floor(this.xSpeed);
   }
 
@@ -52,7 +57,7 @@ class Player {
         this.y += ydir;
       }
       this.verticalSpeed = 0;
-    }
+    }else
     this.y += Math.floor(this.verticalSpeed);
   }
 

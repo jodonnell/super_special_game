@@ -9,8 +9,8 @@ class CollisionDetector {
     if (spriteA === spriteB) {
       return false;
     }
-    if (spriteA.rightSide() + projectedVelocityX < spriteB.x || spriteA.x + projectedVelocityX > spriteB.rightSide()) return false;
-    if (spriteA.y + projectedVelocityY > spriteB.bottomSide() || spriteA.bottomSide() + projectedVelocityY < spriteB.y) return false;
+    if (spriteA.rightSide() + projectedVelocityX <= spriteB.x || spriteA.x + projectedVelocityX >= spriteB.rightSide()) return false;
+    if (spriteA.y + projectedVelocityY >= spriteB.bottomSide() || spriteA.bottomSide() + projectedVelocityY <= spriteB.y) return false;
     return true;
   }
 }
