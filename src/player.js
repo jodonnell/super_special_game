@@ -4,7 +4,7 @@ class Player {
     this.y = y;
     this.verticalSpeed = 0;
     this.xSpeed = 0;
-    this.color = sprite.pallet.a
+    this.color = sprite.pallet.a;
   }
 
   update(control, walls) {
@@ -14,11 +14,19 @@ class Player {
   }
 
   draw() {
+    this.drawBody();
+    this.drawEyes();
+  }
+
+  drawBody() {
     ctx.fillStyle = this.color[2];
     ctx.fillRect(this.x, this.y, 20, 20);
+  }
+
+  drawEyes() {
     ctx.fillStyle = this.color[3];
-    ctx.fillRect(this.x+4, this.y+4,4,8)
-    ctx.fillRect(this.x+12, this.y+4,4,8)
+    ctx.fillRect(this.x + 4, this.y + 4, 4, 8);
+    ctx.fillRect(this.x + 12, this.y + 4, 4, 8);
   }
 
   rightSide() {
@@ -37,13 +45,12 @@ class Player {
     if (!horizontal) this.xSpeed = toZero(this.xSpeed, 1);
 
     if (CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls)) {
-      const xdir = Math.sign(this.xSpeed)
+      const xdir = Math.sign(this.xSpeed);
       while (!CollisionDetector.willCollideWithSprites(xdir, 0, this, walls)) {
         this.x += xdir;
       }
       this.xSpeed = 0;
-    }else
-    this.x += Math.floor(this.xSpeed);
+    } else this.x += Math.floor(this.xSpeed);
   }
 
   updateY(control, walls) {
@@ -57,8 +64,7 @@ class Player {
         this.y += ydir;
       }
       this.verticalSpeed = 0;
-    }else
-    this.y += Math.floor(this.verticalSpeed);
+    } else this.y += Math.floor(this.verticalSpeed);
   }
 
   updateJump(control, walls) {
