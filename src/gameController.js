@@ -8,6 +8,7 @@ class GameController {
     this.FX = [];
     this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, this.player];
     this.pallet = images.pallet.a;
+    this.hasTouchedSwapper = false;
   }
 
   update() {
@@ -24,17 +25,12 @@ class GameController {
   }
 
   swapPalletIfTouchingSwapper() {
-    /*
-      I think there is a small bug here
-      We should keep track if you currently touching a swapper cause right now i think
-      it rapidly touches over and over as long as your falling through it
-     */
-    if (CollisionDetector.doesCollideWithSprites(this.player, this.swappers)) {
-      if (this.pallet === images.pallet.a) {
-        this.pallet = images.pallet.b;
-      } else {
-        this.pallet = images.pallet.a;
-      }
+    const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(this.player, this.swappers)
+    if (!this.hasTouchedSwapper && isTouchingSwapper) {
+      this.hasTouchedSwapper = true;
+      this.swapPallets();
+    } else if (!isTouchingSwapper) {
+      this.hasTouchedSwapper = false;
     }
   }
 
@@ -68,5 +64,13 @@ class GameController {
     for (let i = objs.length - 1; i >= 0; i--) {
       if (objs[i].dead == 1) objs.splice(i, 1);
     }
+  }
+
+  swapPallets() {
+      if (this.pallet === images.pallet.a) {
+        this.pallet = images.pallet.b;
+      } else {
+        this.pallet = images.pallet.a;
+      }
   }
 }
