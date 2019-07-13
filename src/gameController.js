@@ -6,7 +6,7 @@ class GameController {
     this.swappers = [new Swapper(400, 400)];
     this.buzzsaws = [new BuzzSaw(600, canvas.height - 110)];
     this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, this.player];
-    this.pallet = sprite.pallet.a;
+    this.pallet = images.pallet.a;
   }
 
   update() {
@@ -25,10 +25,10 @@ class GameController {
       it rapidly touches over and over as long as your falling through it
      */
     if (CollisionDetector.doesCollideWithSprites(this.player, this.swappers)) {
-      if (this.pallet === sprite.pallet.a) {
-        this.pallet = sprite.pallet.b;
+      if (this.pallet === images.pallet.a) {
+        this.pallet = images.pallet.b;
       } else {
-        this.pallet = sprite.pallet.a;
+        this.pallet = images.pallet.a;
       }
     }
   }
@@ -45,12 +45,12 @@ class GameController {
   createWalls() {
     const numWallsToFillBottom = canvas.width / 40;
     const walls = this.range(numWallsToFillBottom).map(x => {
-      return new Block(x * 40, canvas.height - 40, sprite.img.brick);
+      return new Block(x * 40, canvas.height - 40, images.img.brick);
     });
 
-    walls.push(new Block(260, canvas.height - 80, sprite.img.brick));
-    walls.push(new Block(280, canvas.height - 160, sprite.img.brick));
-    walls.push(new Block(200, canvas.height - 200, sprite.img.brick));
+    walls.push(new Block(260, canvas.height - 80, images.img.brick));
+    walls.push(new Block(280, canvas.height - 160, images.img.brick));
+    walls.push(new Block(200, canvas.height - 200, images.img.brick));
     return walls;
   }
 

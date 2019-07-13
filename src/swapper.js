@@ -2,7 +2,7 @@ class Swapper {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.pallet = sprite.pallet.a;
+    this.pallet = images.pallet.a;
     this.frame = 0;
   }
 
@@ -14,10 +14,10 @@ class Swapper {
   update() {
     this.frame++;
     if (this.frame % 10 === 0) {
-      if (this.pallet === sprite.pallet.a) {
-        this.pallet = sprite.pallet.b;
+      if (this.pallet === images.pallet.a) {
+        this.pallet = images.pallet.b;
       } else {
-        this.pallet = sprite.pallet.a;
+        this.pallet = images.pallet.a;
       }
       this.frame = 0;
     }
