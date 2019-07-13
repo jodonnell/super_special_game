@@ -16,7 +16,8 @@ class GameController {
       walls: this.walls,
       FX: this.FX
     }));
-    this.FX.forEach(sprite => sprite.update())
+    this.FX.forEach(sprite => sprite.update());
+    this.eliminate(this.FX);
     this.swapPalletIfTouchingSwapper();
   }
 
@@ -59,5 +60,12 @@ class GameController {
 
   range(num) {
     return [...Array(num).keys()];
+  }
+
+  eliminate(objs){
+	for (let i = objs.length-1; i >= 0; i--){
+		if (objs[i].dead == 1)
+		objs.splice(i,1)
+	}
   }
 }
