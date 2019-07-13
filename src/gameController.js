@@ -4,7 +4,8 @@ class GameController {
     this.player = new Player(200, 200);
     this.walls = this.createWalls();
     this.swappers = [new Swapper(400, 400)];
-    this.sprites = [...this.walls, ...this.swappers, this.player];
+    this.buzzsaws = [new BuzzSaw(600, canvas.height - 110)];
+    this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, this.player];
     this.pallet = sprite.pallet.a;
   }
 
