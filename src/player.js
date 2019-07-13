@@ -66,15 +66,15 @@ class Player {
     } else this.y += Math.floor(this.verticalSpeed);
   }
 
-  updateJump(control, walls,FX) {
+  updateJump(control, walls, FX) {
     if (CollisionDetector.willCollideWithSprites(0, 1, this, walls)) {
       if (control.x) {
-	this.verticalSpeed = -10;
-        FX.push(new Cloud(this.x,this.bottomSide(),1))
-	FX.push(new Cloud(this.x,this.bottomSide(),1))
-	FX.push(new Cloud(this.x,this.bottomSide(),-1))
-	FX.push(new Cloud(this.x,this.bottomSide(),-1))
-	}
+        this.verticalSpeed = -10;
+        FX.push(new Cloud(this.x, this.bottomSide(), 1));
+        FX.push(new Cloud(this.x, this.bottomSide(), 1));
+        FX.push(new Cloud(this.x, this.bottomSide(), -1));
+        FX.push(new Cloud(this.x, this.bottomSide(), -1));
+      }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
   }

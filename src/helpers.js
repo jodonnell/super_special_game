@@ -10,7 +10,6 @@ function toZero(number, decay) {
   return number * sign;
 }
 
-function randomInt(n){
-	return Math.floor(Math.random() * (n+1))
-
+function randomInt(n) {
+  return Math.floor(Math.random() * (n + 1));
 }

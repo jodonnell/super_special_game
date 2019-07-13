@@ -5,17 +5,19 @@ class GameController {
     this.walls = this.createWalls();
     this.swappers = [new Swapper(400, 400)];
     this.buzzsaws = [new BuzzSaw(600, canvas.height - 110)];
-    this.FX = []
+    this.FX = [];
     this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, this.player];
     this.pallet = images.pallet.a;
   }
 
   update() {
-    this.sprites.forEach(sprite => sprite.update({
-      control: this.control,
-      walls: this.walls,
-      FX: this.FX
-    }));
+    this.sprites.forEach(sprite =>
+      sprite.update({
+        control: this.control,
+        walls: this.walls,
+        FX: this.FX
+      })
+    );
     this.FX.forEach(sprite => sprite.update());
     this.eliminate(this.FX);
     this.swapPalletIfTouchingSwapper();
@@ -39,7 +41,7 @@ class GameController {
   draw() {
     this.clearScreen();
     this.sprites.forEach(sprite => sprite.draw(this.pallet));
-    this.FX.forEach(sprite => sprite.draw())
+    this.FX.forEach(sprite => sprite.draw());
   }
 
   clearScreen() {
@@ -62,10 +64,9 @@ class GameController {
     return [...Array(num).keys()];
   }
 
-  eliminate(objs){
-	for (let i = objs.length-1; i >= 0; i--){
-		if (objs[i].dead == 1)
-		objs.splice(i,1)
-	}
+  eliminate(objs) {
+    for (let i = objs.length - 1; i >= 0; i--) {
+      if (objs[i].dead == 1) objs.splice(i, 1);
+    }
   }
 }
