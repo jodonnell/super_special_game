@@ -7,7 +7,7 @@ class Swapper {
   }
 
   draw() {
-    ctx.fillStyle = this.pallet[1];
+    ctx.fillStyle = this.pallet[0];
     ctx.fillRect(this.x, this.y, 15, 15);
   }
 

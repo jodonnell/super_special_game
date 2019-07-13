@@ -4,7 +4,6 @@ class Player {
     this.y = y;
     this.verticalSpeed = 0;
     this.xSpeed = 0;
-    this.color = sprite.pallet.a;
   }
 
   update(args) {
@@ -19,12 +18,12 @@ class Player {
   }
 
   drawBody(pallet) {
-    ctx.fillStyle = pallet[2];
+    ctx.fillStyle = pallet[1];
     ctx.fillRect(this.x, this.y, 20, 20);
   }
 
   drawEyes(pallet) {
-    ctx.fillStyle = pallet[3];
+    ctx.fillStyle = pallet[2];
     ctx.fillRect(this.x + 4, this.y + 4, 4, 8);
     ctx.fillRect(this.x + 12, this.y + 4, 4, 8);
   }
