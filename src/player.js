@@ -7,9 +7,9 @@ class Player {
   }
 
   update(args) {
-    this.updateX(args.control, args.walls);
-    this.updateY(args.control, args.walls);
-    this.updateJump(args.control, args.walls, args.FX);
+    this.updateX(args.control, args.onscreenSprites.walls);
+    this.updateY(args.control, args.onscreenSprites.walls);
+    this.updateJump(args.control, args.onscreenSprites);
   }
 
   draw(pallet) {
@@ -66,14 +66,14 @@ class Player {
     } else this.y += Math.floor(this.verticalSpeed);
   }
 
-  updateJump(control, walls, FX) {
-    if (CollisionDetector.willCollideWithSprites(0, 1, this, walls)) {
+  updateJump(control, onscreenSprites) {
+    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls)) {
       if (control.x) {
         this.verticalSpeed = -10;
-        FX.push(new Cloud(this.x, this.bottomSide(), 1));
-        FX.push(new Cloud(this.x, this.bottomSide(), 1));
-        FX.push(new Cloud(this.x, this.bottomSide(), -1));
-        FX.push(new Cloud(this.x, this.bottomSide(), -1));
+        onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), 1));
+        onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), 1));
+        onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), -1));
+        onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), -1));
       }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;

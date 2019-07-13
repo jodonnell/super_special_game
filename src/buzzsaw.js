@@ -9,6 +9,7 @@ class BuzzSaw extends Sprite {
     this.angle += this.speed;
     this.angle %= 360;
   }
+
   draw(pallet) {
     ctx.save();
     ctx.translate(this.x, this.y);
