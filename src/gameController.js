@@ -5,6 +5,7 @@ class GameController {
     this.walls = this.createWalls();
     this.swappers = [new Swapper(400, 400)];
     this.buzzsaws = [new BuzzSaw(600, canvas.height - 110)];
+    this.FX = []
     this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, this.player];
     this.pallet = images.pallet.a;
   }
@@ -13,8 +14,9 @@ class GameController {
     this.sprites.forEach(sprite => sprite.update({
       control: this.control,
       walls: this.walls,
+      FX: this.FX
     }));
-
+    this.FX.forEach(sprite => sprite.update())
     this.swapPalletIfTouchingSwapper();
   }
 
@@ -36,6 +38,7 @@ class GameController {
   draw() {
     this.clearScreen();
     this.sprites.forEach(sprite => sprite.draw(this.pallet));
+    this.FX.forEach(sprite => sprite.draw())
   }
 
   clearScreen() {

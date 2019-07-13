@@ -9,3 +9,8 @@ function toZero(number, decay) {
   number = Math.max(number - decay, 0);
   return number * sign;
 }
+
+function randomInt(n){
+	return Math.floor(Math.random() * (n+1))
+
+}
