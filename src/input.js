@@ -52,14 +52,14 @@ class InputControl {
         e.preventDefault();
         let touch = e.touches[0];
 
-        if (touch.pageX < 100) {
-          this.pressLeft();
-        } else if (touch.pageX >= 100 && touch.pageX < 400) {
-          this.pressRight();
-        } else if (touch.pageX >= 400 && touch.pageX < 850) {
+        if (touch.pageX >= canvas.width / 2 && touch.pageY > canvas.height - 100) {
           this.pressZ();
-        } else if (touch.pageX >= 850) {
+        } else if (touch.pageX < canvas.width / 2 && touch.pageY > canvas.height - 100) {
           this.pressX();
+        } else if (touch.pageX < canvas.width / 2) {
+          this.pressLeft();
+        } else if (touch.pageX >= canvas.width / 2) {
+          this.pressRight();
         }
       },
       false
