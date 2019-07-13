@@ -24,11 +24,19 @@ class Sprite {
     });
   }
 
+  width() {
+    return this.currentFrame[0].length * this.pixelSize;
+  }
+
+  height() {
+    return this.currentFrame.length * this.pixelSize;
+  }
+
   rightSide() {
-    return this.x + this.currentFrame[0].length * this.pixelSize;
+    return this.x + this.width();
   }
 
   bottomSide() {
-    return this.y + this.currentFrame.length * this.pixelSize;
+    return this.y + this.height();
   }
 }

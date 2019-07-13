@@ -15,6 +15,18 @@ class GameController {
     });
     this.eliminate(this.onscreenSprites.FX);
     this.swapPalletIfTouchingSwapper();
+    this.checkForDeath();
+  }
+
+  checkForDeath() {
+    const isTouchingBuzzSaw = CollisionDetector.doesCollideWithSprites(
+      this.onscreenSprites.player,
+      this.onscreenSprites.buzzsaws
+    );
+
+    if (isTouchingBuzzSaw) {
+      this.onscreenSprites.player.dead = true;
+    }
   }
 
   swapPalletIfTouchingSwapper() {

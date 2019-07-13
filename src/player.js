@@ -4,15 +4,22 @@ class Player {
     this.y = y;
     this.verticalSpeed = 0;
     this.xSpeed = 0;
+    this.dead = false;
   }
 
   update(args) {
+    if (this.dead) {
+      return;
+    }
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
     this.updateJump(args.control, args.onscreenSprites);
   }
 
   draw(pallet) {
+    if (this.dead) {
+      return;
+    }
     this.drawBody(pallet);
     this.drawEyes(pallet);
   }

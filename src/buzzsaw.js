@@ -12,7 +12,7 @@ class BuzzSaw extends Sprite {
 
   draw(pallet) {
     ctx.save();
-    ctx.translate(this.x, this.y);
+    ctx.translate(this.x + this.width() / 2, this.y + this.height() / 2);
     ctx.rotate((this.angle * Math.PI) / 180);
     super.draw(pallet, -this.w / 2, -this.w / 2);
     ctx.restore();
