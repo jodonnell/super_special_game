@@ -12,17 +12,16 @@ class Sprite {
   draw(pallet, x, y) {
     x = x || this.x;
     y = y || this.y;
-    const img = this.currentFrame;
-    for (let row = 0; row < img.length; row++) {
-      let currentrow = img[row];
-      for (let col = 0; col < currentrow.length; col++) {
-        if (currentrow[col] === -1) continue;
-        let color = currentrow[col];
-        ctx.fillStyle = pallet[color];
+    this.currentFrame.forEach((row, i) => {
+      row.forEach((pixelCode, j) => {
+        if (pixelCode === -1) {
+          return;
+        }
 
-        ctx.fillRect(x + col * this.pixelSize, y + row * this.pixelSize, this.pixelSize, this.pixelSize);
-      }
-    }
+        ctx.fillStyle = pallet[pixelCode];
+        ctx.fillRect(x + j * this.pixelSize, y + i * this.pixelSize, this.pixelSize, this.pixelSize);
+      });
+    });
   }
 
   rightSide() {
