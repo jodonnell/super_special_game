@@ -7,18 +7,21 @@ class GameController {
   }
 
   update() {
-    this.onscreenSprites.sprites.forEach(sprite =>
+    this.onscreenSprites.sprites.forEach(sprite => {
       sprite.update({
         control: this.control,
-        onscreenSprites: this.onscreenSprites,
-      })
-    );
+        onscreenSprites: this.onscreenSprites
+      });
+    });
     this.eliminate(this.onscreenSprites.FX);
     this.swapPalletIfTouchingSwapper();
   }
 
   swapPalletIfTouchingSwapper() {
-    const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(this.onscreenSprites.player, this.onscreenSprites.swappers)
+    const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
+      this.onscreenSprites.player,
+      this.onscreenSprites.swappers
+    );
     if (!this.hasTouchedSwapper && isTouchingSwapper) {
       this.hasTouchedSwapper = true;
       this.swapPallets();
@@ -43,10 +46,10 @@ class GameController {
   }
 
   swapPallets() {
-      if (this.pallet === images.pallet.a) {
-        this.pallet = images.pallet.b;
-      } else {
-        this.pallet = images.pallet.a;
-      }
+    if (this.pallet === images.pallet.a) {
+      this.pallet = images.pallet.b;
+    } else {
+      this.pallet = images.pallet.a;
+    }
   }
 }
