@@ -1,5 +1,12 @@
 class Sprite {
-  constructor() {
+  constructor(x, y, sprite) {
+    this.x = x;
+    this.y = y;
+    this.sprite = sprite;
+
+    this.frame = 0;
+    this.currentFrame = this.sprite[this.frame];
+
     this.pixelSize = 5;
   }
 
@@ -8,7 +15,7 @@ class Sprite {
     for (let row = 0; row < img.length; row++) {
       let currentrow = img[row];
       for (let col = 0; col < currentrow.length; col++) {
-        if (currentrow[col] == ".") continue;
+        if (currentrow[col] === -1) continue;
         let color = currentrow[col];
         ctx.fillStyle = pallet[color];
 
