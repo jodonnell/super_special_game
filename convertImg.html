@@ -1,0 +1,92 @@
+<HTML>
+  <body>
+    <style>
+     #canvasContainer {
+         display: flex;
+         width: 100%;
+         height: 100%;
+         justify-content: center;
+     }
+     canvas {
+         background:#f0f0f0;
+         user-select:none;
+         align-self: center;
+     }
+    </style>
+
+    <div id='canvasContainer'>
+      <canvas id='gamewindow'></canvas>
+    </div>
+    <img src="img/buzzsaw.png" id="img">
+    <script>
+     var rgbToHex = function (rgb) {
+       var hex = Number(rgb).toString(16);
+       if (hex.length < 2) {
+         hex = "0" + hex;
+       }
+       return hex;
+     };
+
+     var fullColorHex = function(r,g,b) {
+       var red = rgbToHex(r);
+       var green = rgbToHex(g);
+       var blue = rgbToHex(b);
+       return `#${red}${green}${blue}`;
+     };
+
+     var img = document.getElementById('img');
+     img.onload = () => {
+       var canvas = document.getElementById('gamewindow');
+       var ctx = canvas.getContext('2d');
+       canvas.width = img.width;
+       canvas.height = img.height;
+       ctx.drawImage(img, 0, 0, img.width, img.height);
+       var pixelData = ctx.getImageData(0, 0, img.width, img.height).data;
+       console.log(pixelData)
+
+       const xCoord = 50;
+       const yCoord = 100;
+       const canvasWidth = 1024;
+
+       const getColorIndicesForCoord = (x, y, width) => {
+         const red = y * (width * 4) + x * 4;
+         return [red, red + 1, red + 2, red + 3];
+       };
+
+       const imageColors = {};
+
+       const result = [];
+       for (let x = 0; x < img.width; x += 5) {
+         const currentRow = [];
+         for (let y = 0; y < img.height; y += 5) {
+           const colorIndices = getColorIndicesForCoord(x, y, canvas.width);
+           const [redIndex, greenIndex, blueIndex, alphaIndex] = colorIndices;
+
+           if (pixelData[alphaIndex] === 0) {
+             currentRow.push('.');
+           } else {
+             const hex = fullColorHex(
+               pixelData[redIndex],
+               pixelData[greenIndex],
+               pixelData[blueIndex]
+             );
+             if (hex in imageColors) {
+               currentRow.push(imageColors[hex]);
+             } else {
+               const numColors = Object.keys(imageColors).length;
+               imageColors[hex] = numColors;
+               currentRow.push(numColors);
+             }
+           }
+         }
+         result.push(currentRow);
+       }
+
+       console.log(imageColors);
+       console.log(JSON.stringify(result));
+     }
+
+
+    </script>
+  </body>
+</HTML>
