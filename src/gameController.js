@@ -3,16 +3,38 @@ class GameController {
     this.control = control;
     this.player = new Player(200, 200);
     this.walls = this.createWalls();
+    this.swappers = [new Swapper(400, 400)];
+    this.sprites = [...this.walls, ...this.swappers, this.player];
+    this.pallet = sprite.pallet.a;
   }
 
   update() {
-    this.player.update(this.control, this.walls);
+    this.sprites.forEach(sprite => sprite.update({
+      control: this.control,
+      walls: this.walls,
+    }));
+
+    this.swapPalletIfTouchingSwapper();
+  }
+
+  swapPalletIfTouchingSwapper() {
+    /*
+      I think there is a small bug here
+      We should keep track if you currently touching a swapper cause right now i think
+      it rapidly touches over and over as long as your falling through it
+     */
+    if (CollisionDetector.doesCollideWithSprites(this.player, this.swappers)) {
+      if (this.pallet === sprite.pallet.a) {
+        this.pallet = sprite.pallet.b;
+      } else {
+        this.pallet = sprite.pallet.a;
+      }
+    }
   }
 
   draw() {
     this.clearScreen();
-    this.player.draw();
-    this.walls.forEach(wall => wall.draw());
+    this.sprites.forEach(sprite => sprite.draw(this.pallet));
   }
 
   clearScreen() {
@@ -22,12 +44,12 @@ class GameController {
   createWalls() {
     const numWallsToFillBottom = canvas.width / 40;
     const walls = this.range(numWallsToFillBottom).map(x => {
-      return new Block(x * 40, canvas.height - 40, sprite.img.brick, sprite.pallet.a);
+      return new Block(x * 40, canvas.height - 40, sprite.img.brick);
     });
 
-    walls.push(new Block(260, canvas.height - 80, sprite.img.brick, sprite.pallet.a));
-    walls.push(new Block(280, canvas.height - 160, sprite.img.brick, sprite.pallet.b));
-    walls.push(new Block(200, canvas.height - 200, sprite.img.brick, sprite.pallet.a));
+    walls.push(new Block(260, canvas.height - 80, sprite.img.brick));
+    walls.push(new Block(280, canvas.height - 160, sprite.img.brick));
+    walls.push(new Block(200, canvas.height - 200, sprite.img.brick));
     return walls;
   }
 

@@ -7,24 +7,24 @@ class Player {
     this.color = sprite.pallet.a;
   }
 
-  update(control, walls) {
-    this.updateX(control, walls);
-    this.updateY(control, walls);
-    this.updateJump(control, walls);
+  update(args) {
+    this.updateX(args.control, args.walls);
+    this.updateY(args.control, args.walls);
+    this.updateJump(args.control, args.walls);
   }
 
-  draw() {
-    this.drawBody();
-    this.drawEyes();
+  draw(pallet) {
+    this.drawBody(pallet);
+    this.drawEyes(pallet);
   }
 
-  drawBody() {
-    ctx.fillStyle = this.color[2];
+  drawBody(pallet) {
+    ctx.fillStyle = pallet[2];
     ctx.fillRect(this.x, this.y, 20, 20);
   }
 
-  drawEyes() {
-    ctx.fillStyle = this.color[3];
+  drawEyes(pallet) {
+    ctx.fillStyle = pallet[3];
     ctx.fillRect(this.x + 4, this.y + 4, 4, 8);
     ctx.fillRect(this.x + 12, this.y + 4, 4, 8);
   }
