@@ -3,9 +3,34 @@ class BuzzSaw extends Sprite {
     super(x, y, images.img.buzzsaw);
     this.angle = 20;
     this.speed = 15;
+
+    this.startX = x;
+    this.direction = RIGHT;
+    this.xRange = 120;
   }
 
   update() {
+    this.updateAngle();
+    this.updateX();
+  }
+
+  updateX() {
+    if (this.direction === RIGHT) {
+      this.x += 2;
+    } else {
+      this.x -= 2;
+    }
+
+    if ((this.xRange + this.startX) <= this.x) {
+      this.direction = LEFT;
+    }
+
+    if (this.x <= this.startX) {
+      this.direction = RIGHT;
+    }
+  }
+
+  updateAngle() {
     this.angle += this.speed;
     this.angle %= 360;
   }
