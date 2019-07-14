@@ -52,13 +52,13 @@ class InputControl {
         e.preventDefault();
         let touch = e.touches[0];
 
-        if (touch.pageX >= canvas.width / 2 && touch.pageY > canvas.height - 100) {
+        if (touch.pageX >= window.innerWidth / 2 && touch.pageY > window.innerHeight - 100) {
           this.pressZ();
-        } else if (touch.pageX < canvas.width / 2 && touch.pageY > canvas.height - 100) {
+        } else if (touch.pageX < window.innerWidth / 2 && touch.pageY > window.innerHeight - 100) {
           this.pressX();
-        } else if (touch.pageX < canvas.width / 2) {
+        } else if (touch.pageX < window.innerWidth / 2) {
           this.pressLeft();
-        } else if (touch.pageX >= canvas.width / 2) {
+        } else if (touch.pageX >= window.innerWidth / 2) {
           this.pressRight();
         }
       },
