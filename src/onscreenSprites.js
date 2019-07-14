@@ -2,8 +2,12 @@ class OnscreenSprites {
   constructor() {
     this.player = new Player(200, 200,images.img.hero);
     this.walls = this.createWalls();
-    this.swappers = [new Swapper(400, 400)];
-    this.buzzsaws = [new BuzzSaw(500, canvas.height - 90)];
+    this.swappers = [new Swapper(500, 450)];
+    this.buzzsaws = [
+      new BuzzSaw(580, canvas.height - 90, images.pallet.a, 120),
+      new BuzzSaw(300, canvas.height - 90, images.pallet.a, 200),
+      new BuzzSaw(440, canvas.height - 90, images.pallet.b, 65),
+    ];
     this.FX = [];
     this.updateSprites();
   }

@@ -1,12 +1,13 @@
 class BuzzSaw extends Sprite {
-  constructor(x, y) {
+  constructor(x, y, pallet, xRange) {
     super(x, y, images.img.buzzsaw);
     this.angle = 20;
     this.speed = 15;
 
     this.startX = x;
     this.direction = RIGHT;
-    this.xRange = 120;
+    this.xRange = xRange;
+    this.pallet = pallet;
   }
 
   update() {
@@ -35,11 +36,11 @@ class BuzzSaw extends Sprite {
     this.angle %= 360;
   }
 
-  draw(pallet) {
+  draw() {
     ctx.save();
     ctx.translate(this.x + this.width() / 2, this.y + this.height() / 2);
     ctx.rotate((this.angle * Math.PI) / 180);
-    super.draw(pallet, -this.w / 2, -this.w / 2);
+    super.draw(this.pallet, -this.w / 2, -this.w / 2);
     ctx.restore();
   }
 }

@@ -4,7 +4,7 @@ class CollisionDetector {
   }
 
   static willCollideWithSprites(projectedVelocityX, projectedVelocityY, sprite, sprites) {
-    return sprites.find(otherSprite => {
+    return sprites.filter(otherSprite => {
       return this.willCollideWith(projectedVelocityX, projectedVelocityY, sprite, otherSprite);
     });
   }

@@ -7,24 +7,32 @@ class GameController {
   }
 
   update() {
+    if (this.control.hasZBeenTapped()) {
+      this.swapPallets();
+    }
+
     this.onscreenSprites.sprites.forEach(sprite => {
       sprite.update({
         control: this.control,
         onscreenSprites: this.onscreenSprites
       });
     });
+
     this.eliminate(this.onscreenSprites.FX);
     this.swapPalletIfTouchingSwapper();
     this.checkForDeath();
   }
 
   checkForDeath() {
-    const isTouchingBuzzSaw = CollisionDetector.doesCollideWithSprites(
+    const connectedBuzzSaw = CollisionDetector.doesCollideWithSprites(
       this.onscreenSprites.player,
       this.onscreenSprites.buzzsaws
     );
 
-    if (!this.onscreenSprites.player.dead && isTouchingBuzzSaw) {
+    const playerIsAlive = !this.onscreenSprites.player.dead;
+
+    const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.pallet !== buzzsaw.pallet).length > 0;
+    if (playerIsAlive && connectedBuzzSaw.length > 0 && isDifferentColor) {
       this.onscreenSprites.player.dead = true;
       this.onscreenSprites.addFX(
         new ExplodingPlayer(
@@ -40,10 +48,10 @@ class GameController {
       this.onscreenSprites.player,
       this.onscreenSprites.swappers
     );
-    if (!this.hasTouchedSwapper && isTouchingSwapper) {
+    if (!this.hasTouchedSwapper && isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = true;
       this.swapPallets();
-    } else if (!isTouchingSwapper) {
+    } else if (!isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = false;
     }
   }
@@ -59,7 +67,9 @@ class GameController {
 
   eliminate(objs) {
     for (let i = objs.length - 1; i >= 0; i--) {
-      if (objs[i].dead) objs.splice(i, 1);
+      if (objs[i].dead) {
+        objs.splice(i, 1);
+      }
     }
   }
 

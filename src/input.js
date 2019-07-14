@@ -6,6 +6,8 @@ class InputControl {
     this.up = 0;
     this.x = 0;
     this.z = 0;
+    this.zTapped = false;
+    this.zReleased = true;
     this.getKey();
   }
 
@@ -163,6 +165,15 @@ class InputControl {
 
   pressZ() {
     this.z = 1;
+    if (this.zReleased) {
+      this.zTapped = true;
+    }
+  }
+
+  hasZBeenTapped() {
+    const beenTapped = this.zTapped;
+    this.zTapped = false;
+    return beenTapped;
   }
 
   pressX() {
@@ -187,6 +198,8 @@ class InputControl {
 
   releaseZ() {
     this.z = 0;
+    this.zTapped = false;
+    this.zReleased = true;
   }
 
   releaseX() {

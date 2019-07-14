@@ -31,9 +31,10 @@ class Player extends Sprite {
     this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
-    if (CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls)) {
+    const collidedWithWalls = CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls);
+    if (collidedWithWalls.length > 0) {
       const xdir = Math.sign(this.xSpeed);
-      while (!CollisionDetector.willCollideWithSprites(xdir, 0, this, walls)) {
+      while ((CollisionDetector.willCollideWithSprites(xdir, 0, this, walls)).length === 0) {
         this.x += xdir;
       }
       this.xSpeed = 0;
@@ -45,9 +46,10 @@ class Player extends Sprite {
     const speedMax = 10;
     this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
 
-    if (CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls)) {
+    const collidedWithWalls = CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls);
+    if (collidedWithWalls.length > 0) {
       const ydir = Math.sign(this.verticalSpeed);
-      while (!CollisionDetector.willCollideWithSprites(0, ydir, this, walls)) {
+      while ((CollisionDetector.willCollideWithSprites(0, ydir, this, walls)).length === 0) {
         this.y += ydir;
       }
       this.verticalSpeed = 0;
@@ -55,7 +57,7 @@ class Player extends Sprite {
   }
 
   updateJump(control, onscreenSprites) {
-    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls)) {
+    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls).length > 0) {
       if (control.x) {
         this.verticalSpeed = -10;
         onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), 1));
