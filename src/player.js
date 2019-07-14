@@ -1,46 +1,27 @@
-class Player {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+class Player extends Sprite {
+  constructor(x, y,sprite) {
+    super(x,y,sprite)
     this.verticalSpeed = 0;
     this.xSpeed = 0;
     this.dead = false;
+    this.time = 0
+  }
+
+  draw(pallet){
+	if (this.dead) {
+     	 return;
+    	}
+	super.draw(pallet)
   }
 
   update(args) {
     if (this.dead) {
       return;
     }
+    this.updateAnimation()
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
     this.updateJump(args.control, args.onscreenSprites);
-  }
-
-  draw(pallet) {
-    if (this.dead) {
-      return;
-    }
-    this.drawBody(pallet);
-    this.drawEyes(pallet);
-  }
-
-  drawBody(pallet) {
-    ctx.fillStyle = pallet[1];
-    ctx.fillRect(this.x, this.y, 20, 20);
-  }
-
-  drawEyes(pallet) {
-    ctx.fillStyle = pallet[2];
-    ctx.fillRect(this.x + 4, this.y + 4, 4, 8);
-    ctx.fillRect(this.x + 12, this.y + 4, 4, 8);
-  }
-
-  rightSide() {
-    return this.x + 20;
-  }
-
-  bottomSide() {
-    return this.y + 20;
   }
 
   updateX(control, walls) {
@@ -84,5 +65,20 @@ class Player {
       }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
+  }
+
+  updateAnimation(){
+	var timeSpeed
+	if (this.xSpeed == 0) timeSpeed = 30;  else  timeSpeed = 10
+	this.time++;
+	this.time%=timeSpeed;
+  	if (this.time == 0){
+		this.increaseFrame()
+	}
+  }
+  increaseFrame(){
+	this.frame++
+	this.frame%=2
+	this.currentFrame = this.sprite[this.frame]
   }
 }

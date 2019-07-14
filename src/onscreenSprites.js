@@ -1,6 +1,6 @@
 class OnscreenSprites {
   constructor() {
-    this.player = new Player(200, 200);
+    this.player = new Player(200, 200,images.img.hero);
     this.walls = this.createWalls();
     this.swappers = [new Swapper(400, 400)];
     this.buzzsaws = [new BuzzSaw(500, canvas.height - 90)];

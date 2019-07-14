@@ -2,8 +2,8 @@ class ExplodingPlayer {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 2;
-    this.height = 2;
+    this.width = 5;
+    this.height = 5;
     this.dead = false;
 
     this.pixels = ArrayHelpers.range(30).map(x => {
