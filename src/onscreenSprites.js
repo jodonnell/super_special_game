@@ -18,9 +18,14 @@ class OnscreenSprites {
       return new Block(x * 40, canvas.height - 40, images.img.brick);
     });
 
-    walls.push(new Block(260, canvas.height - 80, images.img.brick));
-    walls.push(new Block(280, canvas.height - 160, images.img.brick));
-    walls.push(new Block(200, canvas.height - 200, images.img.brick));
+    walls.push(new Block(700, canvas.height - 80, images.img.brick));
+    walls.push(new Block(640, canvas.height - 160, images.img.brick));
+    walls.push(new Block(580, canvas.height - 200, images.img.brick));
+    walls.push(new Block(500, canvas.height - 240, images.img.brick));
+    walls.push(new Block(430, canvas.height - 260, images.img.brick));
+    walls.push(new Block(320, canvas.height - 270, images.img.brick));
+    walls.push(new Block(430, canvas.height - 360, images.img.brick));
+    walls.push(new Block(530, canvas.height - 360, images.img.brick));
     return walls;
   }
 

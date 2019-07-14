@@ -7,11 +7,12 @@ class Player extends Sprite {
     this.time = 0;
   }
 
-  draw(pallet) {
+  draw(pallet){
     if (this.dead) {
       return;
     }
-    super.draw(pallet);
+    const lightenedPallet = pallet.map(color => ColorHelpers.lightenDarkenColor(color, -40));
+    super.draw(lightenedPallet);
   }
 
   update(args) {
@@ -57,7 +58,7 @@ class Player extends Sprite {
   }
 
   updateJump(control, onscreenSprites) {
-    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls).length > 0) {
+    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls)) {
       if (control.x) {
         this.verticalSpeed = -10;
         onscreenSprites.addFX(new Cloud(this.x, this.bottomSide(), 1));
