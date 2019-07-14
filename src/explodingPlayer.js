@@ -1,4 +1,4 @@
-class Cloud {
+class ExplodingPlayer {
   constructor(x, y, dir) {
     this.x = x;
     this.y = y;
@@ -7,6 +7,10 @@ class Cloud {
     this.vsp = 1;
     this.dead = 0;
     this.spd = (MathHelpers.randomInt(2) + 2) * dir;
+
+    ArrayHelpers.range(30).map(x => {
+
+    })
   }
 
   update() {
@@ -22,7 +26,7 @@ class Cloud {
   }
 
   draw() {
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "red";
     ctx.fillRect(this.x - this.w / 2, this.y, this.w, -this.h);
   }
 }

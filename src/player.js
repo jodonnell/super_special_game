@@ -47,8 +47,8 @@ class Player {
     const speedmax = 4;
     const vel = 0.4;
     const horizontal = control.right - control.left;
-    this.xSpeed = clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
-    if (!horizontal) this.xSpeed = toZero(this.xSpeed, 1);
+    this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
+    if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
     if (CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls)) {
       const xdir = Math.sign(this.xSpeed);

@@ -24,8 +24,14 @@ class GameController {
       this.onscreenSprites.buzzsaws
     );
 
-    if (isTouchingBuzzSaw) {
+    if (!this.onscreenSprites.player.dead && isTouchingBuzzSaw) {
       this.onscreenSprites.player.dead = true;
+      this.onscreenSprites.addFX(
+        new ExplodingPlayer(
+          this.onscreenSprites.player.x,
+          this.onscreenSprites.player.y,
+          -1
+        ));
     }
   }
 
