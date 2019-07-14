@@ -52,9 +52,9 @@ class InputControl {
         e.preventDefault();
         let touch = e.touches[0];
 
-        if (touch.pageX >= window.innerWidth / 2 && touch.pageY > window.innerHeight - 100) {
+        if (touch.pageX >= window.innerWidth / 2 && touch.pageY > window.innerHeight *  0.8) {
           this.pressZ();
-        } else if (touch.pageX < window.innerWidth / 2 && touch.pageY > window.innerHeight - 100) {
+        } else if (touch.pageX < window.innerWidth / 2 && touch.pageY > window.innerHeight *  0.8) {
           this.pressX();
         } else if (touch.pageX < window.innerWidth / 2) {
           this.pressLeft();
