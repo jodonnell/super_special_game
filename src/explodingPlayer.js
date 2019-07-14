@@ -14,8 +14,8 @@ class ExplodingPlayer {
         y: this.y,
         velocityX: velocityX,
         velocityY: velocityY,
-        startVelocityY: velocityY,
-      }
+        startVelocityY: velocityY
+      };
     });
   }
 
@@ -24,8 +24,8 @@ class ExplodingPlayer {
       pixel.x += pixel.velocityX;
       pixel.y += pixel.velocityY;
 
-      pixel.velocityX = MathHelpers.toZero(pixel.velocityX, 0.1)
-      pixel.velocityY = MathHelpers.toZero(pixel.velocityY, 0.1)
+      pixel.velocityX = MathHelpers.toZero(pixel.velocityX, 0.1);
+      pixel.velocityY = MathHelpers.toZero(pixel.velocityY, 0.1);
     });
 
     this.checkForFinished();
@@ -49,7 +49,7 @@ class ExplodingPlayer {
     // as velicoticyY approaches zero make more transparent
     const max = Math.abs(pixel.startVelocityY);
     if (max === 0) {
-      return '00';
+      return "00";
     }
     const percentOpaque = Math.abs(pixel.velocityY) / max;
     const alpha = Math.floor(255 * percentOpaque);

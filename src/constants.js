@@ -1,2 +1,2 @@
-const RIGHT = 'RIGHT';
-const LEFT = 'LEFT';
+const RIGHT = "RIGHT";
+const LEFT = "LEFT";

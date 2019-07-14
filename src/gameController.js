@@ -34,12 +34,7 @@ class GameController {
     const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.pallet !== buzzsaw.pallet).length > 0;
     if (playerIsAlive && connectedBuzzSaw.length > 0 && isDifferentColor) {
       this.onscreenSprites.player.dead = true;
-      this.onscreenSprites.addFX(
-        new ExplodingPlayer(
-          this.onscreenSprites.player.x,
-          this.onscreenSprites.player.y,
-          -1
-        ));
+      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, -1));
     }
   }
 

@@ -22,7 +22,7 @@ class BuzzSaw extends Sprite {
       this.x -= 2;
     }
 
-    if ((this.xRange + this.startX) <= this.x) {
+    if (this.xRange + this.startX <= this.x) {
       this.direction = LEFT;
     }
 

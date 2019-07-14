@@ -1,24 +1,24 @@
 class Player extends Sprite {
-  constructor(x, y,sprite) {
-    super(x,y,sprite)
+  constructor(x, y, sprite) {
+    super(x, y, sprite);
     this.verticalSpeed = 0;
     this.xSpeed = 0;
     this.dead = false;
-    this.time = 0
+    this.time = 0;
   }
 
-  draw(pallet){
-	if (this.dead) {
-     	 return;
-    	}
-	super.draw(pallet)
+  draw(pallet) {
+    if (this.dead) {
+      return;
+    }
+    super.draw(pallet);
   }
 
   update(args) {
     if (this.dead) {
       return;
     }
-    this.updateAnimation()
+    this.updateAnimation();
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
     this.updateJump(args.control, args.onscreenSprites);
@@ -34,7 +34,7 @@ class Player extends Sprite {
     const collidedWithWalls = CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls);
     if (collidedWithWalls.length > 0) {
       const xdir = Math.sign(this.xSpeed);
-      while ((CollisionDetector.willCollideWithSprites(xdir, 0, this, walls)).length === 0) {
+      while (CollisionDetector.willCollideWithSprites(xdir, 0, this, walls).length === 0) {
         this.x += xdir;
       }
       this.xSpeed = 0;
@@ -49,7 +49,7 @@ class Player extends Sprite {
     const collidedWithWalls = CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls);
     if (collidedWithWalls.length > 0) {
       const ydir = Math.sign(this.verticalSpeed);
-      while ((CollisionDetector.willCollideWithSprites(0, ydir, this, walls)).length === 0) {
+      while (CollisionDetector.willCollideWithSprites(0, ydir, this, walls).length === 0) {
         this.y += ydir;
       }
       this.verticalSpeed = 0;
@@ -69,18 +69,19 @@ class Player extends Sprite {
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
   }
 
-  updateAnimation(){
-	var timeSpeed
-	if (this.xSpeed == 0) timeSpeed = 30;  else  timeSpeed = 10
-	this.time++;
-	this.time%=timeSpeed;
-  	if (this.time == 0){
-		this.increaseFrame()
-	}
+  updateAnimation() {
+    var timeSpeed;
+    if (this.xSpeed == 0) timeSpeed = 30;
+    else timeSpeed = 10;
+    this.time++;
+    this.time %= timeSpeed;
+    if (this.time == 0) {
+      this.increaseFrame();
+    }
   }
-  increaseFrame(){
-	this.frame++
-	this.frame%=2
-	this.currentFrame = this.sprite[this.frame]
+  increaseFrame() {
+    this.frame++;
+    this.frame %= 2;
+    this.currentFrame = this.sprite[this.frame];
   }
 }

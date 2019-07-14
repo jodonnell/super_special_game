@@ -15,7 +15,7 @@ class Cloud {
       return;
     }
     this.x -= this.spd;
-    this.y += Math.abs(this.spd/4)
+    this.y += Math.abs(this.spd / 4);
     this.w = Math.max(this.h + 5, this.w - 0.5);
     this.h = Math.max(this.h + this.vsp, 0);
     this.spd = MathHelpers.toZero(this.spd, 0.2);
