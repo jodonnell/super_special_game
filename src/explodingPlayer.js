@@ -1,32 +1,58 @@
 class ExplodingPlayer {
-  constructor(x, y, dir) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.h = MathHelpers.randomInt(5) + 5;
-    this.w = this.h + MathHelpers.randomInt(20);
-    this.vsp = 1;
-    this.dead = 0;
-    this.spd = (MathHelpers.randomInt(2) + 2) * dir;
+    this.width = 2;
+    this.height = 2;
+    this.dead = false;
 
-    ArrayHelpers.range(30).map(x => {
-
-    })
+    this.pixels = ArrayHelpers.range(30).map(x => {
+      const velocityX = MathHelpers.randomRange(-5, 5);
+      const velocityY = MathHelpers.randomRange(-5, 5);
+      return {
+        x: this.x,
+        y: this.y,
+        velocityX: velocityX,
+        velocityY: velocityY,
+        startVelocityY: velocityY,
+      }
+    });
   }
 
   update() {
-    if (!this.h) {
-      this.dead = 1;
-      return;
-    }
-    this.x -= this.spd;
-    this.w = Math.max(this.h + 5, this.w - 0.5);
-    this.h = Math.max(this.h + this.vsp, 0);
-    this.spd = MathHelpers.toZero(this.spd, 0.2);
-    this.vsp -= 0.1;
+    this.pixels.forEach(pixel => {
+      pixel.x += pixel.velocityX;
+      pixel.y += pixel.velocityY;
+
+      pixel.velocityX = MathHelpers.toZero(pixel.velocityX, 0.1)
+      pixel.velocityY = MathHelpers.toZero(pixel.velocityY, 0.1)
+    });
+
+    this.checkForFinished();
   }
 
-  draw() {
-    ctx.fillStyle = "red";
-    ctx.fillRect(this.x - this.w / 2, this.y, this.w, -this.h);
+  checkForFinished() {
+    const numLivePixesLeft = this.pixels.filter(pixel => pixel.velocityY !== 0).length;
+    if (numLivePixesLeft > 0) {
+      this.dead = true;
+    }
+  }
+
+  draw(pallet) {
+    this.pixels.forEach(pixel => {
+      ctx.fillStyle = `${pallet[0]}${this.getAlphaHex(pixel)}`;
+      ctx.fillRect(pixel.x, pixel.y, this.width, this.height);
+    });
+  }
+
+  getAlphaHex(pixel) {
+    // as velicoticyY approaches zero make more transparent
+    const max = Math.abs(pixel.startVelocityY);
+    if (max === 0) {
+      return '00';
+    }
+    const percentOpaque = Math.abs(pixel.velocityY) / max;
+    const alpha = Math.floor(255 * percentOpaque);
+    return ColorHelpers.rgbToHex(alpha);
   }
 }

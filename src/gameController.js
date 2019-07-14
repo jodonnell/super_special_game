@@ -59,7 +59,7 @@ class GameController {
 
   eliminate(objs) {
     for (let i = objs.length - 1; i >= 0; i--) {
-      if (objs[i].dead == 1) objs.splice(i, 1);
+      if (objs[i].dead) objs.splice(i, 1);
     }
   }
 
