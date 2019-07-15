@@ -1,9 +1,9 @@
 class Sprite {
-  constructor(x, y, sprite) {
+  constructor(x, y, sprite,frame) {
     this.x = x;
     this.y = y;
     this.sprite = sprite;
-    this.frame = 0;
+    this.frame = frame || 0;
     this.currentFrame = this.sprite[this.frame];
     this.w = this.currentFrame[0].length * 5;
     this.pixelSize = 5;
