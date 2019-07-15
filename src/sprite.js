@@ -1,5 +1,5 @@
 class Sprite {
-  constructor(x, y, sprite,frame) {
+  constructor(x, y, sprite, frame) {
     this.x = x;
     this.y = y;
     this.sprite = sprite;

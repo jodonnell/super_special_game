@@ -31,7 +31,7 @@ class OnscreenSprites {
     });
 
     walls.push(...leftWalls);
-    walls.push(new Block(260, canvas.height - 80, images.img.brick,1));
+    walls.push(new Block(260, canvas.height - 80, images.img.brick, 1));
     walls.push(new Block(280, canvas.height - 160, images.img.brick));
     walls.push(new Block(200, canvas.height - 200, images.img.brick));
     walls.push(new BlankBlock(750, canvas.height - 150, 40));

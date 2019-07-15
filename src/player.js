@@ -55,7 +55,6 @@ class Player extends Sprite {
       this.verticalSpeed = 0;
     } else this.y += Math.floor(this.verticalSpeed);
 
-
     if (this.canStickToWall(control, walls)) {
       this.verticalSpeed = MathHelpers.toZero(this.verticalSpeed, 1);
     }
@@ -66,13 +65,13 @@ class Player extends Sprite {
       return false;
     }
 
-    const couldStickToLeft = control.left && this.willCollideWithSideWalls(walls, -1).length > 0
-    const couldStickToRight = control.right && this.willCollideWithSideWalls(walls, 1).length > 0
+    const couldStickToLeft = control.left && this.willCollideWithSideWalls(walls, -1).length > 0;
+    const couldStickToRight = control.right && this.willCollideWithSideWalls(walls, 1).length > 0;
     return couldStickToRight || couldStickToLeft;
   }
 
   willCollideWithFloors(walls) {
-    return CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls)
+    return CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls);
   }
 
   willCollideWithSideWalls(walls, speed) {
