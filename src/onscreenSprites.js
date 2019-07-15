@@ -9,6 +9,13 @@ class OnscreenSprites {
       new BuzzSaw(440, canvas.height - 90, images.pallet.b, 65)
     ];
     this.FX = [];
+    this.BG = [
+	new BackgroundSquare(canvas.width/2,canvas.height,400,-1,45),
+	new BackgroundSquare(canvas.width,canvas.height,600,1,0,8),
+	new BackgroundSquare(150,120,200),
+	new BackgroundSquare(160,130,200),
+	new BackgroundSquare(0,320,150,-2,0)
+    ];
     this.updateSprites();
   }
 
@@ -30,6 +37,6 @@ class OnscreenSprites {
   }
 
   updateSprites() {
-    this.sprites = [...this.buzzsaws, ...this.walls, ...this.swappers, ...this.FX, this.player];
+    this.sprites = [...this.BG, ...this.buzzsaws, ...this.walls, ...this.swappers,this.player,...this.FX];
   }
 }
