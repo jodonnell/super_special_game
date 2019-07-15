@@ -60,10 +60,10 @@ class Player extends Sprite {
     if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls).length > 0) {
       if (control.x) {
         this.verticalSpeed = -10;
-        onscreenSprites.addFX(new Cloud(this.x+this.w/2, this.bottomSide(), 1));
-        onscreenSprites.addFX(new Cloud(this.x+this.w/2, this.bottomSide(), 1));
-        onscreenSprites.addFX(new Cloud(this.x+this.w/2, this.bottomSide(), -1));
-        onscreenSprites.addFX(new Cloud(this.x+this.w/2, this.bottomSide(), -1));
+        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
+        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
+        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
+        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
       }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
