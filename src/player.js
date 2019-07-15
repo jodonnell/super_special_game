@@ -31,7 +31,7 @@ class Player extends Sprite {
     this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
-    const collidedWithWalls = CollisionDetector.willCollideWithSprites(Math.floor(this.xSpeed), 0, this, walls);
+    const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
       const xdir = Math.sign(this.xSpeed);
       while (CollisionDetector.willCollideWithSprites(xdir, 0, this, walls).length === 0) {
@@ -46,7 +46,7 @@ class Player extends Sprite {
     const speedMax = 10;
     this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
 
-    const collidedWithWalls = CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls);
+    const collidedWithWalls = this.willCollideWithFloors(walls);
     if (collidedWithWalls.length > 0) {
       const ydir = Math.sign(this.verticalSpeed);
       while (CollisionDetector.willCollideWithSprites(0, ydir, this, walls).length === 0) {
@@ -54,6 +54,29 @@ class Player extends Sprite {
       }
       this.verticalSpeed = 0;
     } else this.y += Math.floor(this.verticalSpeed);
+
+
+    if (this.canStickToWall(control, walls)) {
+      this.verticalSpeed = MathHelpers.toZero(this.verticalSpeed, 1);
+    }
+  }
+
+  canStickToWall(control, walls) {
+    if (this.verticalSpeed <= 0) {
+      return false;
+    }
+
+    const couldStickToLeft = control.left && this.willCollideWithSideWalls(walls, -1).length > 0
+    const couldStickToRight = control.right && this.willCollideWithSideWalls(walls, 1).length > 0
+    return couldStickToRight || couldStickToLeft;
+  }
+
+  willCollideWithFloors(walls) {
+    return CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls)
+  }
+
+  willCollideWithSideWalls(walls, speed) {
+    return CollisionDetector.willCollideWithSprites(Math.floor(speed), 0, this, walls);
   }
 
   updateJump(control, onscreenSprites) {
