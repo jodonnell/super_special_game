@@ -16,10 +16,28 @@ class BlankBlock {
   draw() {
     ctx.fillRect(this.x, this.y, this.width, this.width);
   }
+
   rightSide() {
     return this.x + this.width;
   }
+
   bottomSide() {
     return this.y + this.width;
+  }
+
+  leftCollisionBound() {
+    return this.x;
+  }
+
+  topCollisionBound() {
+    return this.y;
+  }
+
+  rightCollisionBound() {
+    return this.rightSide();
+  }
+
+  bottomCollisionBound() {
+    return this.bottomSide();
   }
 }

@@ -106,4 +106,12 @@ class Player extends Sprite {
     this.frame %= 2;
     this.currentFrame = this.sprite[this.frame];
   }
+
+  leftCollisionBound() {
+    return this.x + 5;
+  }
+
+  rightCollisionBound() {
+    return this.rightSide() - 5;
+  }
 }

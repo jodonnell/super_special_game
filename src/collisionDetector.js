@@ -13,11 +13,14 @@ class CollisionDetector {
     if (spriteA === spriteB) {
       return false;
     }
-    if (spriteA.rightSide() + projectedVelocityX <= spriteB.x || spriteA.x + projectedVelocityX >= spriteB.rightSide())
+    if (
+      spriteA.rightCollisionBound() + projectedVelocityX <= spriteB.leftCollisionBound() ||
+      spriteA.leftCollisionBound() + projectedVelocityX >= spriteB.rightCollisionBound()
+    )
       return false;
     if (
-      spriteA.y + projectedVelocityY >= spriteB.bottomSide() ||
-      spriteA.bottomSide() + projectedVelocityY <= spriteB.y
+      spriteA.topCollisionBound() + projectedVelocityY >= spriteB.bottomCollisionBound() ||
+      spriteA.bottomCollisionBound() + projectedVelocityY <= spriteB.topCollisionBound()
     )
       return false;
     return true;

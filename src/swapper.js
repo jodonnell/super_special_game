@@ -30,4 +30,20 @@ class Swapper {
   bottomSide() {
     return this.y + 10;
   }
+
+  leftCollisionBound() {
+    return this.x;
+  }
+
+  topCollisionBound() {
+    return this.y;
+  }
+
+  rightCollisionBound() {
+    return this.rightSide();
+  }
+
+  bottomCollisionBound() {
+    return this.bottomSide();
+  }
 }

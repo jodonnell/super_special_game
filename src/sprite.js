@@ -32,6 +32,22 @@ class Sprite {
     return this.currentFrame.length * this.pixelSize;
   }
 
+  leftCollisionBound() {
+    return this.x;
+  }
+
+  topCollisionBound() {
+    return this.y;
+  }
+
+  rightCollisionBound() {
+    return this.rightSide();
+  }
+
+  bottomCollisionBound() {
+    return this.bottomSide();
+  }
+
   rightSide() {
     return this.x + this.width();
   }
