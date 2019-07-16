@@ -14,13 +14,15 @@ class CollisionDetector {
       return false;
     }
     if (
-      spriteA.rightCollisionBound() + projectedVelocityX <= spriteB.leftCollisionBound() ||
-      spriteA.leftCollisionBound() + projectedVelocityX >= spriteB.rightCollisionBound()
+      spriteA.collisionBounds.rightCollisionBound() + projectedVelocityX <=
+        spriteB.collisionBounds.leftCollisionBound() ||
+      spriteA.collisionBounds.leftCollisionBound() + projectedVelocityX >= spriteB.collisionBounds.rightCollisionBound()
     )
       return false;
     if (
-      spriteA.topCollisionBound() + projectedVelocityY >= spriteB.bottomCollisionBound() ||
-      spriteA.bottomCollisionBound() + projectedVelocityY <= spriteB.topCollisionBound()
+      spriteA.collisionBounds.topCollisionBound() + projectedVelocityY >=
+        spriteB.collisionBounds.bottomCollisionBound() ||
+      spriteA.collisionBounds.bottomCollisionBound() + projectedVelocityY <= spriteB.collisionBounds.topCollisionBound()
     )
       return false;
     return true;

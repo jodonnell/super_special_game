@@ -5,6 +5,7 @@ class Player extends Sprite {
     this.xSpeed = 0;
     this.dead = false;
     this.time = 0;
+    this.collisionBounds = new CollisionBounds(this, 5);
   }
 
   draw(pallet) {

@@ -7,6 +7,7 @@ class Sprite {
     this.currentFrame = this.sprite[this.frame];
     this.w = this.currentFrame[0].length * 5;
     this.pixelSize = 5;
+    this.collisionBounds = new CollisionBounds(this);
   }
 
   draw(pallet, x, y) {
@@ -30,22 +31,6 @@ class Sprite {
 
   height() {
     return this.currentFrame.length * this.pixelSize;
-  }
-
-  leftCollisionBound() {
-    return this.x;
-  }
-
-  topCollisionBound() {
-    return this.y;
-  }
-
-  rightCollisionBound() {
-    return this.rightSide();
-  }
-
-  bottomCollisionBound() {
-    return this.bottomSide();
   }
 
   rightSide() {

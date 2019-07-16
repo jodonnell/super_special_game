@@ -11,6 +11,7 @@ class BlankBlock {
     this.x = x;
     this.y = y;
     this.width = width;
+    this.collisionBounds = new CollisionBounds(this);
   }
   update() {}
   draw() {
@@ -23,21 +24,5 @@ class BlankBlock {
 
   bottomSide() {
     return this.y + this.width;
-  }
-
-  leftCollisionBound() {
-    return this.x;
-  }
-
-  topCollisionBound() {
-    return this.y;
-  }
-
-  rightCollisionBound() {
-    return this.rightSide();
-  }
-
-  bottomCollisionBound() {
-    return this.bottomSide();
   }
 }
