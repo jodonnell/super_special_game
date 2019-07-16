@@ -30,7 +30,12 @@ class OnscreenSprites {
       return new Block(0, y * 40, images.img.brick);
     });
 
+    const moreLeftWalls = ArrayHelpers.range(numWallsToFillSide - 6).map(y => {
+      return new Block(120, (y + 3) * 40, images.img.brick);
+    });
+
     walls.push(...leftWalls);
+    walls.push(...moreLeftWalls);
     walls.push(new Block(260, canvas.height - 80, images.img.brick, 1));
     walls.push(new Block(280, canvas.height - 160, images.img.brick));
     walls.push(new Block(200, canvas.height - 200, images.img.brick));

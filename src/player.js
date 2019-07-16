@@ -47,7 +47,7 @@ class Player extends Sprite {
     const speedMax = 10;
     this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
 
-    const collidedWithWalls = this.willCollideWithFloors(walls);
+    const collidedWithWalls = this.willCollideWithFloors(walls, this.verticalSpeed);
     if (collidedWithWalls.length > 0) {
       const ydir = Math.sign(this.verticalSpeed);
       while (CollisionDetector.willCollideWithSprites(0, ydir, this, walls).length === 0) {
@@ -62,7 +62,7 @@ class Player extends Sprite {
   }
 
   canStickToWall(control, walls) {
-    if (this.verticalSpeed <= 0) {
+    if (this.verticalSpeed < 0) {
       return false;
     }
 
@@ -71,8 +71,8 @@ class Player extends Sprite {
     return couldStickToRight || couldStickToLeft;
   }
 
-  willCollideWithFloors(walls) {
-    return CollisionDetector.willCollideWithSprites(0, Math.floor(this.verticalSpeed), this, walls);
+  willCollideWithFloors(walls, speed) {
+    return CollisionDetector.willCollideWithSprites(0, Math.floor(speed), this, walls);
   }
 
   willCollideWithSideWalls(walls, speed) {
@@ -80,7 +80,10 @@ class Player extends Sprite {
   }
 
   updateJump(control, onscreenSprites) {
-    if (CollisionDetector.willCollideWithSprites(0, 1, this, onscreenSprites.walls).length > 0) {
+    if (
+      this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0 ||
+      this.canStickToWall(control, onscreenSprites.walls)
+    ) {
       if (control.x) {
         this.verticalSpeed = -10;
         onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
