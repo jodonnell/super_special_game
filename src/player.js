@@ -5,7 +5,8 @@ class Player extends Sprite {
     this.xSpeed = 0;
     this.dead = false;
     this.time = 0;
-    this.collisionBounds = new CollisionBounds(this, 5);
+    this.xCollisionTrim = 5;
+    this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
   }
 
   draw(pallet) {
@@ -37,10 +38,7 @@ class Player extends Sprite {
 
     const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
-      const xdir = Math.sign(this.xSpeed);
-      while (CollisionDetector.willCollideWithSprites(xdir, 0, this, walls).length === 0) {
-        this.x += xdir;
-      }
+      this.adjustXToCollide(collidedWithWalls);
       this.xSpeed = 0;
     } else this.x += Math.floor(this.xSpeed);
   }
@@ -69,6 +67,17 @@ class Player extends Sprite {
     } else {
       const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottomCollisionBound());
       this.y = topY.collisionBounds.bottomCollisionBound();
+    }
+  }
+
+  adjustXToCollide(collidedWithWalls) {
+    const xdir = Math.sign(this.xSpeed);
+    if (xdir > 0) {
+      const leftX = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.leftCollisionBound());
+      this.x += leftX.collisionBounds.leftCollisionBound() - this.collisionBounds.rightCollisionBound();
+    } else {
+      const rightX = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.rightCollisionBound());
+      this.x = rightX.collisionBounds.rightCollisionBound() - this.xCollisionTrim;
     }
   }
 
