@@ -52,15 +52,23 @@ class Player extends Sprite {
 
     const collidedWithWalls = this.willCollideWithFloors(walls, this.verticalSpeed);
     if (collidedWithWalls.length > 0) {
-      const ydir = Math.sign(this.verticalSpeed);
-      while (CollisionDetector.willCollideWithSprites(0, ydir, this, walls).length === 0) {
-        this.y += ydir;
-      }
+      this.adjustYToCollide(collidedWithWalls);
       this.verticalSpeed = 0;
     } else this.y += Math.floor(this.verticalSpeed);
 
     if (this.canStickToWall(control, walls)) {
       this.verticalSpeed = MathHelpers.toZero(this.verticalSpeed, 1);
+    }
+  }
+
+  adjustYToCollide(collidedWithWalls) {
+    const ydir = Math.sign(this.verticalSpeed);
+    if (ydir > 0) {
+      const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.topCollisionBound());
+      this.y = topY.collisionBounds.topCollisionBound() - this.height();
+    } else {
+      const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottomCollisionBound());
+      this.y = topY.collisionBounds.bottomCollisionBound();
     }
   }
 
