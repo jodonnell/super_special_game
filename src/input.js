@@ -9,6 +9,7 @@ class InputControl {
     this.zTapped = false;
     this.zReleased = true;
     this.getKey();
+    this.canJump = true;
   }
 
   get LEFT_KEY() {
@@ -177,7 +178,9 @@ class InputControl {
   }
 
   pressX() {
-    this.x = 1;
+    if (this.canJump) {
+      this.x = 1;
+    }
   }
 
   releaseLeft() {
@@ -204,5 +207,6 @@ class InputControl {
 
   releaseX() {
     this.x = 0;
+    this.canJump = true;
   }
 }
