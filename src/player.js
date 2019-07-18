@@ -103,17 +103,22 @@ class Player extends Sprite {
     if (control.x && control.canJump) {
       if (this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0){
         this.verticalSpeed = -10;
-        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
-        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
-        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
-        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
+        this.addJumpClouds(onscreenSprites);
       }else
       if (this.canStickToWall(control, onscreenSprites.walls)){
+        this.addJumpClouds(onscreenSprites);
 	this.verticalSpeed= -10;
 	this.xSpeed = 4 * (control.left - control.right);
       }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
+  }
+
+  addJumpClouds(onscreenSprites) {
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
   }
 
   updateAnimation() {
