@@ -65,7 +65,9 @@ class Player extends Sprite {
       const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.topCollisionBound());
       this.y = topY.collisionBounds.topCollisionBound() - this.height();
     } else {
-      const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottomCollisionBound());
+      const topY = _.maxBy(collidedWithWalls, collidedWithWall =>
+        collidedWithWall.collisionBounds.bottomCollisionBound()
+      );
       this.y = topY.collisionBounds.bottomCollisionBound();
     }
   }
@@ -73,10 +75,14 @@ class Player extends Sprite {
   adjustXToCollide(collidedWithWalls) {
     const xdir = Math.sign(this.xSpeed);
     if (xdir > 0) {
-      const leftX = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.leftCollisionBound());
+      const leftX = _.minBy(collidedWithWalls, collidedWithWall =>
+        collidedWithWall.collisionBounds.leftCollisionBound()
+      );
       this.x += leftX.collisionBounds.leftCollisionBound() - this.collisionBounds.rightCollisionBound();
     } else {
-      const rightX = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.rightCollisionBound());
+      const rightX = _.maxBy(collidedWithWalls, collidedWithWall =>
+        collidedWithWall.collisionBounds.rightCollisionBound()
+      );
       this.x = rightX.collisionBounds.rightCollisionBound() - this.xCollisionTrim;
     }
   }
@@ -86,8 +92,9 @@ class Player extends Sprite {
       return false;
     }
 
-    const couldStickToLeft = control.left && this.willCollideWithSideWalls(walls, -1).length > 0;
-    const couldStickToRight = control.right && this.willCollideWithSideWalls(walls, 1).length > 0;
+    const isMoving = control.left || control.right;
+    const couldStickToLeft = isMoving && this.willCollideWithSideWalls(walls, -2).length > 0;
+    const couldStickToRight = isMoving && this.willCollideWithSideWalls(walls, 2).length > 0;
     return couldStickToRight || couldStickToLeft;
   }
 
@@ -101,14 +108,13 @@ class Player extends Sprite {
 
   updateJump(control, onscreenSprites) {
     if (control.x && control.canJump) {
-      if (this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0){
+      if (this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0) {
         this.verticalSpeed = -10;
         this.addJumpClouds(onscreenSprites);
-      }else
-      if (this.canStickToWall(control, onscreenSprites.walls)){
+      } else if (this.canStickToWall(control, onscreenSprites.walls)) {
         this.addJumpClouds(onscreenSprites);
-	this.verticalSpeed= -10;
-	this.xSpeed = 4 * (control.left - control.right);
+        this.verticalSpeed = -10;
+        this.xSpeed = 4 * (control.left - control.right);
       }
     }
     if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
