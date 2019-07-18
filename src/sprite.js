@@ -4,8 +4,7 @@ class Sprite {
     this.y = y;
     this.sprite = sprite;
     this.frame = frame || 0;
-    this.currentFrame = this.sprite[this.frame];
-    this.w = this.currentFrame[0].length * 5;
+    this.w = this.sprite[0].length * 5;
     this.pixelSize = 5;
     this.collisionBounds = new CollisionBounds(this);
   }
@@ -13,7 +12,8 @@ class Sprite {
   draw(pallet, x, y) {
     x = x || this.x;
     y = y || this.y;
-    this.currentFrame.forEach((row, i) => {
+    const currentFrame = this.sprite[this.frame]
+    currentFrame.forEach((row, i) => {
       row.forEach((pixelCode, j) => {
         if (pixelCode === -1) {
           return;
@@ -26,11 +26,11 @@ class Sprite {
   }
 
   width() {
-    return this.currentFrame[0].length * this.pixelSize;
+    return this.sprite[0][0].length * this.pixelSize;
   }
 
   height() {
-    return this.currentFrame.length * this.pixelSize;
+    return this.sprite[0].length * this.pixelSize;
   }
 
   rightSide() {

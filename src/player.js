@@ -27,6 +27,11 @@ class Player extends Sprite {
     if (args.control.x) {
       args.control.canJump = false;
     }
+    if (this.verticalSpeed < 0){
+     this.sprite = images.img.jump 
+      this.frame = 0
+    }else this.sprite = images.img.hero 
+     
   }
 
   updateX(control, walls) {
@@ -138,9 +143,9 @@ class Player extends Sprite {
     }
   }
   increaseFrame() {
+    const maxFrame = this.sprite.length
     this.frame++;
-    this.frame %= 2;
-    this.currentFrame = this.sprite[this.frame];
+    this.frame %= maxFrame;
   }
 
   leftCollisionBound() {
