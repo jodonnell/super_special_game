@@ -134,7 +134,7 @@ class Player extends Sprite {
 
   updateAnimation() {
     var timeSpeed;
-    if (this.xSpeed == 0) timeSpeed = 30;
+    if (Math.floor(this.xSpeed) == 0) timeSpeed = 30;
     else timeSpeed = 10;
     this.time++;
     this.time %= timeSpeed;
