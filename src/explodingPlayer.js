@@ -2,11 +2,11 @@ class ExplodingPlayer {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.width = 5;
-    this.height = 5;
+    this.width = 10;
+    this.height = 10;
     this.dead = false;
 
-    this.pixels = ArrayHelpers.range(30).map(x => {
+    this.pixels = ArrayHelpers.range(80).map(x => {
       const velocityX = MathHelpers.randomRange(-5, 5);
       const velocityY = MathHelpers.randomRange(-5, 5);
       return {
@@ -24,8 +24,8 @@ class ExplodingPlayer {
       pixel.x += pixel.velocityX;
       pixel.y += pixel.velocityY;
 
-      pixel.velocityX = MathHelpers.toZero(pixel.velocityX, 0.1);
-      pixel.velocityY = MathHelpers.toZero(pixel.velocityY, 0.1);
+      pixel.velocityX = MathHelpers.toZero(pixel.velocityX, 0.09);
+      pixel.velocityY = MathHelpers.toZero(pixel.velocityY, 0.09);
     });
 
     this.checkForFinished();
