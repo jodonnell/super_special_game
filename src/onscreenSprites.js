@@ -23,26 +23,31 @@ class OnscreenSprites {
   }
 
   createWalls() {
-    const numWallsToFillBottom = canvas.width / 40;
-    const walls = ArrayHelpers.range(numWallsToFillBottom).map(x => {
-      return new Block(x * 40, canvas.height - 40, images.img.brick);
-    });
-
-    const numWallsToFillSide = canvas.height / 40;
-    const leftWalls = ArrayHelpers.range(numWallsToFillSide - 1).map(y => {
-      return new Block(0, y * 40, images.img.brick);
-    });
-
-    const moreLeftWalls = ArrayHelpers.range(numWallsToFillSide - 6).map(y => {
-      return new Block(120, (y + 3) * 40, images.img.brick);
-    });
-
-    walls.push(...leftWalls);
-    walls.push(...moreLeftWalls);
+    const walls = [];
     walls.push(new Block(260, canvas.height - 80, images.img.brick, 1));
     walls.push(new Block(280, canvas.height - 160, images.img.brick));
     walls.push(new Block(200, canvas.height - 200, images.img.brick));
-    walls.push(new BlankBlock(750, canvas.height - 150, 40));
+
+    const wallsWidth = walls[0].width();
+    walls.push(new BlankBlock(750, canvas.height - 150, wallsWidth));
+
+    const numWallsToFillBottom = canvas.width / wallsWidth;
+    const bottomWalls = ArrayHelpers.range(numWallsToFillBottom).map(x => {
+      return new Block(x * wallsWidth, canvas.height - 40, images.img.brick);
+    });
+
+    const numWallsToFillSide = canvas.height / wallsWidth;
+    const leftWalls = ArrayHelpers.range(numWallsToFillSide - 1).map(y => {
+      return new Block(0, y * wallsWidth, images.img.brick);
+    });
+
+    const moreLeftWalls = ArrayHelpers.range(numWallsToFillSide - 6).map(y => {
+      return new Block(120, (y + 3) * wallsWidth, images.img.brick);
+    });
+
+    walls.push(...bottomWalls);
+    walls.push(...leftWalls);
+    walls.push(...moreLeftWalls);
     return walls;
   }
 
