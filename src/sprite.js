@@ -14,6 +14,9 @@ class Sprite {
     y = y || this.y;
     const currentFrame = this.sprite[this.frame]
     currentFrame.forEach((row, i) => {
+      if (this.reverse) {
+        row = row.slice().reverse();
+      }
       row.forEach((pixelCode, j) => {
         if (pixelCode === -1) {
           return;

@@ -36,12 +36,19 @@ class Player extends Sprite {
       this.sprite = images.img.jump;
       this.frame = 0;
     } else if (this.canStickToRight(control, walls)) {
+      this.reverse = false;
       this.sprite = images.img.climb;
     } else if (this.canStickToLeft(control, walls)) {
       this.reverse = true;
       this.sprite = images.img.climb;
     } else {
       this.sprite = images.img.hero;
+    }
+
+    if (this.xSpeed > 0) {
+      this.reverse = false;
+    } else if (this.xSpeed < 0) {
+      this.reverse = true;
     }
   }
 
