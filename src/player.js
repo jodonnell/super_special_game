@@ -41,9 +41,9 @@ class Player extends Sprite {
       this.sprite = images.img.hero;
     }
 
-    if (this.xSpeed > 0) {
+    if (this.xSpeed > 0 || control.right) {
       this.reverse = false;
-    } else if (this.xSpeed < 0) {
+    } else if (this.xSpeed < 0 || control.left) {
       this.reverse = true;
     }
   }
@@ -152,7 +152,7 @@ class Player extends Sprite {
     else timeSpeed = 10;
     this.time++;
     this.time %= timeSpeed;
-    if (this.time == 0) {
+    if (this.time == 0 && Math.floor(this.verticalSpeed) == 0) {
       this.increaseFrame();
     }
   }
