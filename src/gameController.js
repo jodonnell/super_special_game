@@ -4,6 +4,7 @@ class GameController {
     this.onscreenSprites = new OnscreenSprites();
     this.pallet = images.pallet.a;
     this.hasTouchedSwapper = false;
+    this.hasSawTouchedSwapper = false;
   }
 
   update() {
@@ -39,6 +40,11 @@ class GameController {
   }
 
   swapPalletIfTouchingSwapper() {
+    this.swapPalletIfPlayerTouchingSwapper();
+    this.swapPalletIfBuzzsawTouchingSwapper();
+  }
+
+  swapPalletIfPlayerTouchingSwapper() {
     const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
       this.onscreenSprites.player,
       this.onscreenSprites.swappers
@@ -48,6 +54,27 @@ class GameController {
       this.swapPallets();
     } else if (!isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = false;
+    }
+  }
+
+  swapPalletIfBuzzsawTouchingSwapper() {
+    const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
+      this.onscreenSprites.buzzsaws[4],
+      this.onscreenSprites.swappers
+    );
+    if (!this.hasSawTouchedSwapper && isTouchingSwapper.length > 0) {
+      this.hasSawTouchedSwapper = true;
+
+      let pallet = this.onscreenSprites.buzzsaws[4].pallet;
+      if (pallet === images.pallet.a) {
+        pallet = images.pallet.b;
+      } else {
+        pallet = images.pallet.a;
+      }
+
+      this.onscreenSprites.buzzsaws[4].pallet = pallet;
+    } else if (!isTouchingSwapper.length > 0) {
+      this.hasSawTouchedSwapper = false;
     }
   }
 
