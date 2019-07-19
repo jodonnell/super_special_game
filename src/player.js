@@ -35,11 +35,7 @@ class Player extends Sprite {
     if (this.verticalSpeed < 0){
       this.sprite = images.img.jump;
       this.frame = 0;
-    } else if (this.canStickToRight(control, walls)) {
-      this.reverse = false;
-      this.sprite = images.img.climb;
-    } else if (this.canStickToLeft(control, walls)) {
-      this.reverse = true;
+    } else if (this.canStickToWall(control, walls)) {
       this.sprite = images.img.climb;
     } else {
       this.sprite = images.img.hero;
@@ -111,25 +107,14 @@ class Player extends Sprite {
   }
 
   canStickToWall(control, walls) {
-    return this.canStickToRight(control, walls) || this.canStickToLeft(control, walls);
-  }
-
-  canStickToRight(control, walls) {
     if (this.verticalSpeed < 0) {
       return false;
     }
 
     const isMoving = control.left || control.right;
-    return isMoving && this.willCollideWithSideWalls(walls, 2).length > 0;
-  }
-
-  canStickToLeft(control, walls) {
-    if (this.verticalSpeed < 0) {
-      return false;
-    }
-
-    const isMoving = control.left || control.right;
-    return isMoving && this.willCollideWithSideWalls(walls, -2).length > 0;
+    const couldStickToLeft = isMoving && this.willCollideWithSideWalls(walls, -3).length > 0;
+    const couldStickToRight = isMoving && this.willCollideWithSideWalls(walls, 3).length > 0;
+    return couldStickToRight || couldStickToLeft;
   }
 
   willCollideWithFloors(walls, speed) {
