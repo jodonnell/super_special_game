@@ -7,6 +7,7 @@ class Player extends Sprite {
     this.time = 0;
     this.xCollisionTrim = 5;
     this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
+    this.reverse = false;
   }
 
   draw(pallet) {
@@ -24,14 +25,24 @@ class Player extends Sprite {
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
     this.updateJump(args.control, args.onscreenSprites);
+    this.updateSprite(args.control, args.onscreenSprites.walls);
     if (args.control.x) {
       args.control.canJump = false;
     }
+  }
+
+  updateSprite(control, walls) {
     if (this.verticalSpeed < 0){
-     this.sprite = images.img.jump 
-      this.frame = 0
-    }else this.sprite = images.img.hero 
-     
+      this.sprite = images.img.jump;
+      this.frame = 0;
+    } else if (this.canStickToRight(control, walls)) {
+      this.sprite = images.img.climb;
+    } else if (this.canStickToLeft(control, walls)) {
+      this.reverse = true;
+      this.sprite = images.img.climb;
+    } else {
+      this.sprite = images.img.hero;
+    }
   }
 
   updateX(control, walls) {
@@ -93,14 +104,25 @@ class Player extends Sprite {
   }
 
   canStickToWall(control, walls) {
+    return this.canStickToRight(control, walls) || this.canStickToLeft(control, walls);
+  }
+
+  canStickToRight(control, walls) {
     if (this.verticalSpeed < 0) {
       return false;
     }
 
     const isMoving = control.left || control.right;
-    const couldStickToLeft = isMoving && this.willCollideWithSideWalls(walls, -2).length > 0;
-    const couldStickToRight = isMoving && this.willCollideWithSideWalls(walls, 2).length > 0;
-    return couldStickToRight || couldStickToLeft;
+    return isMoving && this.willCollideWithSideWalls(walls, 2).length > 0;
+  }
+
+  canStickToLeft(control, walls) {
+    if (this.verticalSpeed < 0) {
+      return false;
+    }
+
+    const isMoving = control.left || control.right;
+    return isMoving && this.willCollideWithSideWalls(walls, -2).length > 0;
   }
 
   willCollideWithFloors(walls, speed) {
