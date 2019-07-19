@@ -6,7 +6,10 @@ class OnscreenSprites {
     this.buzzsaws = [
       new BuzzSaw(580, canvas.height - 90, images.pallet.a, 120),
       new BuzzSaw(300, canvas.height - 90, images.pallet.a, 200),
-      new BuzzSaw(440, canvas.height - 90, images.pallet.b, 65)
+      new BuzzSaw(440, canvas.height - 90, images.pallet.b, 65),
+      new BuzzSaw(0, canvas.height - 200, images.pallet.a, 65),
+      new BuzzSaw(0, canvas.height - 380, images.pallet.b, 65),
+      new BuzzSaw(0, canvas.height - 572, images.pallet.a, 65),
     ];
     this.FX = [];
     this.BG = [
