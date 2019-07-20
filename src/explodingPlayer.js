@@ -1,20 +1,23 @@
 class ExplodingPlayer {
-  constructor(x, y) {
+  constructor(x, y, pallet) {
     this.x = x;
     this.y = y;
     this.width = 10;
     this.height = 10;
     this.dead = false;
+    this.pallet = pallet;
 
     this.pixels = ArrayHelpers.range(80).map(x => {
       const velocityX = MathHelpers.randomRange(-5, 5);
       const velocityY = MathHelpers.randomRange(-5, 5);
+      const color = MathHelpers.randomRange(0, 3);
       return {
         x: this.x,
         y: this.y,
         velocityX: velocityX,
         velocityY: velocityY,
-        startVelocityY: velocityY
+        startVelocityY: velocityY,
+        color: this.pallet[color]
       };
     });
   }
@@ -38,9 +41,9 @@ class ExplodingPlayer {
     }
   }
 
-  draw(pallet) {
+  draw() {
     this.pixels.forEach(pixel => {
-      ctx.fillStyle = `${pallet[0]}${this.getAlphaHex(pixel)}`;
+      ctx.fillStyle = `${pixel.color}${this.getAlphaHex(pixel)}`;
       ctx.fillRect(pixel.x, pixel.y, this.width, this.height);
     });
   }

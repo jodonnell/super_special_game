@@ -42,13 +42,13 @@ class GameController {
     if (this.onscreenSprites.player.dead && !this.onscreenSprites.hasExplodingPlayer()) {
       this.onscreenSprites.player.dead = false;
       this.onscreenSprites.resetPlayer();
-      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y));
+      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
     }
   }
 
   playerDied() {
     this.onscreenSprites.player.dead = true;
-    this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y));
+    this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
   }
 
   swapPalletIfTouchingSwapper() {
