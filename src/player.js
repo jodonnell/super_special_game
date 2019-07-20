@@ -3,13 +3,13 @@ class Player extends Sprite {
     super(x, y, sprite);
     this.resetPlayer();
     this.xCollisionTrim = 5;
+    this.dead = false;
     this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
   }
 
   resetPlayer() {
     this.verticalSpeed = 0;
     this.xSpeed = 0;
-    this.dead = false;
     this.time = 0;
     this.reverse = false;
   }

@@ -18,7 +18,8 @@ class GameController {
       });
     });
 
-    this.eliminate(this.onscreenSprites.FX);
+    this.onscreenSprites.removeFX();
+
     this.swapPalletIfTouchingSwapper();
     this.checkForDeath();
     this.checkForRegeneration();
@@ -39,10 +40,18 @@ class GameController {
   }
 
   checkForRegeneration() {
-    if (this.onscreenSprites.player.dead && !this.onscreenSprites.hasExplodingPlayer()) {
+    if (!this.onscreenSprites.player.dead) {
+      return;
+    }
+
+    const isPlayerAtStartSpot = this.onscreenSprites.isPlayerAtStartSpot();
+    if (!this.onscreenSprites.hasImplodingPlayer() && isPlayerAtStartSpot) {
       this.onscreenSprites.player.dead = false;
+    }
+
+    if (!this.onscreenSprites.hasExplodingPlayer() && !isPlayerAtStartSpot) {
       this.onscreenSprites.resetPlayer();
-      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
+      this.onscreenSprites.addFX(new ImplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
     }
   }
 
@@ -71,14 +80,6 @@ class GameController {
 
   clearScreen() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
-  eliminate(objs) {
-    for (let i = objs.length - 1; i >= 0; i--) {
-      if (objs[i].dead) {
-        objs.splice(i, 1);
-      }
-    }
   }
 
   swapPallets() {
