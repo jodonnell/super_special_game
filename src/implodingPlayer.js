@@ -40,6 +40,7 @@ class ImplodingPlayer {
 
   checkForFinished() {
     const numLivePixesLeft = this.pixels.filter((pixel, i) => {
+      // TODO: very bad way to check
       const yDone = MathHelpers.between(pixel.y, this.y - 35, this.y + 35);
       const xDone = MathHelpers.between(pixel.x, this.x - 35, this.x + 35);
 
