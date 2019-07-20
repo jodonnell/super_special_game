@@ -21,6 +21,7 @@ class GameController {
     this.eliminate(this.onscreenSprites.FX);
     this.swapPalletIfTouchingSwapper();
     this.checkForDeath();
+    this.checkForRegeneration();
   }
 
   checkForDeath() {
@@ -33,9 +34,21 @@ class GameController {
 
     const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.pallet !== buzzsaw.pallet).length > 0;
     if (playerIsAlive && connectedBuzzSaw.length > 0 && isDifferentColor) {
-      this.onscreenSprites.player.dead = true;
-      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, -1));
+      this.playerDied();
     }
+  }
+
+  checkForRegeneration() {
+    if (this.onscreenSprites.player.dead && !this.onscreenSprites.hasExplodingPlayer()) {
+      this.onscreenSprites.player.dead = false;
+      this.onscreenSprites.resetPlayer();
+      this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y));
+    }
+  }
+
+  playerDied() {
+    this.onscreenSprites.player.dead = true;
+    this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y));
   }
 
   swapPalletIfTouchingSwapper() {

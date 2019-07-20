@@ -1,12 +1,16 @@
 class Player extends Sprite {
   constructor(x, y, sprite) {
     super(x, y, sprite);
+    this.resetPlayer();
+    this.xCollisionTrim = 5;
+    this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
+  }
+
+  resetPlayer() {
     this.verticalSpeed = 0;
     this.xSpeed = 0;
     this.dead = false;
     this.time = 0;
-    this.xCollisionTrim = 5;
-    this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
     this.reverse = false;
   }
 

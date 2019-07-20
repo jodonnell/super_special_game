@@ -1,6 +1,8 @@
 class OnscreenSprites {
   constructor() {
-    this.player = new Player(200, 200, images.img.hero);
+    this.startX = 270;
+    this.startY = 200;
+    this.player = new Player(this.startX, this.startY, images.img.hero);
     this.walls = this.createWalls();
     this.swappers = [new Swapper(500, 450), new Swapper(75, canvas.height - 340)];
     this.buzzsaws = [
@@ -56,7 +58,24 @@ class OnscreenSprites {
     this.updateSprites();
   }
 
+  hasExplodingPlayer() {
+    var found = false;
+    this.FX.forEach(fx => {
+      if (fx instanceof ExplodingPlayer) {
+        found = true;
+      }
+    });
+
+    return found;
+  }
+
   updateSprites() {
     this.sprites = [...this.BG, ...this.buzzsaws, ...this.walls, ...this.swappers, this.player, ...this.FX];
+  }
+
+  resetPlayer() {
+    this.player.x = this.startX;
+    this.player.y = this.startY;
+    this.player.resetPlayer();
   }
 }

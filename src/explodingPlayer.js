@@ -33,7 +33,7 @@ class ExplodingPlayer {
 
   checkForFinished() {
     const numLivePixesLeft = this.pixels.filter(pixel => pixel.velocityY !== 0).length;
-    if (numLivePixesLeft > 0) {
+    if (numLivePixesLeft === 0) {
       this.dead = true;
     }
   }
