@@ -18,7 +18,7 @@ class Sprite {
         row = row.slice().reverse();
       }
       row.forEach((pixelCode, j) => {
-        if (pixelCode === -1) {
+        if (pixelCode === -1 || pixelCode === 9) {
           return;
         }
 

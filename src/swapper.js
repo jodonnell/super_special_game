@@ -1,27 +1,19 @@
-class Swapper {
+class Swapper extends Sprite {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.pallet = images.pallet.a;
-    this.frame = 0;
+    super(x, y, images.img.swapper, 0);
     this.collisionBounds = new CollisionBounds(this);
-  }
-
-  draw() {
-    ctx.fillStyle = this.pallet[0];
-    ctx.fillRect(this.x, this.y, 15, 15);
+    this.counter = 0;
   }
 
   update() {
-    this.frame++;
-    if (this.frame % 10 === 0) {
-      if (this.pallet === images.pallet.a) {
-        this.pallet = images.pallet.b;
-      } else {
-        this.pallet = images.pallet.a;
-      }
-      this.frame = 0;
+    this.counter++;
+
+    if (this.counter > 10) {
+      this.frame++;
+      this.counter = 0;
     }
+    if (this.frame === 2)
+      this.frame = 0;
   }
 
   rightSide() {
