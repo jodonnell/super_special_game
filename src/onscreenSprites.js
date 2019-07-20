@@ -4,7 +4,11 @@ class OnscreenSprites {
     this.startY = 200;
     this.player = new Player(this.startX, this.startY, images.img.hero);
     this.walls = this.createWalls();
-    this.swappers = [new Swapper(500, 450), new Swapper(75, canvas.height - 340)];
+    this.swappers = [
+      new Swapper(500, 450),
+      new Swapper(75, canvas.height - 340),
+      new Field(400, 400),
+    ];
     this.buzzsaws = [
       new BuzzSaw(580, canvas.height - 90, images.pallet.a, 120),
       new BuzzSaw(300, canvas.height - 90, images.pallet.a, 200),
@@ -21,6 +25,7 @@ class OnscreenSprites {
       new BackgroundSquare(160, 130, 200),
       new BackgroundSquare(0, 320, 150, -2, 0)
     ];
+
     this.updateSprites();
   }
 
