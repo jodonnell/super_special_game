@@ -1,7 +1,7 @@
 class Swapper extends Sprite {
   constructor(x, y) {
     super(x, y, images.img.swapper, 0);
-    this.collisionBounds = new CollisionBounds(this);
+    this.collisionBounds = new CollisionBoundsRect(this);
     this.counter = 0;
   }
 

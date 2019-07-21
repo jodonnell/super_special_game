@@ -11,7 +11,7 @@ class BlankBlock {
     this.x = x;
     this.y = y;
     this.width = width;
-    this.collisionBounds = new CollisionBounds(this);
+    this.collisionBounds = new CollisionBoundsRect(this);
   }
   update() {}
   draw() {

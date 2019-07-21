@@ -3,7 +3,7 @@ class Field {
     this.x = x;
     this.y = y;
     this.radius = 60;
-    this.collisionBounds = new CollisionBounds(this);
+    this.collisionBounds = new CollisionBoundsCircle(this);
     this.shrink = true;
     this.counter = 0;
     this.pallet = pallet;

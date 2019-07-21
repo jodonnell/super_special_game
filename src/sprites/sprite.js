@@ -6,7 +6,7 @@ class Sprite {
     this.frame = frame || 0;
     this.w = this.sprite[0].length * 5;
     this.pixelSize = 5;
-    this.collisionBounds = new CollisionBounds(this);
+    this.collisionBounds = new CollisionBoundsRect(this);
   }
 
   draw(pallet, x, y) {

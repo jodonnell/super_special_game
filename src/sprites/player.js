@@ -4,7 +4,7 @@ class Player extends Sprite {
     this.resetPlayer();
     this.xCollisionTrim = 5;
     this.dead = false;
-    this.collisionBounds = new CollisionBounds(this, this.xCollisionTrim);
+    this.collisionBounds = new CollisionBoundsRect(this, this.xCollisionTrim);
   }
 
   resetPlayer() {
