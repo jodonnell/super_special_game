@@ -8,6 +8,11 @@ class BuzzSaw extends Sprite {
     this.direction = RIGHT;
     this.xRange = xRange;
     this.pallet = pallet;
+    this.originalPallet = pallet;
+  }
+
+  resetPallet() {
+    this.pallet = this.originalPallet;
   }
 
   update() {

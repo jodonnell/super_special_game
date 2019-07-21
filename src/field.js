@@ -1,11 +1,12 @@
 class Field {
-  constructor(x, y) {
+  constructor(x, y, pallet) {
     this.x = x;
     this.y = y;
     this.radius = 60;
     this.collisionBounds = new CollisionBounds(this);
     this.shrink = true;
     this.counter = 0;
+    this.pallet = pallet;
   }
 
   update() {
@@ -35,16 +36,16 @@ class Field {
   draw() {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI, false);
-    ctx.fillStyle = `${images.pallet.a[0]}99`;
+    ctx.fillStyle = `${this.pallet[0]}99`;
     ctx.fill();
   }
 
   rightSide() {
-    return this.x + this.width;
+    return this.x + 60;
   }
 
   bottomSide() {
-    return this.y + this.width;
+    return this.y + 60;
   }
 
 }

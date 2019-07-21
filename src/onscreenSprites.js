@@ -7,7 +7,9 @@ class OnscreenSprites {
     this.swappers = [
       new Swapper(500, 450),
       new Swapper(75, canvas.height - 340),
-      new Field(400, 400),
+    ];
+    this.fieldSwappers = [
+      new Field(160, 270, images.pallet.a),
     ];
     this.buzzsaws = [
       new BuzzSaw(580, canvas.height - 90, images.pallet.a, 120),
@@ -95,7 +97,15 @@ class OnscreenSprites {
   }
 
   updateSprites() {
-    this.sprites = [...this.BG, ...this.buzzsaws, ...this.walls, ...this.swappers, this.player, ...this.FX];
+    this.sprites = [
+      ...this.BG,
+      ...this.buzzsaws,
+      ...this.walls,
+      ...this.swappers,
+      ...this.fieldSwappers,
+      this.player,
+      ...this.FX
+    ];
   }
 
   resetPlayer() {

@@ -21,6 +21,7 @@ class GameController {
     this.onscreenSprites.removeFX();
 
     this.swapPalletIfTouchingSwapper();
+    this.swapPalletIfTouchingSwapperField();
     this.checkForDeath();
     this.checkForRegeneration();
   }
@@ -71,6 +72,21 @@ class GameController {
     } else if (!isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = false;
     }
+  }
+
+  swapPalletIfTouchingSwapperField() {
+    this.onscreenSprites.buzzsaws.forEach(buzzsaw => buzzsaw.resetPallet());
+
+    this.onscreenSprites.fieldSwappers.forEach(fieldSwapper => {
+      const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
+        fieldSwapper,
+        this.onscreenSprites.buzzsaws
+      );
+
+      isTouchingSwapper.forEach((buzzsaw) => {
+        buzzsaw.pallet = fieldSwapper.pallet;
+      })
+    });
   }
 
   draw() {
