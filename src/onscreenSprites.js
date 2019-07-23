@@ -27,7 +27,9 @@ class OnscreenSprites {
       new BackgroundSquare(160, 130, 200),
       new BackgroundSquare(0, 320, 150, -2, 0)
     ];
-
+    this.enemies = [
+      new Blob (60,canvas.height-100, images.img.blob)
+    ];
     this.updateSprites();
   }
 
@@ -103,6 +105,7 @@ class OnscreenSprites {
       ...this.walls,
       ...this.swappers,
       ...this.fieldSwappers,
+      ...this.enemies,
       this.player,
       ...this.FX
     ];
