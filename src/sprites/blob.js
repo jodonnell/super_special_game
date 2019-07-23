@@ -29,7 +29,7 @@ class Blob extends Sprite {
       case this.states.sliding:
         this.updateAnimation();
         this.updateX(args.onscreenSprites.walls);
-        this.ApplyHorizontalFriction();
+        this.applyHorizontalFriction();
         if (this.xSpeed == 0) this.currentState = this.states.idle;
         break;
 
@@ -39,7 +39,8 @@ class Blob extends Sprite {
         break;
     }
   }
-  ApplyHorizontalFriction() {
+
+  applyHorizontalFriction() {
     this.xSpeed = MathHelpers.toZero(this.xSpeed, 0.5);
   }
 
