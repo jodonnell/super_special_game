@@ -8,15 +8,15 @@ class CollisionBounds {
     return this.sprite.x + this.trimX;
   }
 
-  topCollisionBound() {
+  top() {
     return this.sprite.y;
   }
 
-  rightCollisionBound() {
+  right() {
     return this.sprite.rightSide() - this.trimX;
   }
 
-  bottomCollisionBound() {
+  bottom() {
     return this.sprite.bottomSide();
   }
 }

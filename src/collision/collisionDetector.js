@@ -30,45 +30,45 @@ class CollisionDetector {
 
   static doRectsCollide(projectedVelocityX, projectedVelocityY, spriteA, spriteB) {
     if (
-      spriteA.collisionBounds.rightCollisionBound() + projectedVelocityX <=
-        spriteB.collisionBounds.leftCollisionBound() ||
-      spriteA.collisionBounds.leftCollisionBound() + projectedVelocityX >= spriteB.collisionBounds.rightCollisionBound()
+      spriteA.collisionBounds.right() + projectedVelocityX <=
+        spriteB.collisionBounds.left() ||
+      spriteA.collisionBounds.left() + projectedVelocityX >= spriteB.collisionBounds.right()
     )
       return false;
     if (
-      spriteA.collisionBounds.topCollisionBound() + projectedVelocityY >=
-        spriteB.collisionBounds.bottomCollisionBound() ||
-      spriteA.collisionBounds.bottomCollisionBound() + projectedVelocityY <= spriteB.collisionBounds.topCollisionBound()
+      spriteA.collisionBounds.top() + projectedVelocityY >=
+        spriteB.collisionBounds.bottom() ||
+      spriteA.collisionBounds.bottom() + projectedVelocityY <= spriteB.collisionBounds.top()
     )
       return false;
     return true;
   }
 
   static doCircleAndRectCollide(projectedVelocityX, projectedVelocityY, circle, rect) {
-    const topLeftPoint = { x: rect.collisionBounds.leftCollisionBound(), y: rect.collisionBounds.topCollisionBound() };
+    const topLeftPoint = { x: rect.collisionBounds.left(), y: rect.collisionBounds.top() };
     if (this.pointInCircle(topLeftPoint, circle)) {
       return true;
     }
 
     const topRightPoint = {
-      x: rect.collisionBounds.rightCollisionBound(),
-      y: rect.collisionBounds.topCollisionBound()
+      x: rect.collisionBounds.right(),
+      y: rect.collisionBounds.top()
     };
     if (this.pointInCircle(topRightPoint, circle)) {
       return true;
     }
 
     const bottomLeftPoint = {
-      x: rect.collisionBounds.leftCollisionBound(),
-      y: rect.collisionBounds.bottomCollisionBound()
+      x: rect.collisionBounds.left(),
+      y: rect.collisionBounds.bottom()
     };
     if (this.pointInCircle(bottomLeftPoint, circle)) {
       return true;
     }
 
     const bottomRightPoint = {
-      x: rect.collisionBounds.rightCollisionBound(),
-      y: rect.collisionBounds.bottomCollisionBound()
+      x: rect.collisionBounds.right(),
+      y: rect.collisionBounds.bottom()
     };
     if (this.pointInCircle(bottomRightPoint, circle)) {
       return true;

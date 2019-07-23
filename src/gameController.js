@@ -27,14 +27,32 @@ class GameController {
   }
 
   checkForDeath() {
+    if (this.player().dead) {
+      return;
+    }
     this.checkForBuzzsawDeath();
     this.checkForPlayerOutOfBounds();
   }
 
-  checkForPlayerOutOfBounds() {
-    const player = this.onscreenSprites.player;
 
-    if (player.x > canvas.width) {
+  player() {
+    return this.onscreenSprites.player;
+  }
+
+  checkForPlayerOutOfBounds() {
+    if (this.player().collisionBounds.right() < 0) {
+      this.playerDied();
+    }
+
+    if (this.player().collisionBounds.bottom() < 0) {
+      this.playerDied();
+    }
+
+    if (this.player().collisionBounds.top() > canvas.height) {
+      this.playerDied();
+    }
+
+    if (this.player().collisionBounds.left() > canvas.width) {
       this.playerDied();
     }
   }

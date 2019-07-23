@@ -85,13 +85,13 @@ class Player extends Sprite {
   adjustYToCollide(collidedWithWalls) {
     const ydir = Math.sign(this.verticalSpeed);
     if (ydir > 0) {
-      const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.topCollisionBound());
-      this.y = topY.collisionBounds.topCollisionBound() - this.height();
+      const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
+      this.y = topY.collisionBounds.top() - this.height();
     } else {
       const topY = _.maxBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.bottomCollisionBound()
+        collidedWithWall.collisionBounds.bottom()
       );
-      this.y = topY.collisionBounds.bottomCollisionBound();
+      this.y = topY.collisionBounds.bottom();
     }
   }
 
@@ -99,14 +99,14 @@ class Player extends Sprite {
     const xdir = Math.sign(this.xSpeed);
     if (xdir > 0) {
       const leftX = _.minBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.leftCollisionBound()
+        collidedWithWall.collisionBounds.left()
       );
-      this.x += leftX.collisionBounds.leftCollisionBound() - this.collisionBounds.rightCollisionBound();
+      this.x += leftX.collisionBounds.left() - this.collisionBounds.right();
     } else {
       const rightX = _.maxBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.rightCollisionBound()
+        collidedWithWall.collisionBounds.right()
       );
-      this.x = rightX.collisionBounds.rightCollisionBound() - this.xCollisionTrim;
+      this.x = rightX.collisionBounds.right() - this.xCollisionTrim;
     }
   }
 
@@ -166,11 +166,11 @@ class Player extends Sprite {
     this.frame %= maxFrame;
   }
 
-  leftCollisionBound() {
+  left() {
     return this.x + 5;
   }
 
-  rightCollisionBound() {
+  right() {
     return this.rightSide() - 5;
   }
 }
