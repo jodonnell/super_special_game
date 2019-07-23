@@ -20,4 +20,12 @@ class CollisionBoundsRect {
   bottom() {
     return this.sprite.bottomSide();
   }
+
+  width() {
+    return this.right() - this.left();
+  }
+
+  height() {
+    return this.bottom() - this.top();
+  }
 }

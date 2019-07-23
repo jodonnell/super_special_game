@@ -74,9 +74,7 @@ class Blob extends Sprite {
       const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
       this.y = topY.collisionBounds.top() - this.height();
     } else {
-      const topY = _.maxBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.bottom()
-      );
+      const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottom());
       this.y = topY.collisionBounds.bottom();
     }
   }
@@ -84,14 +82,10 @@ class Blob extends Sprite {
   adjustXToCollide(collidedWithWalls) {
     const xdir = Math.sign(this.xSpeed);
     if (xdir > 0) {
-      const leftX = _.minBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.left()
-      );
+      const leftX = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.left());
       this.x += leftX.collisionBounds.left() - this.collisionBounds.right();
     } else {
-      const rightX = _.maxBy(collidedWithWalls, collidedWithWall =>
-        collidedWithWall.collisionBounds.right()
-      );
+      const rightX = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.right());
       this.x = rightX.collisionBounds.right() - this.xCollisionTrim;
     }
   }

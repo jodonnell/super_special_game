@@ -30,14 +30,12 @@ class CollisionDetector {
 
   static doRectsCollide(projectedVelocityX, projectedVelocityY, spriteA, spriteB) {
     if (
-      spriteA.collisionBounds.right() + projectedVelocityX <=
-        spriteB.collisionBounds.left() ||
+      spriteA.collisionBounds.right() + projectedVelocityX <= spriteB.collisionBounds.left() ||
       spriteA.collisionBounds.left() + projectedVelocityX >= spriteB.collisionBounds.right()
     )
       return false;
     if (
-      spriteA.collisionBounds.top() + projectedVelocityY >=
-        spriteB.collisionBounds.bottom() ||
+      spriteA.collisionBounds.top() + projectedVelocityY >= spriteB.collisionBounds.bottom() ||
       spriteA.collisionBounds.bottom() + projectedVelocityY <= spriteB.collisionBounds.top()
     )
       return false;
@@ -45,41 +43,29 @@ class CollisionDetector {
   }
 
   static doCircleAndRectCollide(projectedVelocityX, projectedVelocityY, circle, rect) {
-    const topLeftPoint = { x: rect.collisionBounds.left(), y: rect.collisionBounds.top() };
-    if (this.pointInCircle(topLeftPoint, circle)) {
+    const rectX = rect.collisionBounds.left();
+    const rectY = rect.collisionBounds.top();
+    const rectWidth = rect.collisionBounds.width();
+    const rectHeight = rect.collisionBounds.height();
+    const distX = Math.abs(circle.x - rectX - rectWidth / 2);
+    const distY = Math.abs(circle.y - rectY - rectHeight / 2);
+
+    if (distX > rectWidth / 2 + circle.radius) {
+      return false;
+    }
+    if (distY > rectHeight / 2 + circle.radius) {
+      return false;
+    }
+
+    if (distX <= rectWidth / 2) {
+      return true;
+    }
+    if (distY <= rectHeight / 2) {
       return true;
     }
 
-    const topRightPoint = {
-      x: rect.collisionBounds.right(),
-      y: rect.collisionBounds.top()
-    };
-    if (this.pointInCircle(topRightPoint, circle)) {
-      return true;
-    }
-
-    const bottomLeftPoint = {
-      x: rect.collisionBounds.left(),
-      y: rect.collisionBounds.bottom()
-    };
-    if (this.pointInCircle(bottomLeftPoint, circle)) {
-      return true;
-    }
-
-    const bottomRightPoint = {
-      x: rect.collisionBounds.right(),
-      y: rect.collisionBounds.bottom()
-    };
-    if (this.pointInCircle(bottomRightPoint, circle)) {
-      return true;
-    }
-    return false;
-  }
-
-  static pointInCircle(point, circle) {
-    return (
-      Math.sqrt((point.x - circle.x) * (point.x - circle.x) + (point.y - circle.y) * (point.y - circle.y)) <
-      circle.radius
-    );
+    var dx = distX - rectWidth / 2;
+    var dy = distY - rectHeight / 2;
+    return dx * dx + dy * dy <= circle.radius * circle.radius;
   }
 }
