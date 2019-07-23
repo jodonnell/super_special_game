@@ -2,7 +2,7 @@ class CollisionBoundsRect {
   constructor(sprite, trimX = 0) {
     this.sprite = sprite;
     this.trimX = trimX;
-    this.type = 'rect';
+    this.type = "rect";
   }
 
   leftCollisionBound() {

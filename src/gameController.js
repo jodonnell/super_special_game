@@ -27,6 +27,19 @@ class GameController {
   }
 
   checkForDeath() {
+    this.checkForBuzzsawDeath();
+    this.checkForPlayerOutOfBounds();
+  }
+
+  checkForPlayerOutOfBounds() {
+    const player = this.onscreenSprites.player;
+
+    if (player.x > canvas.width) {
+      this.playerDied();
+    }
+  }
+
+  checkForBuzzsawDeath() {
     const connectedBuzzSaw = CollisionDetector.doesCollideWithSprites(
       this.onscreenSprites.player,
       this.onscreenSprites.buzzsaws
@@ -52,13 +65,17 @@ class GameController {
 
     if (!this.onscreenSprites.hasExplodingPlayer() && !isPlayerAtStartSpot) {
       this.onscreenSprites.resetPlayer();
-      this.onscreenSprites.addFX(new ImplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
+      this.onscreenSprites.addFX(
+        new ImplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet)
+      );
     }
   }
 
   playerDied() {
     this.onscreenSprites.player.dead = true;
-    this.onscreenSprites.addFX(new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet));
+    this.onscreenSprites.addFX(
+      new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet)
+    );
   }
 
   swapPalletIfTouchingSwapper() {
@@ -78,14 +95,11 @@ class GameController {
     this.onscreenSprites.buzzsaws.forEach(buzzsaw => buzzsaw.resetPallet());
 
     this.onscreenSprites.fieldSwappers.forEach(fieldSwapper => {
-      const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
-        fieldSwapper,
-        this.onscreenSprites.buzzsaws
-      );
+      const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(fieldSwapper, this.onscreenSprites.buzzsaws);
 
-      isTouchingSwapper.forEach((buzzsaw) => {
+      isTouchingSwapper.forEach(buzzsaw => {
         buzzsaw.pallet = fieldSwapper.pallet;
-      })
+      });
     });
   }
 

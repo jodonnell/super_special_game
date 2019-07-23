@@ -12,8 +12,7 @@ class Swapper extends Sprite {
       this.frame++;
       this.counter = 0;
     }
-    if (this.frame === 2)
-      this.frame = 0;
+    if (this.frame === 2) this.frame = 0;
   }
 
   rightSide() {

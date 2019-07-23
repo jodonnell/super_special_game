@@ -18,8 +18,8 @@ class ImplodingPlayer {
       return {
         x: xChange + this.x + xWidth,
         y: yChange + this.y + yWidth,
-        velocityX: xChange / 14 * -1,
-        velocityY: yChange / 14 * -1,
+        velocityX: (xChange / 14) * -1,
+        velocityY: (yChange / 14) * -1,
         startVelocityY: yChange / 10,
         color: this.pallet[color]
       };

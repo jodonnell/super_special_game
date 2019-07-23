@@ -36,7 +36,7 @@ class Player extends Sprite {
   }
 
   updateSprite(control, walls) {
-    if (this.verticalSpeed < 0){
+    if (this.verticalSpeed < 0) {
       this.sprite = images.img.jump;
       this.frame = 0;
     } else if (this.canStickToWall(control, walls)) {
@@ -161,7 +161,7 @@ class Player extends Sprite {
     }
   }
   increaseFrame() {
-    const maxFrame = this.sprite.length
+    const maxFrame = this.sprite.length;
     this.frame++;
     this.frame %= maxFrame;
   }

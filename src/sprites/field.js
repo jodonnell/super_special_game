@@ -12,8 +12,7 @@ class Field {
   update() {
     this.counter++;
 
-    if (this.counter < 5)
-      return;
+    if (this.counter < 5) return;
 
     this.counter = 0;
     if (this.shrink) {
@@ -47,5 +46,4 @@ class Field {
   bottomSide() {
     return this.y + 60;
   }
-
 }

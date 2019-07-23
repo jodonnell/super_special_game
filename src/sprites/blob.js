@@ -5,9 +5,9 @@ class Blob extends Sprite {
     this.xSpeed = 5;
     this.ySpeed = -2;
     this.time = 0;
-    this.states = {idle:0, grounded:1, bouncing:2}
-    this.currentState = this.states.bouncing
-    }
+    this.states = { idle: 0, grounded: 1, bouncing: 2 };
+    this.currentState = this.states.bouncing;
+  }
 
   draw(pallet) {
     if (this.dead) {
@@ -20,17 +20,17 @@ class Blob extends Sprite {
     if (this.dead) {
       return;
     }
-    
-    switch(this.currentState){
+
+    switch (this.currentState) {
       case this.states.idle:
         this.updateAnimation();
-       break;
+        break;
 
       case this.states.sliding:
         this.updateAnimation();
         this.updateX(args.onscreenSprites.walls);
-        this.ApplyHorizontalFriction()
-        if (this.xSpeed == 0) this.currentState = this.states.idle
+        this.ApplyHorizontalFriction();
+        if (this.xSpeed == 0) this.currentState = this.states.idle;
         break;
 
       case this.states.bouncing:
@@ -39,14 +39,14 @@ class Blob extends Sprite {
         break;
     }
   }
-  ApplyHorizontalFriction(){
-    this.xSpeed = MathHelpers.toZero(this.xSpeed, .5);
+  ApplyHorizontalFriction() {
+    this.xSpeed = MathHelpers.toZero(this.xSpeed, 0.5);
   }
 
   updateX(walls) {
     const speedmax = 4;
     const vel = 0.4;
-    
+
     const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustXToCollide(collidedWithWalls);
@@ -63,10 +63,8 @@ class Blob extends Sprite {
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
       this.ySpeed = 0;
-      this.currentState = this.states.sliding
+      this.currentState = this.states.sliding;
     } else this.y += Math.floor(this.ySpeed);
-
-   
   }
 
   adjustYToCollide(collidedWithWalls) {
@@ -114,7 +112,7 @@ class Blob extends Sprite {
     }
   }
   increaseFrame() {
-    const maxFrame = this.sprite.length
+    const maxFrame = this.sprite.length;
     this.frame++;
     this.frame %= maxFrame;
   }

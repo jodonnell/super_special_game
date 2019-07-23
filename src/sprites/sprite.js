@@ -12,7 +12,7 @@ class Sprite {
   draw(pallet, x, y) {
     x = x || this.x;
     y = y || this.y;
-    const currentFrame = this.sprite[this.frame]
+    const currentFrame = this.sprite[this.frame];
     currentFrame.forEach((row, i) => {
       if (this.reverse) {
         row = row.slice().reverse();

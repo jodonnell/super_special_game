@@ -14,15 +14,16 @@ class CollisionDetector {
       return false;
     }
 
-    const bothRects = spriteA.collisionBounds.type === 'rect' && spriteB.collisionBounds.type === 'rect';
-    const oneCircleOneRect = (spriteA.collisionBounds.type === 'rect' && spriteB.collisionBounds.type === 'circle') ||
-          (spriteB.collisionBounds.type === 'rect' && spriteA.collisionBounds.type === 'circle');
+    const bothRects = spriteA.collisionBounds.type === "rect" && spriteB.collisionBounds.type === "rect";
+    const oneCircleOneRect =
+      (spriteA.collisionBounds.type === "rect" && spriteB.collisionBounds.type === "circle") ||
+      (spriteB.collisionBounds.type === "rect" && spriteA.collisionBounds.type === "circle");
     if (bothRects) {
       return this.doRectsCollide(projectedVelocityX, projectedVelocityY, spriteA, spriteB);
     } else if (oneCircleOneRect) {
-      const circle = spriteA.collisionBounds.type === 'circle' ? spriteA : spriteB;
-      const rect = spriteA.collisionBounds.type === 'rect' ? spriteA : spriteB;
-      return this.doCircleAndRectCollide(projectedVelocityX, projectedVelocityY, circle, rect)
+      const circle = spriteA.collisionBounds.type === "circle" ? spriteA : spriteB;
+      const rect = spriteA.collisionBounds.type === "rect" ? spriteA : spriteB;
+      return this.doCircleAndRectCollide(projectedVelocityX, projectedVelocityY, circle, rect);
     }
     return false;
   }
@@ -49,17 +50,26 @@ class CollisionDetector {
       return true;
     }
 
-    const topRightPoint = { x: rect.collisionBounds.rightCollisionBound(), y: rect.collisionBounds.topCollisionBound() };
+    const topRightPoint = {
+      x: rect.collisionBounds.rightCollisionBound(),
+      y: rect.collisionBounds.topCollisionBound()
+    };
     if (this.pointInCircle(topRightPoint, circle)) {
       return true;
     }
 
-    const bottomLeftPoint = { x: rect.collisionBounds.leftCollisionBound(), y: rect.collisionBounds.bottomCollisionBound() };
+    const bottomLeftPoint = {
+      x: rect.collisionBounds.leftCollisionBound(),
+      y: rect.collisionBounds.bottomCollisionBound()
+    };
     if (this.pointInCircle(bottomLeftPoint, circle)) {
       return true;
     }
 
-    const bottomRightPoint = { x: rect.collisionBounds.rightCollisionBound(), y: rect.collisionBounds.bottomCollisionBound() };
+    const bottomRightPoint = {
+      x: rect.collisionBounds.rightCollisionBound(),
+      y: rect.collisionBounds.bottomCollisionBound()
+    };
     if (this.pointInCircle(bottomRightPoint, circle)) {
       return true;
     }
@@ -67,6 +77,9 @@ class CollisionDetector {
   }
 
   static pointInCircle(point, circle) {
-    return Math.sqrt((point.x - circle.x) * (point.x - circle.x) + (point.y - circle.y) * (point.y - circle.y)) < circle.radius;
+    return (
+      Math.sqrt((point.x - circle.x) * (point.x - circle.x) + (point.y - circle.y) * (point.y - circle.y)) <
+      circle.radius
+    );
   }
 }
