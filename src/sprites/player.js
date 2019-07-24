@@ -125,7 +125,7 @@ class Player extends Sprite {
 
   updateJump(control, onscreenSprites) {
     if (control.x && control.canJump) {
-      if (this.willCollideWithFloors(onscreenSprites.walls, 1)) {
+      if (this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0) {
         this.verticalSpeed = -10;
         this.addJumpClouds(onscreenSprites);
       } else if (this.canStickToWall(control, onscreenSprites.walls)) {

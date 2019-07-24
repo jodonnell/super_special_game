@@ -60,8 +60,12 @@
        requestAnimationFrame(mainloop);
      }
 
-     canvas.width = 800;
-     canvas.height = 600;
+     console.log(PIXEL_SIZE)
+     const widthRatio = 800 / 5;
+     const heightRatio = 600 / 5;
+
+     canvas.width = (PIXEL_SIZE * widthRatio);
+     canvas.height = (PIXEL_SIZE * heightRatio);
 
      const input = new InputControl()
      const gameController = new GameController(input);
