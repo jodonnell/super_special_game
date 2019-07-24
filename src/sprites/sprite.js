@@ -4,8 +4,8 @@ class Sprite {
     this.y = y;
     this.sprite = sprite;
     this.frame = frame || 0;
-    this.w = this.sprite[0].length * 5;
-    this.pixelSize = 5;
+    this.w = this.sprite[0].length * PIXEL_SIZE;
+    this.pixelSize = PIXEL_SIZE;
     this.collisionBounds = new CollisionBoundsRect(this);
   }
 
