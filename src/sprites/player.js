@@ -44,7 +44,7 @@ class Player extends Sprite {
     } else {
       this.sprite = images.img.hero;
     }
-
+    if (!this.getInputs(control)) return
     if (this.xSpeed > 0 || control.right) {
       this.reverse = false;
     } else if (this.xSpeed < 0 || control.left) {
@@ -52,10 +52,14 @@ class Player extends Sprite {
     }
   }
 
+  getInputs(control){
+	return control.right - control.left
+  }
+
   updateX(control, walls) {
     const speedmax = 4;
     const vel = 0.4;
-    const horizontal = control.right - control.left;
+    const horizontal = this.getInputs(control);
     this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
