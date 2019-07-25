@@ -1,52 +1,57 @@
+
+const tileToWorld = (tileX, tileY) => {
+  return [tileX * 8 * PIXEL_SIZE, tileY * 8 * PIXEL_SIZE];
+}
+
 class OnscreenSprites {
   constructor() {
     this.startX = 270;
     this.startY = 200;
     this.player = new Player(this.startX, this.startY, images.img.hero);
     this.walls = this.createWalls();
-    this.swappers = [new Swapper(500, 450), new Swapper(75, canvas.height - 340)];
-    this.fieldSwappers = [new Field(220, 270, images.pallet.a)];
+    this.swappers = [new Swapper(...tileToWorld(12, 11)), new Swapper(...tileToWorld(2, 7))];
+    this.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
     this.buzzsaws = [
-      new BuzzSaw(580, canvas.height - 90, images.pallet.a, 120),
-      new BuzzSaw(300, canvas.height - 90, images.pallet.a, 200),
-      new BuzzSaw(440, canvas.height - 90, images.pallet.b, 65),
-      new BuzzSaw(-40, canvas.height - 200, images.pallet.a, 205),
-      new BuzzSaw(-40, canvas.height - 380, images.pallet.b, 205),
-      new BuzzSaw(-40, canvas.height - 572, images.pallet.a, 205)
+      new BuzzSaw(...tileToWorld(8, 13), images.pallet.a, 120),
+      new BuzzSaw(...tileToWorld(13, 13), images.pallet.a, 200),
+      new BuzzSaw(...tileToWorld(12, 13), images.pallet.b, 65),
+      new BuzzSaw(...tileToWorld(-1, 3), images.pallet.a, 205),
+      new BuzzSaw(...tileToWorld(-1, 6.5), images.pallet.b, 205),
+      new BuzzSaw(...tileToWorld(-1, 10), images.pallet.a, 205)
     ];
     this.FX = [];
     this.BG = [
-      new BackgroundSquare(canvas.width / 2, canvas.height, 400, -1, 45),
-      new BackgroundSquare(canvas.width, canvas.height, 600, 1, 0, 8),
-      new BackgroundSquare(150, 120, 200),
-      new BackgroundSquare(160, 130, 200),
-      new BackgroundSquare(0, 320, 150, -2, 0)
+      new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),
+      new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE, MAX_Y_GRID_SIZE + 4), 600, 1, 0, 8),
+      new BackgroundSquare(...tileToWorld(3.3, 3), 200),
+      new BackgroundSquare(...tileToWorld(3, 3), 200),
+      new BackgroundSquare(...tileToWorld(0, 6), 150, -2, 0)
     ];
-    this.enemies = [new Blob(60, canvas.height - 100, images.img.blob)];
+    this.enemies = [new Blob(...tileToWorld(1.5, 13), images.img.blob)];
     this.updateSprites();
   }
 
   createWalls() {
     const walls = [];
-    walls.push(new Block(260, canvas.height - 80, images.img.brick, 1));
-    walls.push(new Block(280, canvas.height - 160, images.img.brick));
-    walls.push(new Block(200, canvas.height - 200, images.img.brick));
+    walls.push(new Block(...tileToWorld(6, MAX_Y_GRID_SIZE - 1), images.img.brick, 1));
+    walls.push(new Block(...tileToWorld(8, MAX_Y_GRID_SIZE - 3), images.img.brick));
+    walls.push(new Block(...tileToWorld(5, MAX_Y_GRID_SIZE - 3), images.img.brick));
 
     const wallsWidth = walls[0].width();
-    walls.push(new BlankBlock(750, canvas.height - 150, wallsWidth));
+    walls.push(new BlankBlock(...tileToWorld(17, 11), wallsWidth));
 
     const numWallsToFillBottom = canvas.width / wallsWidth;
     const bottomWalls = ArrayHelpers.range(numWallsToFillBottom).map(x => {
-      return new Block(x * wallsWidth, canvas.height - 40, images.img.brick);
+      return new Block(...tileToWorld(x, MAX_Y_GRID_SIZE), images.img.brick);
     });
 
     const numWallsToFillSide = canvas.height / wallsWidth;
     const leftWalls = ArrayHelpers.range(numWallsToFillSide - 1).map(y => {
-      return new Block(0, y * wallsWidth, images.img.brick);
+      return new Block(...tileToWorld(0, y), images.img.brick);
     });
 
     const moreLeftWalls = ArrayHelpers.range(numWallsToFillSide - 6).map(y => {
-      return new Block(120, (y + 3) * wallsWidth, images.img.brick);
+      return new Block(...tileToWorld(3, y + 3), images.img.brick);
     });
 
     walls.push(...bottomWalls);
