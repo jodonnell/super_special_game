@@ -27,7 +27,7 @@ class OnscreenSprites {
       new BackgroundSquare(...tileToWorld(3, 3), 200),
       new BackgroundSquare(...tileToWorld(0, 6), 150, -2, 0)
     ];
-    this.enemies = [new Blob(...tileToWorld(1.5, 13), images.img.blob)];
+    this.enemies = [new Blob(...tileToWorld(5, 10), images.img.blob)];
     this.updateSprites();
   }
 

@@ -3,7 +3,7 @@ class Blob extends Sprite {
     super(x, y, sprite);
     this.dead = false;
     this.xSpeed = 5;
-    this.ySpeed = -2;
+    this.ySpeed = -6;
     this.time = 0;
     this.states = { idle: 0, grounded: 1, bouncing: 2 };
     this.currentState = this.states.bouncing;
@@ -29,11 +29,17 @@ class Blob extends Sprite {
       case this.states.sliding:
         this.updateAnimation();
         this.updateX(args.onscreenSprites.walls);
+        if (this.onGround(args.onscreenSprites.walls))
         this.applyHorizontalFriction();
+        else {
+         this.currentState = this.states.bouncing
+         break;
+        }
         if (this.xSpeed == 0) this.currentState = this.states.idle;
         break;
 
       case this.states.bouncing:
+        this.frame = 1
         this.updateX(args.onscreenSprites.walls);
         this.updateY(args.onscreenSprites.walls);
         break;
@@ -42,6 +48,11 @@ class Blob extends Sprite {
 
   applyHorizontalFriction() {
     this.xSpeed = MathHelpers.toZero(this.xSpeed, 0.5);
+  }
+
+  onGround(walls){
+    if (this.willCollideWithFloors(walls, 1).length > 0) return true
+    else return false
   }
 
   updateX(walls) {
@@ -63,8 +74,8 @@ class Blob extends Sprite {
     const collidedWithWalls = this.willCollideWithFloors(walls, this.ySpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
+      if ( this.ySpeed > 0 ) this.currentState = this.states.sliding;
       this.ySpeed = 0;
-      this.currentState = this.states.sliding;
     } else this.y += Math.floor(this.ySpeed);
   }
 
