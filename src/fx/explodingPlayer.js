@@ -7,7 +7,7 @@ class ExplodingPlayer {
     this.dead = false;
     this.pallet = pallet;
 
-    this.pixels = ArrayHelpers.range(80).map(x => {
+    this.pixels = ArrayHelpers.range(80).map(() => {
       const velocityX = MathHelpers.randomRange(-5, 5);
       const velocityY = MathHelpers.randomRange(-5, 5);
       const color = MathHelpers.randomRange(0, 3);

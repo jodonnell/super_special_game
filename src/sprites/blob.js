@@ -56,9 +56,6 @@ class Blob extends Sprite {
   }
 
   updateX(walls) {
-    const speedmax = 4;
-    const vel = 0.4;
-
     const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustXToCollide(collidedWithWalls);

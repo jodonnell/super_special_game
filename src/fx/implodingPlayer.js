@@ -7,7 +7,7 @@ class ImplodingPlayer {
     this.dead = false;
     this.pallet = pallet;
 
-    this.pixels = ArrayHelpers.range(80).map(x => {
+    this.pixels = ArrayHelpers.range(80).map(() => {
       const xChange = MathHelpers.randomRange(-141, 141);
       const yChange = MathHelpers.randomRange(-141, 141);
 
@@ -27,7 +27,7 @@ class ImplodingPlayer {
   }
 
   update() {
-    this.pixels.forEach((pixel, i) => {
+    this.pixels.forEach((pixel) => {
       pixel.x += pixel.velocityX;
       pixel.y += pixel.velocityY;
 
@@ -39,8 +39,7 @@ class ImplodingPlayer {
   }
 
   checkForFinished() {
-    const numLivePixesLeft = this.pixels.filter((pixel, i) => {
-      // TODO: very bad way to check
+    const numLivePixesLeft = this.pixels.filter((pixel) => {
       const yDone = MathHelpers.between(pixel.y, this.y - 35, this.y + 35);
       const xDone = MathHelpers.between(pixel.x, this.x - 35, this.x + 35);
 
