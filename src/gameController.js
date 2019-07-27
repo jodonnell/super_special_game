@@ -4,6 +4,7 @@ class GameController {
     this.onscreenSprites = new OnscreenSprites();
     this.pallet = images.pallet.a;
     this.hasTouchedSwapper = false;
+    this.heldPallets = [images.pallet.a, images.pallet.b];
   }
 
   update() {
@@ -103,10 +104,18 @@ class GameController {
     );
     if (!this.hasTouchedSwapper && isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = true;
-      this.swapPallets();
+      const currentPallet = this.pallet;
+      this.changePrimaryPalleteTo(isTouchingSwapper[0].pallet);
+      isTouchingSwapper[0].pallet = currentPallet;
     } else if (!isTouchingSwapper.length > 0) {
       this.hasTouchedSwapper = false;
     }
+  }
+
+  changePrimaryPalleteTo(pallet) {
+    this.heldPallets[this.selectedPalletIndex()] = pallet;
+    this.pallet = pallet;
+    document.querySelector('.primary').style.backgroundColor = pallet[0];
   }
 
   swapPalletIfTouchingSwapperField() {
@@ -130,13 +139,19 @@ class GameController {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  selectedPalletIndex() {
+    if (this.pallet === this.heldPallets[0])
+      return 0;
+    return 1;
+  }
+
   swapPallets() {
-    if (this.pallet === images.pallet.a) {
-      this.pallet = images.pallet.b;
+    if (this.pallet === this.heldPallets[0]) {
+      this.pallet = this.heldPallets[1];
       document.getElementById('firstColor').classList.remove('primary');
       document.getElementById('secondColor').classList.add('primary');
     } else {
-      this.pallet = images.pallet.a;
+      this.pallet = this.heldPallets[0];
       document.getElementById('firstColor').classList.add('primary');
       document.getElementById('secondColor').classList.remove('primary');
     }

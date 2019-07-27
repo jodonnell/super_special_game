@@ -9,15 +9,18 @@ class OnscreenSprites {
     this.startY = 200;
     this.player = new Player(this.startX, this.startY, images.img.hero);
     this.walls = this.createWalls();
-    this.swappers = [new Swapper(...tileToWorld(12, 11)), new Swapper(...tileToWorld(2, 7))];
+    this.swappers = [
+      new Swapper(...tileToWorld(12, 11), images.pallet.yellow),
+      new Swapper(...tileToWorld(2, 7), images.pallet.blue)
+    ];
     this.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
     this.buzzsaws = [
-      new BuzzSaw(...tileToWorld(8, 13), images.pallet.yellow, 120),
-      new BuzzSaw(...tileToWorld(13, 13), images.pallet.a, 200),
-      new BuzzSaw(...tileToWorld(12, 13), images.pallet.b, 65),
-      new BuzzSaw(...tileToWorld(-1, 3), images.pallet.a, 205),
-      new BuzzSaw(...tileToWorld(-1, 6.5), images.pallet.b, 205),
-      new BuzzSaw(...tileToWorld(-1, 10), images.pallet.a, 205)
+      // new BuzzSaw(...tileToWorld(8, 13), images.pallet.yellow, 120),
+      // new BuzzSaw(...tileToWorld(13, 13), images.pallet.a, 200),
+      // new BuzzSaw(...tileToWorld(12, 13), images.pallet.b, 65),
+      // new BuzzSaw(...tileToWorld(-1, 3), images.pallet.a, 205),
+      // new BuzzSaw(...tileToWorld(-1, 6.5), images.pallet.b, 205),
+      // new BuzzSaw(...tileToWorld(-1, 10), images.pallet.a, 205)
     ];
     this.FX = [];
     this.BG = [
