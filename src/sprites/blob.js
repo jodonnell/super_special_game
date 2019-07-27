@@ -2,11 +2,13 @@ class Blob extends Sprite {
   constructor(x, y, sprite) {
     super(x, y, sprite);
     this.dead = false;
-    this.xSpeed = 5;
-    this.ySpeed = -6;
+    this.xSpeed = 0;
+    this.ySpeed = 0;
     this.time = 0;
+    this.xCollisionTrim = 0;
     this.states = { idle: 0, grounded: 1, bouncing: 2 };
     this.currentState = this.states.bouncing;
+    this.hit=false
   }
 
   draw(pallet) {
@@ -20,6 +22,16 @@ class Blob extends Sprite {
     if (this.dead) {
       return;
     }
+    const player = args.onscreenSprites.player
+    
+    if (this.willCollideWithPlayer(player)){
+      if (this.hit == false){
+      this.hit = true
+      this.currentState = this.states.bouncing
+      this.xSpeed = MathHelpers.clamp(player.xSpeed * 2 || 4,-6, 6) 
+      this.ySpeed = Math.abs(player.xSpeed) * -2 || -4
+      }
+    }else this.hit = false
 
     switch (this.currentState) {
       case this.states.idle:
@@ -96,6 +108,9 @@ class Blob extends Sprite {
       const rightX = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.right());
       this.x = rightX.collisionBounds.right() - this.xCollisionTrim;
     }
+  }
+  willCollideWithPlayer(player){
+    return CollisionDetector.doRectsCollide(0, 0, this, player);
   }
 
   willCollideWithFloors(walls, speed) {

@@ -8,7 +8,7 @@ class Player extends Sprite {
   }
 
   resetPlayer() {
-    this.verticalSpeed = 0;
+    this.ySpeed = 0;
     this.xSpeed = 0;
     this.time = 0;
     this.reverse = false;
@@ -36,7 +36,7 @@ class Player extends Sprite {
   }
 
   updateSprite(control, walls) {
-    if (this.verticalSpeed < 0) {
+    if (this.ySpeed < 0) {
       this.sprite = images.img.jump;
       this.frame = 0;
     } else if (this.canStickToWall(control, walls)) {
@@ -73,21 +73,21 @@ class Player extends Sprite {
   updateY(control, walls) {
     const gravity = 0.5;
     const speedMax = 10;
-    this.verticalSpeed = Math.min(this.verticalSpeed + gravity, speedMax);
+    this.ySpeed = Math.min(this.ySpeed + gravity, speedMax);
 
-    const collidedWithWalls = this.willCollideWithFloors(walls, this.verticalSpeed);
+    const collidedWithWalls = this.willCollideWithFloors(walls, this.ySpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
-      this.verticalSpeed = 0;
-    } else this.y += Math.floor(this.verticalSpeed);
+      this.ySpeed = 0;
+    } else this.y += Math.floor(this.ySpeed);
 
     if (this.canStickToWall(control, walls)) {
-      this.verticalSpeed = MathHelpers.toZero(this.verticalSpeed, 1);
+      this.ySpeed = MathHelpers.toZero(this.ySpeed, 1);
     }
   }
 
   adjustYToCollide(collidedWithWalls) {
-    const ydir = Math.sign(this.verticalSpeed);
+    const ydir = Math.sign(this.ySpeed);
     if (ydir > 0) {
       const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
       this.y = topY.collisionBounds.top() - this.height();
@@ -109,7 +109,7 @@ class Player extends Sprite {
   }
 
   canStickToWall(control, walls) {
-    if (this.verticalSpeed < 0) {
+    if (this.ySpeed < 0) {
       return false;
     }
 
@@ -130,15 +130,15 @@ class Player extends Sprite {
   updateJump(control, onscreenSprites) {
     if (control.x && control.canJump) {
       if (this.willCollideWithFloors(onscreenSprites.walls, 1).length > 0) {
-        this.verticalSpeed = -10;
+        this.ySpeed = -10;
         this.addJumpClouds(onscreenSprites);
       } else if (this.canStickToWall(control, onscreenSprites.walls)) {
         this.addJumpClouds(onscreenSprites);
-        this.verticalSpeed = -10;
+        this.ySpeed = -10;
         this.xSpeed = 4 * (control.left - control.right);
       }
     }
-    if (this.verticalSpeed < -5 && !control.x) this.verticalSpeed = -4;
+    if (this.ySpeed < -5 && !control.x) this.ySpeed = -4;
   }
 
   addJumpClouds(onscreenSprites) {
@@ -154,7 +154,7 @@ class Player extends Sprite {
     else timeSpeed = 10;
     this.time++;
     this.time %= timeSpeed;
-    if (this.time == 0 && Math.floor(this.verticalSpeed) == 0) {
+    if (this.time == 0 && Math.floor(this.ySpeed) == 0) {
       this.increaseFrame();
     }
   }
