@@ -12,7 +12,7 @@ class OnscreenSprites {
     this.swappers = [new Swapper(...tileToWorld(12, 11)), new Swapper(...tileToWorld(2, 7))];
     this.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
     this.buzzsaws = [
-      new BuzzSaw(...tileToWorld(8, 13), images.pallet.a, 120),
+      new BuzzSaw(...tileToWorld(8, 13), images.pallet.yellow, 120),
       new BuzzSaw(...tileToWorld(13, 13), images.pallet.a, 200),
       new BuzzSaw(...tileToWorld(12, 13), images.pallet.b, 65),
       new BuzzSaw(...tileToWorld(-1, 3), images.pallet.a, 205),

@@ -133,8 +133,12 @@ class GameController {
   swapPallets() {
     if (this.pallet === images.pallet.a) {
       this.pallet = images.pallet.b;
+      document.getElementById('firstColor').classList.remove('primary');
+      document.getElementById('secondColor').classList.add('primary');
     } else {
       this.pallet = images.pallet.a;
+      document.getElementById('firstColor').classList.add('primary');
+      document.getElementById('secondColor').classList.remove('primary');
     }
   }
 }
