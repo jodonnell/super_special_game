@@ -71,7 +71,7 @@ class Blob extends Sprite {
     const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustXToCollide(collidedWithWalls);
-      this.xSpeed = 0;
+      this.xSpeed *= -.5;
     } else this.x += Math.floor(this.xSpeed);
   }
 
