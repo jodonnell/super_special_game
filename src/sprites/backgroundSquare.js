@@ -22,12 +22,15 @@ class BackgroundSquare {
   }
 
   drawEachPart() {
-    const offset = this.w / 2,
-      w = this.w,
-      th = this.thickness;
+    const offset = this.w / 2;
     ctx.fillStyle = "#1b3535";
-    ctx.fillRect(-offset, -offset, w, w);
+    ctx.fillRect(-offset, -offset, this.w, this.w);
     ctx.fillStyle = "#00212d";
-    ctx.fillRect(-offset + th, -offset + th, w - th * 2, w - th * 2);
+    ctx.fillRect(
+      -offset + this.thickness,
+      -offset + this.thickness,
+      this.w - this.thickness * 2,
+      this.w - this.thickness * 2
+    );
   }
 }
