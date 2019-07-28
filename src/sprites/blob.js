@@ -23,18 +23,10 @@ class Blob extends Sprite {
       return;
     }
     const player = args.onscreenSprites.player
-    
-    if (this.willCollideWithPlayer(player)){
-      if (this.hit == false){
-      this.hit = true
-      this.currentState = this.states.bouncing
-      this.xSpeed = MathHelpers.clamp(player.xSpeed * 2 || 4,-6, 6) 
-      this.ySpeed = Math.abs(player.xSpeed) * -2 || -4
-      }
-    }else this.hit = false
 
     switch (this.currentState) {
       case this.states.idle:
+	this. kickCheck(player)
         this.updateAnimation();
         break;
 
@@ -56,6 +48,17 @@ class Blob extends Sprite {
         this.updateY(args.onscreenSprites.walls);
         break;
     }
+  }
+
+  kickCheck(player){
+    if (this.willCollideWithPlayer(player)){
+      if (this.hit == false){
+      this.hit = true
+      this.currentState = this.states.bouncing
+      this.xSpeed = MathHelpers.clamp(player.xSpeed * 2 || 4,-6, 6) 
+      this.ySpeed = Math.abs(player.xSpeed) * -2 || -4
+      }
+    }else this.hit = false
   }
 
   applyHorizontalFriction() {
