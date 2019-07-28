@@ -55,8 +55,8 @@ class Blob extends Sprite {
       if (this.hit == false){
       this.hit = true
       this.currentState = this.states.bouncing
-      this.xSpeed = MathHelpers.clamp(player.xSpeed * 2 || 4,-6, 6) 
-      this.ySpeed = Math.abs(player.xSpeed) * -2 || -4
+      this.xSpeed = MathHelpers.clamp((player.xSpeed * 1.5) || Math.sign(this.x-player.x),-4, 4) 
+      this.ySpeed = Math.abs(player.xSpeed) * -1 || -1
       }
     }else this.hit = false
   }
@@ -79,7 +79,7 @@ class Blob extends Sprite {
   }
 
   updateY(walls) {
-    const gravity = 0.5;
+    const gravity = 0.2;
     const speedMax = 10;
     this.ySpeed = Math.min(this.ySpeed + gravity, speedMax);
 
