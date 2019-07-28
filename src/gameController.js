@@ -1,7 +1,7 @@
 class GameController {
   constructor(control) {
     this.control = control;
-    this.onscreenSprites = new OnscreenSprites();
+    this.onscreenSprites = new OnscreenSprites(LevelJacob);
     this.pallet = images.pallet.a;
     this.hasTouchedSwapper = false;
     this.heldPallets = [images.pallet.a, images.pallet.b];
