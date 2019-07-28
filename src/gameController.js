@@ -115,7 +115,7 @@ class GameController {
   changePrimaryPalleteTo(pallet) {
     this.heldPallets[this.selectedPalletIndex()] = pallet;
     this.pallet = pallet;
-    document.querySelector('.primary').style.backgroundColor = pallet[0];
+    document.querySelector('.primary').style.backgroundColor = pallet[1];
   }
 
   swapPalletIfTouchingSwapperField() {
