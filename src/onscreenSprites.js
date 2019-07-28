@@ -15,6 +15,7 @@ class OnscreenSprites {
     this.BG = [];
     this.enemies = [];
     this.FX = [];
+    this.uncollidableBackgrounds = [];
 
     new Level(this);
     this.updateSprites();
@@ -61,6 +62,7 @@ class OnscreenSprites {
       ...this.BG,
       ...this.buzzsaws,
       ...this.walls,
+      ...this.uncollidableBackgrounds,
       ...this.swappers,
       ...this.fieldSwappers,
       ...this.enemies,
