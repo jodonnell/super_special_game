@@ -25,7 +25,7 @@ class Player extends Sprite {
     if (this.dead) {
       return;
     }
-    
+
     this.updateAnimation();
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
@@ -45,7 +45,7 @@ class Player extends Sprite {
     } else {
       this.sprite = images.img.hero;
     }
-    if (!this.getInputs(control)) return
+    if (!this.getInputs(control)) return;
     if (this.xSpeed > 0 || control.right) {
       this.reverse = false;
     } else if (this.xSpeed < 0 || control.left) {
@@ -53,8 +53,8 @@ class Player extends Sprite {
     }
   }
 
-  getInputs(control){
-	return control.right - control.left
+  getInputs(control) {
+    return control.right - control.left;
   }
 
   updateX(control, walls) {

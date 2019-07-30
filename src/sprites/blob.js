@@ -8,7 +8,7 @@ class Blob extends Sprite {
     this.xCollisionTrim = 0;
     this.states = { idle: 0, grounded: 1, bouncing: 2 };
     this.currentState = this.states.bouncing;
-    this.hit=false
+    this.hit = false;
   }
 
   draw(pallet) {
@@ -22,59 +22,58 @@ class Blob extends Sprite {
     if (this.dead) {
       return;
     }
-    const player = args.onscreenSprites.player
+    const player = args.onscreenSprites.player;
 
     switch (this.currentState) {
       case this.states.idle:
-	this. kickCheck(player)
+        this.kickCheck(player);
         this.updateAnimation();
         break;
 
       case this.states.sliding:
         this.updateAnimation();
         this.updateX(args.onscreenSprites.walls);
-        if (this.onGround(args.onscreenSprites.walls))
-        this.applyHorizontalFriction();
+        if (this.onGround(args.onscreenSprites.walls)) this.applyHorizontalFriction();
         else {
-         this.currentState = this.states.bouncing
-         break;
+          this.currentState = this.states.bouncing;
+          break;
         }
         if (this.xSpeed == 0) this.currentState = this.states.idle;
         break;
 
       case this.states.bouncing:
-        this.frame = 1
+        this.frame = 1;
         this.updateX(args.onscreenSprites.walls);
         this.updateY(args.onscreenSprites.walls);
         break;
     }
   }
 
-  kickCheck(player){
-    if (this.willCollideWithPlayer(player)){
-      if (this.hit == false){
-      this.hit = true
-      this.currentState = this.states.bouncing
-      this.xSpeed = MathHelpers.clamp((player.xSpeed * 1.5) || Math.sign(this.x-player.x),-4, 4) 
-      this.ySpeed = Math.abs(player.xSpeed) * -1 || -1
+  kickCheck(player) {
+    if (this.willCollideWithPlayer(player)) {
+      if (this.hit == false) {
+        this.hit = true;
+        this.currentState = this.states.bouncing;
+        this.xSpeed = MathHelpers.clamp(player.xSpeed * 1.5 || Math.sign(this.x - player.x), -4, 4);
+        this.ySpeed = Math.abs(player.xSpeed) * -1 || -1;
       }
-    }else this.hit = false
+    } else this.hit = false;
   }
 
   applyHorizontalFriction() {
     this.xSpeed = MathHelpers.toZero(this.xSpeed, 0.5);
   }
 
-  onGround(walls){
-    if (this.willCollideWithFloors(walls, 1).length > 0) return true
-    else return false
+  onGround(walls) {
+    if (this.willCollideWithFloors(walls, 1).length > 0) return true;
+    else return false;
   }
 
   updateX(walls) {
     const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustXToCollide(collidedWithWalls);
-      this.xSpeed *= -.5;
+      this.xSpeed *= -0.5;
     } else this.x += Math.floor(this.xSpeed);
   }
 
@@ -86,7 +85,7 @@ class Blob extends Sprite {
     const collidedWithWalls = this.willCollideWithFloors(walls, this.ySpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
-      if ( this.ySpeed > 0 ) this.currentState = this.states.sliding;
+      if (this.ySpeed > 0) this.currentState = this.states.sliding;
       this.ySpeed = 0;
     } else this.y += Math.floor(this.ySpeed);
   }
@@ -112,7 +111,7 @@ class Blob extends Sprite {
       this.x = rightX.collisionBounds.right() - this.xCollisionTrim;
     }
   }
-  willCollideWithPlayer(player){
+  willCollideWithPlayer(player) {
     return CollisionDetector.doRectsCollide(0, 0, this, player);
   }
 

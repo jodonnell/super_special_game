@@ -2,11 +2,7 @@ class LevelJacob {
   constructor(onscreenSprites) {
     onscreenSprites.startX = 270;
     onscreenSprites.startY = 450;
-    onscreenSprites.player = new Player(
-      onscreenSprites.startX,
-      onscreenSprites.startY,
-      images.img.hero
-    );
+    onscreenSprites.player = new Player(onscreenSprites.startX, onscreenSprites.startY, images.img.hero);
 
     onscreenSprites.walls = this.createWalls();
     onscreenSprites.swappers = [
@@ -16,7 +12,7 @@ class LevelJacob {
     //onscreenSprites.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
     onscreenSprites.buzzsaws = [
       new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 120),
-      new BuzzSaw(...tileToWorld(12, 12), images.pallet.a, 120),
+      new BuzzSaw(...tileToWorld(12, 12), images.pallet.a, 120)
     ];
     onscreenSprites.BG = [
       new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),
@@ -32,10 +28,9 @@ class LevelJacob {
     });
     onscreenSprites.uncollidableBackgrounds.push(...bottomLava);
 
-   // onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 12))];
-      onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 12)))
+    // onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 12))];
+    onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 12)));
     onscreenSprites.enemies = [new Blob(...tileToWorld(5, 10), images.img.blob)];
-
   }
 
   numWallsToFillBottom() {
@@ -46,11 +41,12 @@ class LevelJacob {
   createWalls() {
     const walls = [];
 
-    const bottomWalls = _.compact(ArrayHelpers.range(this.numWallsToFillBottom()).map(x => {
-      if (x === 10 || x === 11)
-        return null;
-      return new Block(...tileToWorld(x, MAX_Y_GRID_SIZE - 1), images.img.brick);
-    }));
+    const bottomWalls = _.compact(
+      ArrayHelpers.range(this.numWallsToFillBottom()).map(x => {
+        if (x === 10 || x === 11) return null;
+        return new Block(...tileToWorld(x, MAX_Y_GRID_SIZE - 1), images.img.brick);
+      })
+    );
 
     const wallsWidth = 8 * PIXEL_SIZE;
     const numWallsToFillSide = canvas.height / wallsWidth;
@@ -66,10 +62,11 @@ class LevelJacob {
       return new Block(...tileToWorld(x, 0), images.img.brick);
     });
 
-    walls.push(...ArrayHelpers.range(8).map(x => {
-      return new Block(...tileToWorld(x + 3, 6), images.img.brick);
-    }));
-
+    walls.push(
+      ...ArrayHelpers.range(8).map(x => {
+        return new Block(...tileToWorld(x + 3, 6), images.img.brick);
+      })
+    );
 
     walls.push(...bottomWalls);
     walls.push(...leftWalls);
@@ -79,5 +76,4 @@ class LevelJacob {
     walls.push(new Block(...tileToWorld(17, 8), images.img.brick));
     return walls;
   }
-
 }

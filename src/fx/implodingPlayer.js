@@ -27,7 +27,7 @@ class ImplodingPlayer {
   }
 
   update() {
-    this.pixels.forEach((pixel) => {
+    this.pixels.forEach(pixel => {
       pixel.x += pixel.velocityX;
       pixel.y += pixel.velocityY;
 
@@ -39,7 +39,7 @@ class ImplodingPlayer {
   }
 
   checkForFinished() {
-    const numLivePixesLeft = this.pixels.filter((pixel) => {
+    const numLivePixesLeft = this.pixels.filter(pixel => {
       const yDone = MathHelpers.between(pixel.y, this.y - 35, this.y + 35);
       const xDone = MathHelpers.between(pixel.x, this.x - 35, this.x + 35);
 
