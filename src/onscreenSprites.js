@@ -9,6 +9,7 @@ class OnscreenSprites {
     this.startY = 0;
     this.player = null;
     this.walls = [];
+    this.breakwalls = [];
     this.swappers = [];
     this.fieldSwappers = [];
     this.buzzsaws = [];
@@ -62,6 +63,7 @@ class OnscreenSprites {
       ...this.BG,
       ...this.buzzsaws,
       ...this.walls,
+      ...this.breakwalls,	
       ...this.uncollidableBackgrounds,
       ...this.swappers,
       ...this.fieldSwappers,

@@ -26,3 +26,25 @@ class BlankBlock {
     return this.y + this.width;
   }
 }
+
+class BreakerBlock extends Sprite {
+  constructor(x, y) {
+    super(x, y, images.img.brick, 1);
+    this.dead = 0;
+    this.break = 0;   
+ }
+    update(args){
+	if (this.dead) return;
+	if (CollisionDetector.doRectsCollide(0, -1, this, args.onscreenSprites.player)) 
+	this.break = true;
+	else if (this.break){
+	 this.dead = true;
+	 this.x=0;this.y=0;
+	}
+    }
+
+    draw(pallet){
+	if (this.dead == false) super.draw(pallet)
+    }
+
+}

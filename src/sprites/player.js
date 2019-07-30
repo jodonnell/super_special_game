@@ -25,6 +25,7 @@ class Player extends Sprite {
     if (this.dead) {
       return;
     }
+    
     this.updateAnimation();
     this.updateX(args.control, args.onscreenSprites.walls);
     this.updateY(args.control, args.onscreenSprites.walls);
