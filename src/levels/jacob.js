@@ -11,7 +11,7 @@ class LevelJacob {
     onscreenSprites.walls = this.createWalls();
     onscreenSprites.swappers = [
       new Swapper(...tileToWorld(16, 12), images.pallet.yellow),
-      new Swapper(...tileToWorld(2, 7), images.pallet.blue)
+      new Swapper(...tileToWorld(2, 4), images.pallet.blue)
     ];
     //onscreenSprites.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
     onscreenSprites.buzzsaws = [
@@ -74,6 +74,8 @@ class LevelJacob {
     walls.push(...leftWalls);
     walls.push(...rightWalls);
     walls.push(...topWalls);
+    walls.push(new Block(...tileToWorld(18, 8), images.img.brick));
+    walls.push(new Block(...tileToWorld(17, 8), images.img.brick));
     return walls;
   }
 
