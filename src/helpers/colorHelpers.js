@@ -6,4 +6,8 @@ class ColorHelpers {
     }
     return hex;
   }
+
+  static addOpacity(color, opacity) {
+    return `${color}${ColorHelpers.rgbToHex(opacity)}`;
+  }
 }

@@ -29,7 +29,7 @@ class LevelJacob {
     onscreenSprites.uncollidableBackgrounds.push(...bottomLava);
 
     // onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 12))];
-    onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 12)));
+    onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 10)));
     onscreenSprites.enemies = [new Blob(...tileToWorld(5, 10), images.img.blob)];
   }
 
