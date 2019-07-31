@@ -5,9 +5,16 @@ const tileToWorld = (tileX, tileY) => {
 
 class OnscreenSprites {
   constructor(Level) {
+    this.reset();
+    new Level(this);
+    this.updateSprites();
+  }
+
+  reset() {
     this.startX = 0;
     this.startY = 0;
     this.player = null;
+    this.goal = null;
     this.walls = [];
     this.breakwalls = [];
     this.swappers = [];
@@ -17,9 +24,7 @@ class OnscreenSprites {
     this.enemies = [];
     this.FX = [];
     this.uncollidableBackgrounds = [];
-
-    new Level(this);
-    this.updateSprites();
+    this.NextLevel = null;
   }
 
   addFX(fx) {
@@ -63,12 +68,13 @@ class OnscreenSprites {
       ...this.BG,
       ...this.buzzsaws,
       ...this.walls,
-      ...this.breakwalls,	
+      ...this.breakwalls,
       ...this.uncollidableBackgrounds,
       ...this.swappers,
       ...this.fieldSwappers,
       ...this.enemies,
       this.player,
+      this.goal,
       ...this.FX
     ];
   }
@@ -81,5 +87,12 @@ class OnscreenSprites {
 
   isPlayerAtStartSpot() {
     return this.player.x === this.startX && this.player.y === this.startY;
+  }
+
+  advanceLevel() {
+    const NextLevel = this.NextLevel;
+    this.reset();
+    new NextLevel(this);
+    this.updateSprites();
   }
 }

@@ -1,38 +1,12 @@
-class LevelJacob {
+class LevelMark {
   constructor(onscreenSprites) {
     onscreenSprites.startX = 270;
     onscreenSprites.startY = 450;
     onscreenSprites.player = new Player(onscreenSprites.startX, onscreenSprites.startY, images.img.hero);
 
-    onscreenSprites.NextLevel = LevelMark;
+    onscreenSprites.NextLevel = LevelJacob;
     onscreenSprites.goal = new Swapper(...tileToWorld(18, 6), images.pallet.yellow);
     onscreenSprites.walls = this.createWalls();
-    onscreenSprites.swappers = [
-      new Swapper(...tileToWorld(16, 12), images.pallet.yellow),
-      new Swapper(...tileToWorld(2, 4), images.pallet.blue)
-    ];
-    //onscreenSprites.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.a)];
-    onscreenSprites.buzzsaws = [
-      new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 120),
-      new BuzzSaw(...tileToWorld(12, 12), images.pallet.a, 120)
-    ];
-    onscreenSprites.BG = [
-      new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),
-      new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE, MAX_Y_GRID_SIZE + 4), 600, 1, 0, 8),
-      new BackgroundSquare(...tileToWorld(3.3, 3), 200),
-      new BackgroundSquare(...tileToWorld(3, 3), 200),
-      new BackgroundSquare(...tileToWorld(0, 6), 150, -2, 0)
-    ];
-
-    onscreenSprites.uncollidableBackgrounds = [];
-    const bottomLava = ArrayHelpers.range(this.numWallsToFillBottom()).map(x => {
-      return new BlankBlock(...tileToWorld(x, MAX_Y_GRID_SIZE), 8 * PIXEL_SIZE);
-    });
-    onscreenSprites.uncollidableBackgrounds.push(...bottomLava);
-
-    // onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 12))];
-    onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 10)));
-    onscreenSprites.enemies = [new Blob(...tileToWorld(5, 10), images.img.blob)];
   }
 
   numWallsToFillBottom() {

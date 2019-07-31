@@ -25,6 +25,18 @@ class GameController {
     this.swapPalletIfTouchingSwapperField();
     this.checkForDeath();
     this.checkForRegeneration();
+    this.checkForFinishedLevel();
+  }
+
+
+  checkForFinishedLevel() {
+    const isTouchingGoal = CollisionDetector.doesCollideWithSprites(
+      this.onscreenSprites.player,
+      [this.onscreenSprites.goal]
+    );
+    if (isTouchingGoal.length > 0) {
+      this.onscreenSprites.advanceLevel();
+    }
   }
 
   checkForDeath() {
