@@ -43,8 +43,6 @@ class BreakerBlock extends Sprite {
       this.updateMeltingPixels();
     } else if (this.break) {
       this.dead = true;
-      this.x = 0;
-      this.y = 0;
     }
   }
 

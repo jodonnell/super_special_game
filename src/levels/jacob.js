@@ -29,9 +29,7 @@ class LevelJacob {
       return new BlankBlock(...tileToWorld(x, MAX_Y_GRID_SIZE), 8 * PIXEL_SIZE);
     });
     onscreenSprites.uncollidableBackgrounds.push(...bottomLava);
-
-    // onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 12))];
-    onscreenSprites.walls.push(new BreakerBlock(...tileToWorld(10, 10)));
+    onscreenSprites.breakwalls = [new BreakerBlock(...tileToWorld(10, 10))];
     onscreenSprites.enemies = [new Blob(...tileToWorld(5, 10), images.img.blob)];
   }
 

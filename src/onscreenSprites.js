@@ -32,10 +32,10 @@ class OnscreenSprites {
     this.updateSprites();
   }
 
-  removeFX() {
-    for (let i = this.FX.length - 1; i >= 0; i--) {
-      if (this.FX[i].dead) {
-        this.FX.splice(i, 1);
+  removeOBJ(obj) {
+    for (let i = obj.length - 1; i >= 0; i--) {
+      if (obj[i].dead) {
+        obj.splice(i, 1);
       }
     }
     this.updateSprites();

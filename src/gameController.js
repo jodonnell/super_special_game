@@ -19,7 +19,8 @@ class GameController {
       });
     });
 
-    this.onscreenSprites.removeFX();
+    this.onscreenSprites.removeOBJ(this.onscreenSprites.FX);
+    this.onscreenSprites.removeOBJ(this.onscreenSprites.breakwalls);
 
     this.swapPalletIfTouchingSwapper();
     this.swapPalletIfTouchingSwapperField();
