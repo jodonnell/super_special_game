@@ -52,6 +52,9 @@ class GameController {
 
     const winAnimationComplete = this.finishedLevel && !this.onscreenSprites.hasExplodingPlayer();
     if (winAnimationComplete) {
+      this.ui.getScores(this.onscreenSprites.NextLevel.name);
+      this.Level = this.onscreenSprites.NextLevel;
+      this.ui.getScores(this.Level.name);
       this.onscreenSprites.advanceLevel(numSeconds);
       this.finishedLevel = false;
     }
