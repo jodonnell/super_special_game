@@ -76,3 +76,10 @@ canvas {
   border: 4px solid white;
   opacity: 1;
 }
+
+#time {
+  color: white;
+  align-self: flex-end;
+  font-family: monospace;
+  font-size: 50px;
+}

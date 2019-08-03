@@ -8,6 +8,7 @@
         <div id='ui'>
           <div id='firstColor' class="primary"></div>
           <div id='secondColor'></div>
+          <div id='time'>12.3</div>
         </div>
         <canvas id='gamewindow'></canvas>
       </div>
@@ -51,14 +52,17 @@
      var ctx = canvas.getContext('2d');
 
      var lastTime = 0;
+     var start = null;
 
      function mainloop(timestamp){
+       if (!start && timestamp) start = timestamp;
+       const numSeconds = (timestamp - start) / 1000;
        var timeSinceLastFrame = timestamp - lastTime;
        if (timeSinceLastFrame > 17)
          console.log(timeSinceLastFrame);
 
        lastTime = timestamp;
-       gameController.update();
+       gameController.update(numSeconds);
        gameController.draw();
 
        requestAnimationFrame(mainloop);

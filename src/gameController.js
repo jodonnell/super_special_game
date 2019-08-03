@@ -7,7 +7,8 @@ class GameController {
     this.heldPallets = [images.pallet.red, images.pallet.green];
   }
 
-  update() {
+  update(numSeconds) {
+    document.getElementById('time').innerHTML = numSeconds.toFixed(2);
     if (this.control.hasZBeenTapped()) {
       this.swapPallets();
     }
