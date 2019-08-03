@@ -5,10 +5,11 @@ class GameController {
     this.pallet = images.pallet.red;
     this.hasTouchedSwapper = false;
     this.heldPallets = [images.pallet.red, images.pallet.green];
+    this.ui = new Ui();
   }
 
   update(numSeconds) {
-    document.getElementById('time').innerHTML = numSeconds.toFixed(2);
+    this.ui.update(numSeconds);
     if (this.control.hasZBeenTapped()) {
       this.swapPallets();
     }
@@ -162,12 +163,10 @@ class GameController {
   swapPallets() {
     if (this.pallet === this.heldPallets[0]) {
       this.pallet = this.heldPallets[1];
-      document.getElementById('firstColor').classList.remove('primary');
-      document.getElementById('secondColor').classList.add('primary');
+      this.ui.makeSecondColorPrimary();
     } else {
       this.pallet = this.heldPallets[0];
-      document.getElementById('firstColor').classList.add('primary');
-      document.getElementById('secondColor').classList.remove('primary');
+      this.ui.makeFirstColorPrimary();
     }
   }
 }
