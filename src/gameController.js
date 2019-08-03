@@ -6,6 +6,7 @@ class GameController {
     this.hasTouchedSwapper = false;
     this.heldPallets = [images.pallet.red, images.pallet.green];
     this.ui = new Ui();
+    this.finishedLevel = false;
   }
 
   update(numSeconds) {
@@ -37,8 +38,16 @@ class GameController {
       this.onscreenSprites.player,
       [this.onscreenSprites.goal]
     );
-    if (isTouchingGoal.length > 0) {
+    if (!this.player().dead && isTouchingGoal.length > 0) {
+      this.playerDied();
+      this.finishedLevel = true;
+
+    }
+
+    const winAnimationComplete = this.finishedLevel && !this.onscreenSprites.hasExplodingPlayer();
+    if (winAnimationComplete) {
       this.onscreenSprites.advanceLevel();
+      this.finishedLevel = false;
     }
   }
 
@@ -107,6 +116,10 @@ class GameController {
 
   playerDied() {
     this.onscreenSprites.player.dead = true;
+    this.explodePlayer();
+  }
+
+  explodePlayer() {
     this.onscreenSprites.addFX(
       new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet)
     );
