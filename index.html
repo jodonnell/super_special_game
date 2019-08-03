@@ -21,6 +21,8 @@
     <script src='src/input.js'></script>
     <script src='src/images.js'></script>
 
+    <script src='src/levels/1.js'></script>
+    <script src='src/levels/2.js'></script>
     <script src='src/levels/jacob.js'></script>
     <script src='src/levels/mark.js'></script>
 
@@ -48,7 +50,14 @@
      var canvas = document.getElementById('gamewindow');
      var ctx = canvas.getContext('2d');
 
-     function mainloop(){
+     var lastTime = 0;
+
+     function mainloop(timestamp){
+       var timeSinceLastFrame = timestamp - lastTime;
+       if (timeSinceLastFrame > 17)
+         console.log(timeSinceLastFrame);
+
+       lastTime = timestamp;
        gameController.update();
        gameController.draw();
 
@@ -63,7 +72,7 @@
 
      const input = new InputControl()
      const gameController = new GameController(input);
-     mainloop();
+     mainloop(0);
 
     </script>
   </body>
