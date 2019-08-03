@@ -3,6 +3,26 @@ class Ui {
     this.firstColor = document.getElementById('firstColor');
     this.secondColor = document.getElementById('secondColor');
     this.time = document.getElementById('time');
+    this.scoreboardDiv = document.getElementById('scoreboard');
+    this.scoreboard = new Scoreboard();
+  }
+
+  getScores(level) {
+    this.scoreboard.getTimes(level).then((response) => {
+      return response.json()
+    }).then((response) => {
+      this.scoreboardDiv.innerHTML = '';
+      response.results.map((score) => {
+        let node = document.createElement("DIV");
+        var textnode = document.createTextNode(`${score.name} - ${Number(score.time).toFixed(2)}`);
+        node.appendChild(textnode);
+        this.scoreboardDiv.appendChild(node);
+      });
+    });
+  }
+
+  postTime(level, time) {
+    this.scoreboard.postTime(level, time);
   }
 
   update(numSeconds) {

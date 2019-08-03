@@ -1,17 +1,21 @@
 class GameController {
   constructor(control) {
     this.control = control;
-    this.onscreenSprites = new OnscreenSprites(LevelJacob, 0);
+    this.Level = LevelJacob;
+    this.onscreenSprites = new OnscreenSprites(this.Level, 0);
     this.pallet = images.pallet.red;
     this.hasTouchedSwapper = false;
     this.heldPallets = [images.pallet.red, images.pallet.green];
     this.ui = new Ui();
+    this.ui.getScores(this.Level.name);
     this.finishedLevel = false;
   }
 
   update(numSeconds) {
-    if (!this.finishedLevel)
-      this.ui.update(numSeconds - this.onscreenSprites.startTime);
+    if (!this.finishedLevel) {
+      this.levelTime = numSeconds - this.onscreenSprites.startTime;
+      this.ui.update(this.levelTime);
+    }
 
     if (this.control.hasZBeenTapped()) {
       this.swapPallets();
@@ -41,6 +45,7 @@ class GameController {
       [this.onscreenSprites.goal]
     );
     if (!this.player().dead && isTouchingGoal.length > 0) {
+      this.ui.postTime(this.Level.name, this.levelTime);
       this.playerDied();
       this.finishedLevel = true;
     }

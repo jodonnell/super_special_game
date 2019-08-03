@@ -83,3 +83,20 @@ canvas {
   font-family: monospace;
   font-size: 50px;
 }
+
+#name input {
+  height: 40px;
+  margin-right: 100px;
+  border-radius: 10px;
+  border: 0;
+  padding-left: 10px;
+  color: ghostwhite;
+  background-color: #414a4c;
+}
+
+#scoreboard {
+  margin-right: 20px;
+  font-size: 12px;
+  color: ghostwhite;
+  column-count: 2;
+}
