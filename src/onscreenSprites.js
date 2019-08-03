@@ -4,10 +4,11 @@ const tileToWorld = (tileX, tileY) => {
 }
 
 class OnscreenSprites {
-  constructor(Level) {
+  constructor(Level, startTime) {
     this.reset();
     new Level(this);
     this.updateSprites();
+    this.startTime = startTime;
   }
 
   reset() {
@@ -89,10 +90,11 @@ class OnscreenSprites {
     return this.player.x === this.startX && this.player.y === this.startY;
   }
 
-  advanceLevel() {
+  advanceLevel(numSeconds) {
     const NextLevel = this.NextLevel;
     this.reset();
     new NextLevel(this);
     this.updateSprites();
+    this.startTime = numSeconds;
   }
 }

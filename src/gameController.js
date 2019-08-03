@@ -1,7 +1,7 @@
 class GameController {
   constructor(control) {
     this.control = control;
-    this.onscreenSprites = new OnscreenSprites(LevelJacob);
+    this.onscreenSprites = new OnscreenSprites(LevelJacob, 0);
     this.pallet = images.pallet.red;
     this.hasTouchedSwapper = false;
     this.heldPallets = [images.pallet.red, images.pallet.green];
@@ -10,7 +10,9 @@ class GameController {
   }
 
   update(numSeconds) {
-    this.ui.update(numSeconds);
+    if (!this.finishedLevel)
+      this.ui.update(numSeconds - this.onscreenSprites.startTime);
+
     if (this.control.hasZBeenTapped()) {
       this.swapPallets();
     }
@@ -29,11 +31,11 @@ class GameController {
     this.swapPalletIfTouchingSwapperField();
     this.checkForDeath();
     this.checkForRegeneration();
-    this.checkForFinishedLevel();
+    this.checkForFinishedLevel(numSeconds);
   }
 
 
-  checkForFinishedLevel() {
+  checkForFinishedLevel(numSeconds) {
     const isTouchingGoal = CollisionDetector.doesCollideWithSprites(
       this.onscreenSprites.player,
       [this.onscreenSprites.goal]
@@ -41,12 +43,11 @@ class GameController {
     if (!this.player().dead && isTouchingGoal.length > 0) {
       this.playerDied();
       this.finishedLevel = true;
-
     }
 
     const winAnimationComplete = this.finishedLevel && !this.onscreenSprites.hasExplodingPlayer();
     if (winAnimationComplete) {
-      this.onscreenSprites.advanceLevel();
+      this.onscreenSprites.advanceLevel(numSeconds);
       this.finishedLevel = false;
     }
   }
