@@ -11,6 +11,7 @@ class Swapper extends Sprite {
   }
 
   update() {
+    super.update();
     this.counter++;
 
     if (this.counter > 10) {

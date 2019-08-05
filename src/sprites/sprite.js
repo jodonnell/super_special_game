@@ -7,6 +7,10 @@ class Sprite {
     this.w = this.sprite[0].length * PIXEL_SIZE;
     this.pixelSize = PIXEL_SIZE;
     this.collisionBounds = new CollisionBoundsRect(this);
+    this.dimensions = new RectDimensions(
+      this.sprite[0][0].length * this.pixelSize,
+      this.sprite[0].length * this.pixelSize,
+    );
   }
 
   draw(pallet, x, y) {
@@ -28,19 +32,7 @@ class Sprite {
     });
   }
 
-  width() {
-    return this.sprite[0][0].length * this.pixelSize;
-  }
-
-  height() {
-    return this.sprite[0].length * this.pixelSize;
-  }
-
-  rightSide() {
-    return this.x + this.width();
-  }
-
-  bottomSide() {
-    return this.y + this.height();
+  update() {
+    this.dimensions.setPos(this.x, this.y);
   }
 }

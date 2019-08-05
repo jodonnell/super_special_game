@@ -22,6 +22,7 @@ class Player extends Sprite {
   }
 
   update(args) {
+    super.update();
     if (this.dead) {
       return;
     }
@@ -91,7 +92,7 @@ class Player extends Sprite {
     const ydir = Math.sign(this.ySpeed);
     if (ydir > 0) {
       const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
-      this.y = topY.collisionBounds.top() - this.height();
+      this.y = topY.collisionBounds.top() - this.dimensions.height();
     } else {
       const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottom());
       this.y = topY.collisionBounds.bottom();
@@ -143,10 +144,10 @@ class Player extends Sprite {
   }
 
   addJumpClouds(onscreenSprites) {
-    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
-    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), 1));
-    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
-    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), -1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), 1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), 1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), -1));
+    onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), -1));
   }
 
   updateAnimation() {

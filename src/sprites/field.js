@@ -10,6 +10,7 @@ class Field {
   }
 
   update() {
+    super.update();
     this.counter++;
 
     if (this.counter < 5) return;

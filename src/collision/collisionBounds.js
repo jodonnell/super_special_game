@@ -5,18 +5,18 @@ class CollisionBounds {
   }
 
   leftCollisionBound() {
-    return this.sprite.x + this.trimX;
+    return this.sprite.dimensions.x + this.trimX;
   }
 
   top() {
-    return this.sprite.y;
+    return this.sprite.dimensions.y;
   }
 
   right() {
-    return this.sprite.rightSide() - this.trimX;
+    return this.sprite.dimensions.rightSide() - this.trimX;
   }
 
   bottom() {
-    return this.sprite.bottomSide();
+    return this.sprite.dimensions.bottomSide();
   }
 }

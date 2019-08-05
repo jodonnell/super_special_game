@@ -22,6 +22,7 @@ class Blob extends Sprite {
     if (this.dead) {
       return;
     }
+    super.update();
     const player = args.onscreenSprites.player;
 
     switch (this.currentState) {
@@ -56,7 +57,7 @@ class Blob extends Sprite {
         this.currentState = this.states.bouncing;
         this.xSpeed = MathHelpers.clamp(player.xSpeed * 1.5 || Math.sign(this.x - player.x), -4, 4);
         this.ySpeed = Math.abs(player.xSpeed) * -1 || -1;
-	onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.bottomSide(), Math.sign(this.xSpeed),2));
+	onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), Math.sign(this.xSpeed),2));
       }
     } else this.hit = false;
   }
@@ -95,7 +96,7 @@ class Blob extends Sprite {
     const ydir = Math.sign(this.ySpeed);
     if (ydir > 0) {
       const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
-      this.y = topY.collisionBounds.top() - this.height();
+      this.y = topY.collisionBounds.top() - this.dimensions.height();
     } else {
       const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottom());
       this.y = topY.collisionBounds.bottom();

@@ -3,7 +3,9 @@ class Block extends Sprite {
     super(x, y, sprite, frame);
   }
 
-  update() {}
+  update() {
+    super.update();
+  }
 }
 
 class BlankBlock {
@@ -13,7 +15,9 @@ class BlankBlock {
     this.width = width;
     this.collisionBounds = new CollisionBoundsRect(this);
   }
-  update() {}
+
+  update() {
+  }
 
   draw(pallet) {
     ctx.fillStyle = pallet[0];
@@ -36,8 +40,10 @@ class BreakerBlock extends Sprite {
     this.break = 0;
     this.meltingPixels = [];
   }
+
   update(args) {
     if (this.dead) return;
+    super.update();
     if (CollisionDetector.doRectsCollide(0, -1, this, args.onscreenSprites.player)) {
       this.break = true;
       this.updateMeltingPixels();
