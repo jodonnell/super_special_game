@@ -1,5 +1,6 @@
 class Scoreboard {
   constructor() {
+    this.cache = {};
     this.name = document.querySelector('#name input');
     this.name.addEventListener(
       'change',
@@ -16,18 +17,27 @@ class Scoreboard {
 
   }
 
-  getTimes(level) {
-    return fetch(`https://super-special-game.herokuapp.com/scores?level=${level}`, {
+  async getTimes(level) {
+    const result = await fetch(`https://super-special-game.herokuapp.com/scores?level=${level}`, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
     });
+
+    const json = await result.json();
+    this.cache[level] = json.results;
+    return json.results;
   }
 
   postTime(level, time) {
     if (!this.name.value)
+      return;
+
+    const times = this.cache[level];
+    const isTopTenScore = times.length > 0 && time < Number(times[times.length - 1].time);
+    if (!isTopTenScore)
       return;
 
     return fetch('https://super-special-game.herokuapp.com/scores', {
@@ -38,6 +48,5 @@ class Scoreboard {
       },
       body: JSON.stringify({ name: this.name.value, level, time })
     });
-
   }
 }

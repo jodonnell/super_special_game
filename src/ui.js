@@ -7,17 +7,14 @@ class Ui {
     this.scoreboard = new Scoreboard();
   }
 
-  getScores(level) {
-    this.scoreboard.getTimes(level).then((response) => {
-      return response.json()
-    }).then((response) => {
-      this.scoreboardDiv.innerHTML = '';
-      response.results.map((score) => {
-        let node = document.createElement("DIV");
-        var textnode = document.createTextNode(`${score.name} - ${Number(score.time).toFixed(2)}`);
-        node.appendChild(textnode);
-        this.scoreboardDiv.appendChild(node);
-      });
+  async getScores(level) {
+    const results = await this.scoreboard.getTimes(level);
+    this.scoreboardDiv.innerHTML = '';
+    results.map((score) => {
+      let node = document.createElement("DIV");
+      var textnode = document.createTextNode(`${score.name} - ${Number(score.time).toFixed(2)}`);
+      node.appendChild(textnode);
+      this.scoreboardDiv.appendChild(node);
     });
   }
 
