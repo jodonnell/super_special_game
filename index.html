@@ -63,6 +63,7 @@
      var start = null;
 
      function mainloop(timestamp){
+       requestAnimationFrame(mainloop);
        if (!start && timestamp) start = timestamp;
        const numSeconds = (timestamp - start) / 1000;
        var timeSinceLastFrame = timestamp - lastTime;
@@ -72,8 +73,6 @@
        lastTime = timestamp;
        gameController.update(numSeconds);
        gameController.draw();
-
-       requestAnimationFrame(mainloop);
      }
 
      const widthRatio = 800 / 5;
