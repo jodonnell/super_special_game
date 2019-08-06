@@ -5,6 +5,7 @@ class Player extends Sprite {
     this.xCollisionTrim = 5;
     this.dead = false;
     this.collisionBounds = new CollisionBoundsRect(this, this.xCollisionTrim);
+    this.jumpBuffer = 0;
   }
 
   resetPlayer() {
@@ -26,6 +27,7 @@ class Player extends Sprite {
     if (this.dead) {
       return;
     }
+    this.jumpBuffer = Math.max(this.jumpBuffer-1,0)
     const allwalls = [...args.onscreenSprites.walls,...args.onscreenSprites.breakwalls]
     this.updateAnimation();
     this.updateX(args.control, allwalls);
@@ -81,6 +83,7 @@ class Player extends Sprite {
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
       this.ySpeed = 0;
+      this.jumpBuffer = 10;
     } else this.y += Math.floor(this.ySpeed);
 
     if (this.canStickToWall(control, walls)) {
@@ -131,8 +134,9 @@ class Player extends Sprite {
 
   updateJump(control, onscreenSprites,walls) {
     if (control.x && control.canJump) {
-      if (this.willCollideWithFloors(walls, 1).length > 0) {
+      if (this.jumpBuffer || this.willCollideWithFloors(walls, 1).length > 0) {
         this.ySpeed = -10;
+	this.jumpBuffer = 0;
         this.addJumpClouds(onscreenSprites);
       } else if (this.canStickToWall(control, walls)) {
         this.addJumpClouds(onscreenSprites);
