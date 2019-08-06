@@ -83,7 +83,7 @@ class Player extends Sprite {
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
       this.ySpeed = 0;
-      this.jumpBuffer = 10;
+      this.jumpBuffer = 5;
     } else this.y += Math.floor(this.ySpeed);
 
     if (this.canStickToWall(control, walls)) {
@@ -134,7 +134,7 @@ class Player extends Sprite {
 
   updateJump(control, onscreenSprites,walls) {
     if (control.x && control.canJump) {
-      if (this.jumpBuffer || this.willCollideWithFloors(walls, 1).length > 0) {
+      if (this.jumpBuffer || this.willCollideWithFloors(walls, 5).length > 0) {
         this.ySpeed = -10;
 	this.jumpBuffer = 0;
         this.addJumpClouds(onscreenSprites);
