@@ -11,7 +11,7 @@ class GameController {
     this.finishedLevel = false;
   }
 
-  update(numSeconds) {
+  update(numSeconds, tick) {
     if (!this.finishedLevel) {
       this.levelTime = numSeconds - this.onscreenSprites.startTime;
       this.ui.update(this.levelTime);
@@ -24,7 +24,8 @@ class GameController {
     this.onscreenSprites.sprites.forEach(sprite => {
       sprite.update({
         control: this.control,
-        onscreenSprites: this.onscreenSprites
+        onscreenSprites: this.onscreenSprites,
+        tick
       });
     });
 

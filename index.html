@@ -27,6 +27,8 @@
     <script src='src/gameController.js'></script>
     <script src='src/input.js'></script>
     <script src='src/images.js'></script>
+    <script src='src/waypoint.js'></script>
+
     <script src='src/ui.js'></script>
     <script src='src/ui/scoreboard.js'></script>
 
@@ -72,7 +74,7 @@
          console.log(timeSinceLastFrame);
 
        lastTime = timestamp;
-       gameController.update(numSeconds);
+       gameController.update(numSeconds, timeSinceLastFrame);
        gameController.draw();
      }
 

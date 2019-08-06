@@ -13,8 +13,16 @@ class LevelJacob {
     ];
     //onscreenSprites.fieldSwappers = [new Field(...tileToWorld(5, 8), images.pallet.red)];
     onscreenSprites.buzzsaws = [
-      new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 80, 120),
-      new BuzzSaw(...tileToWorld(12, 12), images.pallet.red, 60, 120)
+      new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 80, [
+        new Waypoint(...tileToWorld(12, 11), 8),
+        new Waypoint(...tileToWorld(0, 8), 3),
+      ]),
+      new BuzzSaw(...tileToWorld(12, 12), images.pallet.red, 60, [
+        new Waypoint(...tileToWorld(12, 11), 1),
+        new Waypoint(...tileToWorld(13, 11), 1),
+        new Waypoint(...tileToWorld(13, 12), 1),
+        new Waypoint(...tileToWorld(12, 12), 1),
+      ])
     ];
     onscreenSprites.BG = [
       new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),

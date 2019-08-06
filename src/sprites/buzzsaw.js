@@ -1,17 +1,17 @@
 class BuzzSaw {
-  constructor(x, y, pallet, diameter, xRange) {
+  constructor(x, y, pallet, diameter, waypoints) {
     this.x = x;
     this.y = y;
     this.angle = 20;
     this.speed = 15;
-
-    this.startX = x;
+    this.waypoints = waypoints;
     this.direction = RIGHT;
-    this.xRange = xRange;
     this.pallet = pallet;
     this.originalPallet = pallet;
-
+    this.waypointIndex = 0;
+    this.elapsedTime = null;
     this.collisionBounds = new CollisionBoundsRect(this);
+
     this.dimensions = new RectDimensions(
       diameter,
       diameter,
@@ -22,26 +22,39 @@ class BuzzSaw {
     this.pallet = this.originalPallet;
   }
 
-  update() {
+  update({ tick }) {
+    this.elapsedTime = this.elapsedTime || 0.001;
+    this.elapsedTime += tick;
+
+    this.startX = _.isNumber(this.startX) ? this.startX : this.x;
+    this.startY = _.isNumber(this.startY) ? this.startY : this.y;
+
     this.dimensions.setPos(this.x, this.y);
     this.updateAngle();
-    this.updateX();
+    this.updatePos(tick);
   }
 
-  updateX() {
-    if (this.direction === RIGHT) {
-      this.x += 2;
-    } else {
-      this.x -= 2;
+  updatePos() {
+    const waypoint = this.waypoints[this.waypointIndex];
+    const percentThrough = Math.min((this.elapsedTime / 1000) / waypoint.time, 1);
+
+    this.x = ((waypoint.x - this.startX) * percentThrough) + this.startX;
+    this.y = ((waypoint.y - this.startY) * percentThrough) + this.startY;
+
+    if (percentThrough >= 1) {
+      this.nextWaypoint();
+    }
+  }
+
+  nextWaypoint() {
+    this.waypointIndex++;
+    if (this.waypointIndex > this.waypoints.length - 1) {
+      this.waypointIndex = 0;
     }
 
-    if (this.xRange + this.startX <= this.x) {
-      this.direction = LEFT;
-    }
-
-    if (this.x <= this.startX) {
-      this.direction = RIGHT;
-    }
+    this.elapsedTime = null;
+    this.startX = null;
+    this.startY = null;
   }
 
   updateAngle() {
