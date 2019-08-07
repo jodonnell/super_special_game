@@ -1,0 +1,1 @@
+whenever you die you lose a pixel (or becomes more transparent)
