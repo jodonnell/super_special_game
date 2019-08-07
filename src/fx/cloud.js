@@ -6,7 +6,7 @@ class Cloud {
     this.w = this.h + MathHelpers.randomInt(20);
     this.vsp = 1;
     this.dead = 0;
-    this.spd = (MathHelpers.randomInt(spd/2) + spd/2) * dir;
+    this.spd = (MathHelpers.randomInt(spd / 2) + spd / 2) * dir;
   }
 
   update() {

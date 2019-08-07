@@ -53,6 +53,5 @@ class Level2 {
     return ArrayHelpers.range(numWallsToFillSide - 1).map(y => {
       return new Block(...tileToWorld(x, y), images.img.brick);
     });
-
   }
 }

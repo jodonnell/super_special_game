@@ -11,13 +11,13 @@ class LevelJacob extends Level {
     onscreenSprites.buzzsaws = [
       new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 80, [
         new Waypoint(...tileToWorld(12, 11), 8),
-        new Waypoint(...tileToWorld(0, 8), 3),
+        new Waypoint(...tileToWorld(0, 8), 3)
       ]),
       new BuzzSaw(...tileToWorld(12, 12), images.pallet.red, 60, [
         new Waypoint(...tileToWorld(12, 11), 1),
         new Waypoint(...tileToWorld(13, 11), 1),
         new Waypoint(...tileToWorld(13, 12), 1),
-        new Waypoint(...tileToWorld(12, 12), 1),
+        new Waypoint(...tileToWorld(12, 12), 1)
       ])
     ];
     onscreenSprites.BG = [

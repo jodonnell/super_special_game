@@ -27,12 +27,12 @@ class Player extends Sprite {
     if (this.dead) {
       return;
     }
-    this.jumpBuffer = Math.max(this.jumpBuffer-1,0)
-    const allwalls = [...args.onscreenSprites.walls,...args.onscreenSprites.breakwalls]
+    this.jumpBuffer = Math.max(this.jumpBuffer - 1, 0);
+    const allwalls = [...args.onscreenSprites.walls, ...args.onscreenSprites.breakwalls];
     this.updateAnimation();
     this.updateX(args.control, allwalls);
     this.updateY(args.control, allwalls);
-    this.updateJump(args.control, args.onscreenSprites,allwalls);
+    this.updateJump(args.control, args.onscreenSprites, allwalls);
     this.updateSprite(args.control, allwalls);
     if (args.control.x) {
       args.control.canJump = false;
@@ -132,11 +132,11 @@ class Player extends Sprite {
     return CollisionDetector.willCollideWithSprites(Math.floor(speed), 0, this, walls);
   }
 
-  updateJump(control, onscreenSprites,walls) {
+  updateJump(control, onscreenSprites, walls) {
     if (control.x && control.canJump) {
       if (this.jumpBuffer || this.willCollideWithFloors(walls, 5).length > 0) {
         this.ySpeed = -10;
-	this.jumpBuffer = 0;
+        this.jumpBuffer = 0;
         this.addJumpClouds(onscreenSprites);
       } else if (this.canStickToWall(control, walls)) {
         this.addJumpClouds(onscreenSprites);

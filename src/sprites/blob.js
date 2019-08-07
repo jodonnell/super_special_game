@@ -27,7 +27,7 @@ class Blob extends Sprite {
 
     switch (this.currentState) {
       case this.states.idle:
-        this.kickCheck(player,args.onscreenSprites);
+        this.kickCheck(player, args.onscreenSprites);
         this.updateAnimation();
         break;
 
@@ -50,14 +50,14 @@ class Blob extends Sprite {
     }
   }
 
-  kickCheck(player,onscreenSprites) {
+  kickCheck(player, onscreenSprites) {
     if (this.willCollideWithPlayer(player)) {
       if (this.hit == false) {
         this.hit = true;
         this.currentState = this.states.bouncing;
         this.xSpeed = MathHelpers.clamp(player.xSpeed * 1.5 || Math.sign(this.x - player.x), -4, 4);
         this.ySpeed = Math.abs(player.xSpeed) * -1 || -1;
-	onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), Math.sign(this.xSpeed),2));
+        onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), Math.sign(this.xSpeed), 2));
       }
     } else this.hit = false;
   }

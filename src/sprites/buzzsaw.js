@@ -12,10 +12,7 @@ class BuzzSaw {
     this.elapsedTime = null;
     this.collisionBounds = new CollisionBoundsRect(this);
 
-    this.dimensions = new RectDimensions(
-      diameter,
-      diameter,
-    );
+    this.dimensions = new RectDimensions(diameter, diameter);
   }
 
   resetPallet() {
@@ -36,10 +33,10 @@ class BuzzSaw {
 
   updatePos() {
     const waypoint = this.waypoints[this.waypointIndex];
-    const percentThrough = Math.min((this.elapsedTime / 1000) / waypoint.time, 1);
+    const percentThrough = Math.min(this.elapsedTime / 1000 / waypoint.time, 1);
 
-    this.x = ((waypoint.x - this.startX) * percentThrough) + this.startX;
-    this.y = ((waypoint.y - this.startY) * percentThrough) + this.startY;
+    this.x = (waypoint.x - this.startX) * percentThrough + this.startX;
+    this.y = (waypoint.y - this.startY) * percentThrough + this.startY;
 
     if (percentThrough >= 1) {
       this.nextWaypoint();
@@ -67,10 +64,20 @@ class BuzzSaw {
     ctx.translate(this.x + this.dimensions.width() / 2, this.y + this.dimensions.height() / 2);
     ctx.rotate((this.angle * Math.PI) / 180);
     ctx.fillStyle = "white";
-    ctx.fillRect(-this.dimensions.width() / 2, -this.dimensions.width() / 2, this.dimensions.width(), this.dimensions.height());
+    ctx.fillRect(
+      -this.dimensions.width() / 2,
+      -this.dimensions.width() / 2,
+      this.dimensions.width(),
+      this.dimensions.height()
+    );
     ctx.rotate((45 * Math.PI) / 180);
     ctx.fillStyle = this.pallet[1];
-    ctx.fillRect(-this.dimensions.width() / 2, -this.dimensions.width() / 2, this.dimensions.width(), this.dimensions.height());
+    ctx.fillRect(
+      -this.dimensions.width() / 2,
+      -this.dimensions.width() / 2,
+      this.dimensions.width(),
+      this.dimensions.height()
+    );
     ctx.fillStyle = this.pallet[0];
     ctx.fillRect(-7, -7, 14, 14);
     ctx.restore();
