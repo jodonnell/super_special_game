@@ -30,7 +30,7 @@ class GameController {
     });
 
     this.onscreenSprites.removeOBJ(this.onscreenSprites.FX);
-    this.onscreenSprites.removeOBJ(this.onscreenSprites.breakwalls);
+    //this.onscreenSprites.removeOBJ(this.onscreenSprites.breakwalls);
 
     this.swapPalletIfTouchingSwapper();
     this.swapPalletIfTouchingSwapperField();

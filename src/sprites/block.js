@@ -42,13 +42,18 @@ class BreakerBlock extends Sprite {
   }
 
   update(args) {
-    if (this.dead) return;
-    super.update();
+    this.updateMeltingPixels();
+    if (this.dead){ 
+	this.dead -= 1
+	return;
+    } else super.update();
     if (CollisionDetector.doRectsCollide(0, -1, this, args.onscreenSprites.player)) {
       this.break = true;
-      this.updateMeltingPixels();
+      
     } else if (this.break) {
-      this.dead = true;
+      this.break = 0;
+      this.dead = 200;
+      this.dimensions.setPos(0,0)
     }
   }
 
@@ -62,27 +67,28 @@ class BreakerBlock extends Sprite {
   }
 
   draw(pallet) {
-    if (this.dead === true) {
+    this.drawMelt();
+    if (this.dead) {
       return;
     }
-
     super.draw(pallet);
     if (this.break) {
-      this.drawMelt(pallet);
+      this.addMelt(pallet);
     }
   }
 
-  drawMelt(pallet) {
+  addMelt(pallet) {
     if (MathHelpers.randomInt(25) === 20) {
       const pixel = {
         color: pallet[MathHelpers.randomInt(3)],
-        x: MathHelpers.randomRange(this.x, this.rightSide()),
-        y: this.bottomSide() + 1,
+        x: MathHelpers.randomRange(this.x, this.dimensions.rightSide()),
+        y: this.dimensions.bottomSide() + 1,
         opacity: 255
       };
       this.meltingPixels.push(pixel);
     }
-
+  }
+  drawMelt() {
     for (let i = 0; i < this.meltingPixels.length; i++) {
       ctx.fillStyle = ColorHelpers.addOpacity(this.meltingPixels[i].color, this.meltingPixels[i].opacity);
       ctx.fillRect(this.meltingPixels[i].x, this.meltingPixels[i].y, this.pixelSize, this.pixelSize);
