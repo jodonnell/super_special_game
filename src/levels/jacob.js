@@ -45,9 +45,9 @@ class LevelJacob extends Level {
         new Waypoint(...tileToWorld(4, 1), 1),
       ]),
 
-      new BuzzSaw(...tileToWorld(6, 1), images.pallet.red, 25, [
-        new Waypoint(...tileToWorld(6, 10), 1),
-        new Waypoint(...tileToWorld(6, 1), 1),
+      new BuzzSaw(...tileToWorld(7, 1), images.pallet.red, 25, [
+        new Waypoint(...tileToWorld(7, 10), 1),
+        new Waypoint(...tileToWorld(7, 1), 1),
       ]),
 
       new BuzzSaw(...tileToWorld(9, 1), images.pallet.red, 25, [
