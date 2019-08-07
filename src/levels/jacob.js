@@ -9,6 +9,8 @@ class LevelJacob extends Level {
 
     onscreenSprites.NextLevel = LevelMark;
     onscreenSprites.buzzsaws = [
+
+      // yellow left saws
       new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 30, [
         new Waypoint(...tileToWorld(3, 8), 1),
         new Waypoint(...tileToWorld(0, 8), 1)
@@ -24,12 +26,18 @@ class LevelJacob extends Level {
         new Waypoint(...tileToWorld(-1, 6.5), 1),
         new Waypoint(...tileToWorld(-1, 6.5), 3)
       ]),
+      // end yellow left saws
 
-      new BuzzSaw(...tileToWorld(12, 12), images.pallet.red, 60, [
-        new Waypoint(...tileToWorld(12, 11), 1),
-        new Waypoint(...tileToWorld(13, 11), 1),
-        new Waypoint(...tileToWorld(13, 12), 1),
-        new Waypoint(...tileToWorld(12, 12), 1)
+      // chaser saw
+      new BuzzSaw(...tileToWorld(3, 1.2), images.pallet.green, 60, [
+        new Waypoint(...tileToWorld(15, 1.2), 1),
+        new Waypoint(...tileToWorld(15, 8), 0.3),
+        new Waypoint(...tileToWorld(4, 8), 1),
+        new Waypoint(...tileToWorld(4, 5), 0.5),
+        new Waypoint(...tileToWorld(4, 8), 0.5),
+        new Waypoint(...tileToWorld(15, 8), 1),
+        new Waypoint(...tileToWorld(15, 1.2), 0.3),
+        new Waypoint(...tileToWorld(3, 1.2), 1),
       ])
     ];
     onscreenSprites.BG = [
