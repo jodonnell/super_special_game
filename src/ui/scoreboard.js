@@ -36,8 +36,10 @@ class Scoreboard {
       return;
 
     const times = this.cache[level];
+    const isLessThanTenScores = times.length < 10;
     const isTopTenScore = times.length > 0 && time < Number(times[times.length - 1].time);
-    if (!isTopTenScore)
+    const isHighScore = isTopTenScore || isLessThanTenScores;
+    if (!isHighScore)
       return;
 
     return fetch('https://super-special-game.herokuapp.com/scores', {
