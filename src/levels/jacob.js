@@ -28,7 +28,7 @@ class LevelJacob extends Level {
       ]),
       // end yellow left saws
 
-      // chaser saw
+      // chaser green saw
       new BuzzSaw(...tileToWorld(3, 1.2), images.pallet.green, 60, [
         new Waypoint(...tileToWorld(15, 1.2), 1),
         new Waypoint(...tileToWorld(15, 8), 0.3),
@@ -38,7 +38,23 @@ class LevelJacob extends Level {
         new Waypoint(...tileToWorld(15, 8), 1),
         new Waypoint(...tileToWorld(15, 1.2), 0.3),
         new Waypoint(...tileToWorld(3, 1.2), 1),
-      ])
+      ]),
+
+      new BuzzSaw(...tileToWorld(4, 1), images.pallet.red, 25, [
+        new Waypoint(...tileToWorld(4, 10), 1),
+        new Waypoint(...tileToWorld(4, 1), 1),
+      ]),
+
+      new BuzzSaw(...tileToWorld(6, 1), images.pallet.red, 25, [
+        new Waypoint(...tileToWorld(6, 10), 1),
+        new Waypoint(...tileToWorld(6, 1), 1),
+      ]),
+
+      new BuzzSaw(...tileToWorld(9, 1), images.pallet.red, 25, [
+        new Waypoint(...tileToWorld(9, 10), 1),
+        new Waypoint(...tileToWorld(9, 1), 1),
+      ]),
+
     ];
     onscreenSprites.BG = [
       new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),
