@@ -28,7 +28,7 @@ class Player extends Sprite {
       return;
     }
     this.jumpBuffer = Math.max(this.jumpBuffer - 1, 0);
-    const allwalls = [...args.onscreenSprites.walls, ...args.onscreenSprites.breakwalls];
+    const allwalls = [...args.onscreenSprites.walls, ...args.onscreenSprites.breakCheck()];
     this.updateAnimation();
     this.updateX(args.control, allwalls);
     this.updateY(args.control, allwalls);
