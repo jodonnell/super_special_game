@@ -29,9 +29,10 @@ class Player extends Sprite {
     }
     this.jumpBuffer = Math.max(this.jumpBuffer - 1, 0);
     const allwalls = [...args.onscreenSprites.walls, ...args.onscreenSprites.breakCheck()];
+    const wallCollider = new SpriteWallCollider(this, allwalls);
     this.updateAnimation();
-    this.updateX(args.control, allwalls);
-    this.updateY(args.control, allwalls);
+    this.updateX(args.control, allwalls, wallCollider);
+    this.updateY(args.control, allwalls, wallCollider);
     this.updateJump(args.control, args.onscreenSprites, allwalls);
     this.updateSprite(args.control, allwalls);
     if (args.control.x) {
@@ -60,56 +61,23 @@ class Player extends Sprite {
     return control.right - control.left;
   }
 
-  updateX(control, walls) {
+  updateX(control, walls, wallCollider) {
     const speedmax = 4;
     const vel = 0.4;
     const horizontal = this.getInputs(control);
     this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
-    const collidedWithWalls = this.willCollideWithSideWalls(walls, this.xSpeed);
-    if (collidedWithWalls.length > 0) {
-      this.adjustXToCollide(collidedWithWalls);
-      this.xSpeed = 0;
-    } else this.x += Math.floor(this.xSpeed);
+    wallCollider.updateX(() => this.xSpeed = 0);
   }
 
-  updateY(control, walls) {
-    const gravity = 0.5;
-    const speedMax = 10;
-    this.ySpeed = Math.min(this.ySpeed + gravity, speedMax);
-
-    const collidedWithWalls = this.willCollideWithFloors(walls, this.ySpeed);
-    if (collidedWithWalls.length > 0) {
-      this.adjustYToCollide(collidedWithWalls);
-      this.ySpeed = 0;
+  updateY(control, walls, wallCollider) {
+    wallCollider.updateY(0.5, 10, () => {
       this.jumpBuffer = 5;
-    } else this.y += Math.floor(this.ySpeed);
+    });
 
     if (this.canStickToWall(control, walls)) {
       this.ySpeed = MathHelpers.toZero(this.ySpeed, 1);
-    }
-  }
-
-  adjustYToCollide(collidedWithWalls) {
-    const ydir = Math.sign(this.ySpeed);
-    if (ydir > 0) {
-      const topY = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.top());
-      this.y = topY.collisionBounds.top() - this.dimensions.height();
-    } else {
-      const topY = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.bottom());
-      this.y = topY.collisionBounds.bottom();
-    }
-  }
-
-  adjustXToCollide(collidedWithWalls) {
-    const xdir = Math.sign(this.xSpeed);
-    if (xdir > 0) {
-      const leftX = _.minBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.left());
-      this.x += leftX.collisionBounds.left() - this.collisionBounds.right();
-    } else {
-      const rightX = _.maxBy(collidedWithWalls, collidedWithWall => collidedWithWall.collisionBounds.right());
-      this.x = rightX.collisionBounds.right() - this.xCollisionTrim;
     }
   }
 
@@ -164,6 +132,7 @@ class Player extends Sprite {
       this.increaseFrame();
     }
   }
+
   increaseFrame() {
     const maxFrame = this.sprite.length;
     this.frame++;

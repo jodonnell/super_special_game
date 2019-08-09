@@ -4,22 +4,22 @@ class SpriteWallCollider {
     this.walls = walls;
   }
 
-  updateY(gravity, speedMax) {
+  updateY(gravity, speedMax, onCollide) {
     this.sprite.ySpeed = Math.min(this.sprite.ySpeed + gravity, speedMax);
 
     const collidedWithWalls = this.willCollideWithFloors(this.sprite.ySpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustYToCollide(collidedWithWalls);
-      if (this.sprite.ySpeed > 0) this.sprite.currentState = this.sprite.states.sliding;
+      onCollide();
       this.sprite.ySpeed = 0;
     } else this.sprite.y += Math.floor(this.sprite.ySpeed);
   }
 
-  updateX() {
+  updateX(onCollide) {
     const collidedWithWalls = this.willCollideWithSideWalls(this.sprite.xSpeed);
     if (collidedWithWalls.length > 0) {
       this.adjustXToCollide(collidedWithWalls);
-      this.sprite.xSpeed *= -0.5;
+      onCollide();
     } else this.sprite.x += Math.floor(this.sprite.xSpeed);
   }
 
