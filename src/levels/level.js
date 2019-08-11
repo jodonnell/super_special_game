@@ -18,21 +18,21 @@ class Level {
         oss.startX = x;
         oss.startY = y;
         oss.player = new Player(x, y, images.img.hero);
-      return;
+        return;
       case "goal":
-      return oss.goal = new Swapper(x, y, images.pallet.blue);
+        return (oss.goal = new Swapper(x, y, images.pallet.blue));
       case "swapYellow":
-      return oss.swappers.push(new Swapper(x, y, images.pallet.yellow));
+        return oss.swappers.push(new Swapper(x, y, images.pallet.yellow));
       case "swapGreen":
-      return oss.swappers.push(new Swapper(x, y, images.pallet.green));
+        return oss.swappers.push(new Swapper(x, y, images.pallet.green));
       case "swapBlue":
-      return oss.swappers.push(new Swapper(x, y, images.pallet.blue));
+        return oss.swappers.push(new Swapper(x, y, images.pallet.blue));
       case "swapRed":
-      return oss.swappers.push(new Swapper(x, y, images.pallet.red));
+        return oss.swappers.push(new Swapper(x, y, images.pallet.red));
       case "wall":
-      return oss.walls.push(new Block(x, y, images.img.brick));
+        return oss.walls.push(new Block(x, y, images.img.brick));
       case "break":
-      return oss.breakwalls.push(new BreakerBlock(x, y));
+        return oss.breakwalls.push(new BreakerBlock(x, y));
     }
   }
 }

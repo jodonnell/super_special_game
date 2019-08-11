@@ -68,7 +68,7 @@ class Player extends Sprite {
     this.xSpeed = MathHelpers.clamp(this.xSpeed + vel * horizontal, -speedmax, speedmax);
     if (!horizontal) this.xSpeed = MathHelpers.toZero(this.xSpeed, 1);
 
-    wallCollider.updateX(() => this.xSpeed = 0);
+    wallCollider.updateX(() => (this.xSpeed = 0));
   }
 
   updateY(control, walls, wallCollider) {

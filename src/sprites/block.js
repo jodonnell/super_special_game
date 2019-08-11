@@ -44,10 +44,10 @@ class BreakerBlock extends Sprite {
     this.updateMeltingPixels();
     if (this.dead) {
       if (!CollisionDetector.doRectsCollide(0, 0, this, args.onscreenSprites.player)) {
-	this.dead--
-	}
+        this.dead--;
+      }
       return;
-    } 
+    }
     super.update();
     if (CollisionDetector.doRectsCollide(0, -1, this, args.onscreenSprites.player)) {
       this.break = true;

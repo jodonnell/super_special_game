@@ -71,13 +71,12 @@ class Blob extends Sprite {
   }
 
   updateX(wallCollider) {
-    wallCollider.updateX(() => this.xSpeed *= -0.5);
+    wallCollider.updateX(() => (this.xSpeed *= -0.5));
   }
 
   updateY(wallCollider) {
     wallCollider.updateY(0.2, 10, () => {
-      if (this.ySpeed > 0)
-        this.currentState = this.states.sliding;
+      if (this.ySpeed > 0) this.currentState = this.states.sliding;
     });
   }
 
