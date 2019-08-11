@@ -1,7 +1,7 @@
 class GameController {
   constructor(control) {
     this.control = control;
-    this.Level = LevelJacob;
+    this.Level = LevelJacob2;
     this.onscreenSprites = new OnscreenSprites(this.Level, 0);
     this.pallet = images.pallet.red;
     this.hasTouchedSwapper = false;
