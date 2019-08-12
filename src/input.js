@@ -12,6 +12,50 @@ class InputControl {
     this.canJump = true;
   }
 
+  checkJoypad () {
+    const controller = navigator.getGamepads()[0];
+    if (!controller)
+      return;
+
+    controller.buttons.forEach((button, i) => {
+      const pressed = button.pressed;
+
+      if (pressed && i === 0) {
+        this.pressX();
+      } else if (!pressed && i === 0) {
+        this.releaseX();
+      }
+
+      if (pressed && i === 15) {
+        this.pressRight();
+      } else if (!pressed && i === 15) {
+        this.releaseRight();
+      }
+
+      if (pressed && i === 14) {
+        this.pressLeft();
+      } else if (!pressed && i === 14) {
+        this.releaseLeft();
+      }
+
+      if (pressed && i === 2) {
+        this.pressZ();
+      } else if (!pressed && i === 2) {
+        this.releaseZ();
+      }
+    });
+
+    controller.axes.forEach((inputRange, i) => {
+      if (inputRange > 0.2 && i === 0) {
+        this.releaseLeft();
+        this.pressRight();
+      } else if (inputRange < -0.2 && i === 0) {
+        this.releaseRight();
+        this.pressLeft();
+      }
+    });
+  }
+
   get LEFT_KEY() {
     return 37;
   }
@@ -168,6 +212,7 @@ class InputControl {
     this.z = 1;
     if (this.zReleased) {
       this.zTapped = true;
+      this.zReleased = false;
     }
   }
 
