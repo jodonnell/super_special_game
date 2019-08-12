@@ -10,6 +10,7 @@ class InputControl {
     this.zReleased = true;
     this.getKey();
     this.canJump = true;
+    this.die = false;
   }
 
   checkJoypad () {
@@ -42,6 +43,10 @@ class InputControl {
         this.pressZ();
       } else if (!pressed && i === 2) {
         this.releaseZ();
+      }
+
+      if (pressed && i === 3) {
+        this.die();
       }
     });
 
@@ -242,6 +247,10 @@ class InputControl {
 
   releaseUp() {
     this.up = 0;
+  }
+
+  die() {
+    this.die = true;
   }
 
   releaseZ() {
