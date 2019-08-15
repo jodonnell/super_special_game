@@ -19,12 +19,12 @@ class GameController {
       this.ui.update(this.levelTime);
     }
 
-    if (this.control.isPaused()) {
-      return;
-    }
-
     if (this.control.hasZBeenTapped()) {
       this.swapPallets();
+    }
+
+    if (this.control.isPaused()) {
+      return;
     }
 
     this.onscreenSprites.sprites.forEach(sprite => {
