@@ -122,6 +122,7 @@ class GameController {
     const isPlayerAtStartSpot = this.onscreenSprites.isPlayerAtStartSpot();
     if (!this.onscreenSprites.hasImplodingPlayer() && isPlayerAtStartSpot) {
       this.onscreenSprites.player.dead = false;
+      this.levelTime = 0;
     }
 
     if (!this.onscreenSprites.hasExplodingPlayer() && !isPlayerAtStartSpot) {
