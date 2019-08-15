@@ -254,4 +254,8 @@ class InputControl {
     this.x = 0;
     this.canJump = true;
   }
+
+  isPaused() {
+    return this.up === 1;
+  }
 }

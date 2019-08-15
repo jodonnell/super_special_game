@@ -14,6 +14,10 @@ class GameController {
   update(numSeconds, tick) {
     this.control.checkJoypad();
 
+    if (this.control.isPaused()) {
+      return;
+    }
+
     if (!this.finishedLevel) {
       this.levelTime = numSeconds - this.onscreenSprites.startTime;
       this.ui.update(this.levelTime);
