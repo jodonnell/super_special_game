@@ -4,11 +4,10 @@ const tileToWorld = (tileX, tileY) => {
 }
 
 class OnscreenSprites {
-  constructor(Level, startTime) {
+  constructor(Level) {
     this.reset();
     new Level(this);
     this.updateSprites();
-    this.startTime = startTime;
   }
 
   reset() {
@@ -85,20 +84,21 @@ class OnscreenSprites {
     this.player.y = this.startY;
     this.player.resetPlayer();
   }
+
   breakCheck(){
-	var walls = []
-	this.breakwalls.forEach(BW => {if (!BW.dead) walls.push(BW)})
-	return walls
+    let walls = []
+    this.breakwalls.forEach(BW => {if (!BW.dead) walls.push(BW)})
+    return walls
+
   }
   isPlayerAtStartSpot() {
     return this.player.x === this.startX && this.player.y === this.startY;
   }
 
-  advanceLevel(numSeconds) {
+  advanceLevel() {
     const NextLevel = this.NextLevel;
     this.reset();
     new NextLevel(this);
     this.updateSprites();
-    this.startTime = numSeconds;
   }
 }

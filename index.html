@@ -71,13 +71,12 @@
      function mainloop(timestamp){
        requestAnimationFrame(mainloop);
        if (!start && timestamp) start = timestamp;
-       const numSeconds = (timestamp - start) / 1000;
        var timeSinceLastFrame = timestamp - lastTime;
        if (timeSinceLastFrame > 17)
          console.log(timeSinceLastFrame);
 
        lastTime = timestamp;
-       gameController.update(numSeconds, timeSinceLastFrame);
+       gameController.update(timeSinceLastFrame);
        gameController.draw();
      }
 

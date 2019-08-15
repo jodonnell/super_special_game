@@ -9,13 +9,14 @@ class GameController {
     this.ui = new Ui();
     this.ui.getScores(this.Level.name);
     this.finishedLevel = false;
+    this.levelTime = 0;
   }
 
-  update(numSeconds, tick) {
+  update(tick) {
     this.control.checkJoypad();
 
     if (!this.finishedLevel) {
-      this.levelTime = numSeconds - this.onscreenSprites.startTime;
+      this.levelTime += tick / 1000;
       this.ui.update(this.levelTime);
     }
 
@@ -42,11 +43,11 @@ class GameController {
     this.swapPalletIfTouchingSwapperField();
     this.checkForDeath();
     this.checkForRegeneration();
-    this.checkForFinishedLevel(numSeconds);
+    this.checkForFinishedLevel();
   }
 
 
-  checkForFinishedLevel(numSeconds) {
+  checkForFinishedLevel() {
     const isTouchingGoal = CollisionDetector.doesCollideWithSprites(
       this.onscreenSprites.player,
       [this.onscreenSprites.goal]
@@ -62,7 +63,8 @@ class GameController {
       this.ui.getScores(this.onscreenSprites.NextLevel.name);
       this.Level = this.onscreenSprites.NextLevel;
       this.ui.getScores(this.Level.name);
-      this.onscreenSprites.advanceLevel(numSeconds);
+      this.onscreenSprites.advanceLevel();
+      this.levelTime = 0;
       this.finishedLevel = false;
     }
   }
