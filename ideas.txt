@@ -1,1 +1,5 @@
 whenever you die you lose a pixel (or becomes more transparent)
+
+
+you can pause but the timer doesn't stop
+maybe you only have x seconds to finish a level
