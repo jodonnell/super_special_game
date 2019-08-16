@@ -43,6 +43,19 @@ class LevelJacob3 extends Level {
         new Waypoint(...tileToWorld(MAX_X_GRID_SIZE, 12), 1)
       ]),
 
+      new BuzzSaw(...tileToWorld(MAX_X_GRID_SIZE, 10), images.pallet.red, 95, [
+        new Waypoint(...tileToWorld(0, 10), 5),
+        new Waypoint(...tileToWorld(MAX_X_GRID_SIZE, 10), 5)
+      ]),
+      new BuzzSaw(...tileToWorld(MAX_X_GRID_SIZE, 8), images.pallet.green, 120, [
+        new Waypoint(...tileToWorld(0, 10), 8),
+        new Waypoint(...tileToWorld(MAX_X_GRID_SIZE, 8), 8)
+      ]),
+
+      new BuzzSaw(...tileToWorld(MAX_X_GRID_SIZE, 4), images.pallet.red, 120, [
+        new Waypoint(...tileToWorld(6, 4), 4),
+        new Waypoint(...tileToWorld(MAX_X_GRID_SIZE, 4), 8)
+      ]),
     ];
   }
 

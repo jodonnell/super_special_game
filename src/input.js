@@ -26,6 +26,12 @@ class InputControl {
         this.releaseX();
       }
 
+      if (pressed && i === 3) {
+        this.pressUp();
+      } else if (!pressed && i === 3) {
+        this.releaseUp();
+      }
+
       if (pressed && i === 15) {
         this.pressRight();
       } else if (!pressed && i === 15) {
