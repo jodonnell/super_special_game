@@ -1,5 +1,5 @@
 class BuzzSaw {
-  constructor(x, y, pallet, diameter, waypoints) {
+  constructor(x, y, pallet, diameter, waypoints = 0) {
     this.x = x;
     this.y = y;
     this.angle = 20;
@@ -32,6 +32,7 @@ class BuzzSaw {
   }
 
   updatePos() {
+    if (!this.waypoints) return;
     const waypoint = this.waypoints[this.waypointIndex];
     const percentThrough = Math.min(this.elapsedTime / 1000 / waypoint.time, 1);
 

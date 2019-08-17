@@ -11,7 +11,14 @@ class Level {
   build(oss, index, x, y) {
     x = x * 8 * PIXEL_SIZE;
     y = y * 8 * PIXEL_SIZE;
-    switch (this.constructor.level[index]) {
+    let mapElement = this.constructor.level[index],properties;
+    if (mapElement.length != undefined){
+      if (mapElement[0].length > 1){
+      properties = mapElement[1]
+      mapElement = mapElement[0]
+      }
+    }
+    switch (mapElement) {
       case 0:
         return;
       case "player":
@@ -33,6 +40,8 @@ class Level {
         return oss.walls.push(new Block(x, y, images.img.brick));
       case "break":
         return oss.breakwalls.push(new BreakerBlock(x, y));
+      case "sawblade":
+        oss.buzzsaws.push(new BuzzSaw(x,y,...properties))
     }
   }
 }
