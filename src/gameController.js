@@ -177,13 +177,18 @@ class GameController {
     });
   }
 
-  draw() {
-    this.clearScreen();
+  draw(tick) {
+    this.clearScreen(tick);
     this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.pallet));
   }
 
-  clearScreen() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  clearScreen(tick) {
+    if (tick >= 17)
+      ctx.fillStyle = 'red';
+    else
+      ctx.fillStyle = '#00212d';
+
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
   }
 
   selectedPalletIndex() {
