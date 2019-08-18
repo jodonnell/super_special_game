@@ -1,11 +1,13 @@
 class Player extends Sprite {
   constructor(x, y, sprite) {
     super(x, y, sprite);
+    this.pallet = images.pallet.red;
     this.resetPlayer();
     this.xCollisionTrim = 5;
     this.dead = false;
     this.collisionBounds = new CollisionBoundsRect(this, this.xCollisionTrim);
     this.jumpBuffer = 0;
+    this.heldPallets = [images.pallet.red, images.pallet.green];
   }
 
   resetPlayer() {
@@ -27,6 +29,7 @@ class Player extends Sprite {
     if (this.dead) {
       return;
     }
+
     this.jumpBuffer = Math.max(this.jumpBuffer - 1, 0);
     const allwalls = [...args.onscreenSprites.walls, ...args.onscreenSprites.breakCheck()];
     const wallCollider = new SpriteWallCollider(this, allwalls);
@@ -122,6 +125,28 @@ class Player extends Sprite {
     onscreenSprites.addFX(new Cloud(this.x + this.w / 2, this.dimensions.bottomSide(), -1));
   }
 
+  changePalleteTo(pallet) {
+    this.heldPallets[this.selectedPalletIndex()] = pallet;
+    this.pallet = pallet;
+    document.querySelector('.primary').style.backgroundColor = pallet[1];
+  }
+
+  selectedPalletIndex() {
+    if (this.pallet === this.heldPallets[0])
+      return 0;
+    return 1;
+  }
+
+  swapPallets() {
+    if (this.pallet === this.heldPallets[0]) {
+      this.pallet = this.heldPallets[1];
+      this.ui.makeSecondColorPrimary();
+    } else {
+      this.pallet = this.heldPallets[0];
+      this.ui.makeFirstColorPrimary();
+    }
+  }
+
   updateAnimation() {
     var timeSpeed;
     if (Math.floor(this.xSpeed) == 0) timeSpeed = 30;
@@ -145,5 +170,9 @@ class Player extends Sprite {
 
   right() {
     return this.rightSide() - 5;
+  }
+
+  toHash() {
+    return 'player';
   }
 }

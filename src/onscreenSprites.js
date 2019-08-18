@@ -86,11 +86,11 @@ class OnscreenSprites {
   }
 
   breakCheck(){
-    let walls = []
-    this.breakwalls.forEach(BW => {if (!BW.dead) walls.push(BW)})
-    return walls
-
+    let walls = [];
+    this.breakwalls.forEach(BW => {if (!BW.dead) walls.push(BW)});
+    return walls;
   }
+
   isPlayerAtStartSpot() {
     return this.player.x === this.startX && this.player.y === this.startY;
   }

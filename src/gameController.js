@@ -3,10 +3,10 @@ class GameController {
     this.control = control;
     this.Level = LevelMark;
     this.onscreenSprites = new OnscreenSprites(this.Level, 0);
-    this.pallet = images.pallet.red;
-    this.hasTouchedSwapper = false;
-    this.heldPallets = [images.pallet.red, images.pallet.green];
     this.ui = new Ui();
+    this.player().ui = this.ui;
+
+    this.swapperCollider = new SwapperCollider();
     this.ui.getScores(this.Level.name);
     this.finishedLevel = false;
     this.levelTime = 0;
@@ -21,7 +21,7 @@ class GameController {
     }
 
     if (this.control.hasZBeenTapped()) {
-      this.swapPallets();
+      this.player().swapPallets();
     }
 
     if (this.control.isPaused()) {
@@ -37,10 +37,9 @@ class GameController {
     });
 
     this.onscreenSprites.removeOBJ(this.onscreenSprites.FX);
-    //this.onscreenSprites.removeOBJ(this.onscreenSprites.breakwalls);
 
     this.swapPalletIfTouchingSwapper();
-    this.swapPalletIfTouchingSwapperField();
+    //this.swapPalletIfTouchingSwapperField();
     this.checkForDeath();
     this.checkForRegeneration();
     this.checkForFinishedLevel();
@@ -108,7 +107,7 @@ class GameController {
 
     const playerIsAlive = !this.onscreenSprites.player.dead;
 
-    const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.pallet !== buzzsaw.pallet).length > 0;
+    const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.player().pallet !== buzzsaw.pallet).length > 0;
     if (playerIsAlive && connectedBuzzSaw.length > 0 && isDifferentColor) {
       this.playerDied();
     }
@@ -128,7 +127,7 @@ class GameController {
     if (!this.onscreenSprites.hasExplodingPlayer() && !isPlayerAtStartSpot) {
       this.onscreenSprites.resetPlayer();
       this.onscreenSprites.addFX(
-        new ImplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet)
+        new ImplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.player().pallet)
       );
     }
   }
@@ -140,46 +139,33 @@ class GameController {
 
   explodePlayer() {
     this.onscreenSprites.addFX(
-      new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.pallet)
+      new ExplodingPlayer(this.onscreenSprites.player.x, this.onscreenSprites.player.y, this.player().pallet)
     );
   }
 
   swapPalletIfTouchingSwapper() {
-    const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(
-      this.onscreenSprites.player,
-      this.onscreenSprites.swappers
-    );
-    if (!this.hasTouchedSwapper && isTouchingSwapper.length > 0) {
-      this.hasTouchedSwapper = true;
-      const currentPallet = this.pallet;
-      this.changePrimaryPalleteTo(isTouchingSwapper[0].pallet);
-      isTouchingSwapper[0].pallet = currentPallet;
-    } else if (!isTouchingSwapper.length > 0) {
-      this.hasTouchedSwapper = false;
-    }
-  }
-
-  changePrimaryPalleteTo(pallet) {
-    this.heldPallets[this.selectedPalletIndex()] = pallet;
-    this.pallet = pallet;
-    document.querySelector('.primary').style.backgroundColor = pallet[1];
+    this.swapperCollider.swapPalletIfTouchingSwapper(this.onscreenSprites.player, this.onscreenSprites.swappers);
+    this.onscreenSprites.buzzsaws.forEach((buzzsaw) => {
+      this.swapperCollider.swapPalletIfTouchingSwapper(buzzsaw, this.onscreenSprites.swappers);
+    });
   }
 
   swapPalletIfTouchingSwapperField() {
+    // resetting pallet breaks swapping
     this.onscreenSprites.buzzsaws.forEach(buzzsaw => buzzsaw.resetPallet());
 
     this.onscreenSprites.fieldSwappers.forEach(fieldSwapper => {
       const isTouchingSwapper = CollisionDetector.doesCollideWithSprites(fieldSwapper, this.onscreenSprites.buzzsaws);
 
       isTouchingSwapper.forEach(buzzsaw => {
-        buzzsaw.pallet = fieldSwapper.pallet;
+        buzzsaw.pallet = fieldSwapper.player().pallet;
       });
     });
   }
 
   draw(tick) {
     this.clearScreen(tick);
-    this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.pallet));
+    this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.player().pallet));
   }
 
   clearScreen(tick) {
@@ -189,21 +175,5 @@ class GameController {
       ctx.fillStyle = '#00212d';
 
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
-
-  selectedPalletIndex() {
-    if (this.pallet === this.heldPallets[0])
-      return 0;
-    return 1;
-  }
-
-  swapPallets() {
-    if (this.pallet === this.heldPallets[0]) {
-      this.pallet = this.heldPallets[1];
-      this.ui.makeSecondColorPrimary();
-    } else {
-      this.pallet = this.heldPallets[0];
-      this.ui.makeFirstColorPrimary();
-    }
   }
 }

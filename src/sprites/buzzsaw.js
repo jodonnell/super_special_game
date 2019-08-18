@@ -1,3 +1,4 @@
+var buzzSawNumber = 0;
 class BuzzSaw {
   constructor(x, y, pallet, diameter, waypoints = 0) {
     this.x = x;
@@ -11,12 +12,14 @@ class BuzzSaw {
     this.waypointIndex = 0;
     this.elapsedTime = null;
     this.collisionBounds = new CollisionBoundsRect(this);
-
     this.dimensions = new RectDimensions(diameter, diameter);
+
+    this.buzzSawNumber = buzzSawNumber;
+    buzzSawNumber++;
   }
 
   resetPallet() {
-    this.pallet = this.originalPallet;
+    //this.pallet = this.originalPallet;
   }
 
   update({ tick }) {
@@ -60,6 +63,10 @@ class BuzzSaw {
     this.angle %= 360;
   }
 
+  changePalleteTo(pallet) {
+    this.pallet = pallet;
+  }
+
   draw() {
     ctx.save();
     ctx.translate(this.x + this.dimensions.width() / 2, this.y + this.dimensions.height() / 2);
@@ -82,5 +89,9 @@ class BuzzSaw {
     ctx.fillStyle = this.pallet[0];
     ctx.fillRect(-7, -7, 14, 14);
     ctx.restore();
+  }
+
+  toHash() {
+    return `buzzsaw-${this.buzzSawNumber}`;
   }
 }
