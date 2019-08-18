@@ -138,7 +138,7 @@ class Player extends Sprite {
   }
 
   swapPallets() {
-    if (this.pallet === this.heldPallets[0]) {
+    if (this.ui.isFirstColorPrimary()) {
       this.pallet = this.heldPallets[1];
       this.ui.makeSecondColorPrimary();
     } else {

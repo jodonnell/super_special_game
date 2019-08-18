@@ -36,4 +36,7 @@ class Ui {
     this.secondColor.classList.remove('primary');
   }
 
+  isFirstColorPrimary() {
+    return this.firstColor.classList.contains('primary');
+  }
 }
