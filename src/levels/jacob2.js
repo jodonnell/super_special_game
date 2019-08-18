@@ -3,7 +3,7 @@ class LevelJacob2 extends Level {
     super();
     this.buildLevel(onscreenSprites);
 
-    onscreenSprites.NextLevel = LevelMark;
+    onscreenSprites.NextLevel = LevelJacob3;
 
     onscreenSprites.BG = [
       new BackgroundSquare(...tileToWorld(MAX_X_GRID_SIZE / 2, MAX_Y_GRID_SIZE + 3), 400, -1, 45),
@@ -38,7 +38,14 @@ class LevelJacob2 extends Level {
       ]),
       new BuzzSaw(500, 250, images.pallet.green, 100, [new Waypoint(650, 250, 1), new Waypoint(500, 250, 1)]),
 
-      new BuzzSaw(0, 50, images.pallet.green, 100, [new Waypoint(650, 450, 5), new Waypoint(0, 50, 5)])
+      new BuzzSaw(0, 50, images.pallet.green, 100, [new Waypoint(650, 450, 5), new Waypoint(0, 50, 5)]),
+
+      new BuzzSaw(...tileToWorld(13, 3), images.pallet.yellow, 30, [
+        new Waypoint(...tileToWorld(9, 3), 1),
+        new Waypoint(...tileToWorld(9, 11), 2),
+        new Waypoint(...tileToWorld(5, 11), 1),
+        new Waypoint(...tileToWorld(5, 3), 2),
+      ]),
     ];
   }
 

@@ -7,7 +7,7 @@ class LevelJacob extends Level {
     onscreenSprites.startY = 450;
     onscreenSprites.player = new Player(onscreenSprites.startX, onscreenSprites.startY, images.img.hero);
 
-    onscreenSprites.NextLevel = LevelMark;
+    onscreenSprites.NextLevel = LevelJacob2;
     onscreenSprites.buzzsaws = [
       // yellow left saws
       new BuzzSaw(...tileToWorld(0, 8), images.pallet.yellow, 30, [
