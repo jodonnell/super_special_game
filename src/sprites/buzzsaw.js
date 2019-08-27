@@ -12,7 +12,7 @@ class BuzzSaw {
     this.waypointIndex = 0;
     this.elapsedTime = null;
     this.collisionBounds = new CollisionBoundsRect(this);
-    this.dimensions = new RectDimensions(diameter, diameter);
+    this.dimensions = new RectDimensions(x, y, diameter, diameter);
 
     this.buzzSawNumber = buzzSawNumber;
     buzzSawNumber++;

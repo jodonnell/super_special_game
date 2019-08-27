@@ -8,6 +8,7 @@ class Sprite {
     this.pixelSize = PIXEL_SIZE;
     this.collisionBounds = new CollisionBoundsRect(this);
     this.dimensions = new RectDimensions(
+      x, y,
       this.sprite[0][0].length * this.pixelSize,
       this.sprite[0].length * this.pixelSize
     );

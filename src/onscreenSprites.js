@@ -23,6 +23,7 @@ class OnscreenSprites {
     this.BG = [];
     this.enemies = [];
     this.FX = [];
+    this.electricPoles = [];
     this.uncollidableBackgrounds = [];
     this.NextLevel = null;
   }
@@ -73,6 +74,7 @@ class OnscreenSprites {
       ...this.swappers,
       ...this.fieldSwappers,
       ...this.enemies,
+      ...this.electricPoles,
       this.player,
       this.goal,
       ...this.FX

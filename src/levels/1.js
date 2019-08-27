@@ -7,6 +7,16 @@ class Level1 {
     onscreenSprites.NextLevel = Level2;
     onscreenSprites.goal = new Swapper(...tileToWorld(18, 12), images.pallet.yellow);
     onscreenSprites.walls = this.createWalls();
+
+    onscreenSprites.electricPoles = [
+      new ElectricPoles(
+        [
+          new ElectricPole(180, 520),
+          new ElectricPole(290, 520),
+        ],
+        120
+      ),
+    ];
   }
 
   numWallsToFillBottom() {

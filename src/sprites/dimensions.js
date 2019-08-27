@@ -1,9 +1,9 @@
 class RectDimensions {
-  constructor(width, height) {
+  constructor(x, y, width, height) {
+    this.x = x;
+    this.y = y;
     this.w = width;
     this.h = height;
-    this.x = 0;
-    this.y = 0;
   }
 
   setPos(x, y) {
