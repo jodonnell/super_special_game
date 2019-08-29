@@ -3,7 +3,7 @@ class Beam{
   constructor(x,y,w=40){
     this.x = x;
     this.y = y;
-    this.scale = 4;
+    this.scale = 2;
     this.w = Math.floor(w / this.scale);
   }
 
@@ -38,7 +38,7 @@ class ElectricPoles {
     this.beams = [];
     for (let i = 0; i < this.poles.length - 1; i++) {
       const width = this.poles[i + 1].dimensions.rightSide() - this.poles[i].x;
-      this.beams.push(new Beam(this.poles[i].x + 8, this.poles[i].y, width - 4));
+      this.beams.push(new Beam(this.poles[i].x + 8, this.poles[i].y, width - 16));
     }
   }
 
