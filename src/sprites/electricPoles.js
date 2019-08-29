@@ -32,8 +32,12 @@ class ElectricPoles {
     this.speed = speed;
     this.counter = 0;
     this.burst = false;
-    const width = Math.floor((this.poles[1].dimensions.rightSide() - this.poles[0].x) / 5);
-    this.beam = new Beam(this.poles[0].x + 8, this.poles[0].y, width - 4);
+
+    this.beams = [];
+    for (let i = 0; i < this.poles.length - 1; i++) {
+      const width = Math.floor((this.poles[i + 1].dimensions.rightSide() - this.poles[i].x) / 5);
+      this.beams.push(new Beam(this.poles[i].x + 8, this.poles[i].y, width - 4));
+    }
   }
 
   update() {
@@ -53,6 +57,6 @@ class ElectricPoles {
   }
 
   drawBurst() {
-    this.beam.draw();
+    this.beams.forEach(beam => beam.draw());
   }
 }
