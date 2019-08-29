@@ -40,6 +40,14 @@ class ElectricPoles {
       const width = this.poles[i + 1].dimensions.rightSide() - this.poles[i].x;
       this.beams.push(new Beam(this.poles[i].x + 8, this.poles[i].y, width - 16));
     }
+
+    this.collisionBounds = new CollisionBoundsRect(this);
+    this.dimensions = new RectDimensions(
+      this.poles[0].x,
+      this.poles[0].y,
+      this.poles[1].x,
+      this.poles[0].y + 5
+    );
   }
 
   update() {

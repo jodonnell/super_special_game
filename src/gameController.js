@@ -73,6 +73,7 @@ class GameController {
       return;
     }
     this.checkForBuzzsawDeath();
+    this.checkForElectricPoleDeath();
     this.checkForPlayerOutOfBounds();
   }
 
@@ -105,10 +106,23 @@ class GameController {
       this.onscreenSprites.buzzsaws
     );
 
-    const playerIsAlive = !this.onscreenSprites.player.dead;
-
     const isDifferentColor = connectedBuzzSaw.filter(buzzsaw => this.player().pallet !== buzzsaw.pallet).length > 0;
-    if (playerIsAlive && connectedBuzzSaw.length > 0 && isDifferentColor) {
+    if (connectedBuzzSaw.length > 0 && isDifferentColor) {
+      this.playerDied();
+    }
+  }
+
+  checkForElectricPoleDeath() {
+    const connectedPole = CollisionDetector.doesCollideWithSprites(
+      this.onscreenSprites.player,
+      this.onscreenSprites.electricPoles
+    );
+
+    if (connectedPole.length && !connectedPole[0].burst)
+      return;
+
+    const isDifferentColor = connectedPole.filter(buzzsaw => this.player().pallet !== buzzsaw.pallet).length > 0;
+    if (connectedPole.length > 0 && isDifferentColor) {
       this.playerDied();
     }
   }
