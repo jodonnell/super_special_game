@@ -45,8 +45,8 @@ class ElectricPoles {
     this.dimensions = new RectDimensions(
       this.poles[0].x,
       this.poles[0].y,
-      this.poles[1].x,
-      this.poles[0].y + 5
+      this.poles[1].x - this.poles[0].x,
+      5
     );
   }
 
