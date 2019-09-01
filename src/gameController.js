@@ -181,28 +181,31 @@ class GameController {
   draw(tick) {
     this.clearScreen(tick);
     this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.player().pallet));
-    this.drawLightingEffects();
+    this.lighten(230, 520, 100, '#a6a6a633');
   }
 
-  drawLightingEffects() {
+  lighten(x, y, radius, color) {
     if (this.onscreenSprites.electricPoles.length === 0)
       return;
 
     if (!this.onscreenSprites.electricPoles[0].burst)
       return;
 
-    var myImageData = ctx.getImageData(140, 480, 180, 100);
-
-    var adjustment = 75;
-    var d = myImageData.data;
-    for (var i=0; i<d.length; i+=4) {
-      d[i] += adjustment;
-      d[i+1] += adjustment;
-      d[i+2] += adjustment;
-    }
-    ctx.putImageData(myImageData, 140, 480);
-
+    ctx.save();
+    var rnd = 0.03 * Math.sin(1.1 * Date.now() / 1000);
+    radius = radius * (1 + rnd);
+    ctx.globalCompositeOperation = 'lighter';
+    ctx.fillStyle = '#0B0B00';
+    ctx.beginPath();
+    ctx.arc(x, y, radius, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, radius * 0.90 + rnd, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.restore();
   }
+
 
   clearScreen(tick) {
     if (tick >= 17)
