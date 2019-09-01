@@ -5,7 +5,7 @@ class Level2 {
     onscreenSprites.player = new Player(onscreenSprites.startX, onscreenSprites.startY, images.img.hero);
 
     onscreenSprites.NextLevel = Level2;
-    onscreenSprites.goal = new Swapper(...tileToWorld(18, 12), images.pallet.yellow);
+    onscreenSprites.goal = new Swapper(...tileToWorld(18, 12), ['#ffffff', '#f6f6f6', '#ececec']);
     onscreenSprites.walls = this.createWalls();
   }
 
