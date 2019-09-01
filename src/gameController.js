@@ -181,6 +181,27 @@ class GameController {
   draw(tick) {
     this.clearScreen(tick);
     this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.player().pallet));
+    this.drawLightingEffects();
+  }
+
+  drawLightingEffects() {
+    if (this.onscreenSprites.electricPoles.length === 0)
+      return;
+
+    if (!this.onscreenSprites.electricPoles[0].burst)
+      return;
+
+    var myImageData = ctx.getImageData(140, 480, 180, 100);
+
+    var adjustment = 75;
+    var d = myImageData.data;
+    for (var i=0; i<d.length; i+=4) {
+      d[i] += adjustment;
+      d[i+1] += adjustment;
+      d[i+2] += adjustment;
+    }
+    ctx.putImageData(myImageData, 140, 480);
+
   }
 
   clearScreen(tick) {
