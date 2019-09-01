@@ -65,6 +65,7 @@ class GameController {
       this.onscreenSprites.advanceLevel();
       this.levelTime = 0;
       this.finishedLevel = false;
+      this.player().ui = this.ui;
     }
   }
 
