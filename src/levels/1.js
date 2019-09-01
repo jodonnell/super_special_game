@@ -11,8 +11,10 @@ class Level1 {
     onscreenSprites.electricPoles = [
       new ElectricPoles(
         [
-          new ElectricPole(180, 520),
-          new ElectricPole(290, 520),
+         // new ElectricPole(180, 520),
+         // new ElectricPole(290, 520),
+         new ElectricPole(...tileToWorld(4,13)),
+         new ElectricPole(...tileToWorld(7,13)),
         ],
         120
       ),
