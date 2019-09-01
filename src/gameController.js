@@ -181,10 +181,10 @@ class GameController {
   draw(tick) {
     this.clearScreen(tick);
     this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.player().pallet));
-    this.lighten(230, 520, 100, '#a6a6a633');
+    this.lightenGradient(230, 520, 100);
   }
 
-  lighten(x, y, radius, color) {
+  lightenGradient(x, y, radius) {
     if (this.onscreenSprites.electricPoles.length === 0)
       return;
 
@@ -192,16 +192,18 @@ class GameController {
       return;
 
     ctx.save();
-    var rnd = 0.03 * Math.sin(1.1 * Date.now() / 1000);
-    radius = radius * (1 + rnd);
     ctx.globalCompositeOperation = 'lighter';
-    ctx.fillStyle = '#0B0B00';
+    var rnd = 0.05 * Math.sin(1.1 * Date.now() / 1000);
+    radius = radius * (1 + rnd);
+    var radialGradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
+    radialGradient.addColorStop(0.0, '#BB9');
+    radialGradient.addColorStop(0.2 + rnd, '#AA8');
+    radialGradient.addColorStop(0.7 + rnd, '#330');
+    radialGradient.addColorStop(0.90, '#110');
+    radialGradient.addColorStop(1, '#000');
+    ctx.fillStyle = radialGradient;
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
-    ctx.fill();
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.arc(x, y, radius * 0.90 + rnd, 0, 2 * Math.PI);
     ctx.fill();
     ctx.restore();
   }
