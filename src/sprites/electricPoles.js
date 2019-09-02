@@ -74,4 +74,12 @@ class ElectricPoles {
   drawBurst() {
     this.beams.forEach(beam => beam.draw());
   }
+
+  midPoint() {
+    return Math.floor(this.width() / 2 + this.poles[0].x);
+  }
+
+  width() {
+    return this.poles[1].dimensions.rightSide() - this.poles[0].x;
+  }
 }

@@ -181,16 +181,15 @@ class GameController {
   draw(tick) {
     this.clearScreen(tick);
     this.onscreenSprites.sprites.forEach(sprite => sprite.draw(this.player().pallet));
-    this.lightenGradient(230, 520, 100);
+
+    this.onscreenSprites.electricPoles.forEach(poles => {
+      if (poles.burst)
+        this.lightenGradient(poles.midPoint(), poles.poles[0].y, poles.width() - 25);
+    });
+
   }
 
   lightenGradient(x, y, radius) {
-    if (this.onscreenSprites.electricPoles.length === 0)
-      return;
-
-    if (!this.onscreenSprites.electricPoles[0].burst)
-      return;
-
     ctx.save();
     ctx.globalCompositeOperation = 'lighter';
     var rnd = 0.05 * Math.sin(1.1 * Date.now() / 1000);
