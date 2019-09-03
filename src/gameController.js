@@ -1,7 +1,7 @@
 class GameController {
   constructor(control) {
     this.control = control;
-    this.Level = Level1;
+    this.Level = LevelMarkVision;
     this.onscreenSprites = new OnscreenSprites(this.Level, 0);
     this.ui = new Ui();
     this.player().ui = this.ui;

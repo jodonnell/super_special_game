@@ -9,11 +9,16 @@ class Block extends Sprite {
 }
 
 class BlankBlock {
-  constructor(x, y, width) {
+  constructor(x, y, width=8) {
     this.x = x;
     this.y = y;
-    this.width = width;
+    this.width = width * PIXEL_SIZE;
     this.collisionBounds = new CollisionBoundsRect(this);
+    this.dimensions = new RectDimensions(
+      x, y,
+      width * PIXEL_SIZE,
+      width * PIXEL_SIZE
+    );
   }
 
   update() {}
