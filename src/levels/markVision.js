@@ -11,6 +11,15 @@ class LevelMarkVision {
 
   ground(walls) {
     walls.push(
+      new Block(...tileToWorld(3, 4), images.img.brick),
+      new Block(...tileToWorld(4, 4), images.img.brick),
+
+      new Block(...tileToWorld(7, 7), images.img.brick),
+
+      new Block(...tileToWorld(10, 5), images.img.brick),
+    );
+
+    walls.push(
       new Block(...tileToWorld(0, 9), images.img.brick),
       new BlankBlock(...tileToWorld(1, 9), 8),
       new Block(...tileToWorld(2, 9), images.img.brick),
