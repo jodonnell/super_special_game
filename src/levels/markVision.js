@@ -7,6 +7,14 @@ class LevelMarkVision {
     onscreenSprites.goal = new Swapper(...tileToWorld(18, 12), ['#ffffff', '#f6f6f6', '#ececec']);
 
     this.ground(onscreenSprites.walls);
+
+    this.background(onscreenSprites.BG);
+  }
+
+  background(bg) {
+    bg.push(
+      new BackgroundHill(-10, 120, 160, 250),
+    );
   }
 
   ground(walls) {
