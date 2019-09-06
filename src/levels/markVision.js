@@ -14,6 +14,7 @@ class LevelMarkVision {
   background(bg) {
     bg.push(
       new BackgroundHill(-10, 120, 160, 250),
+      new Line(0, 354, canvas.width, 354, '#000', 10),
     );
   }
 
