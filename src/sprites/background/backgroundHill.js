@@ -4,10 +4,18 @@ class BackgroundHill {
     this.y = y;
     this.width = width;
     this.height = height;
+
+    const quadrents = new Quadrents(x, y, width, height);
+    this.dots = [
+      quadrents.assignPos(),
+      quadrents.assignPos(),
+      quadrents.assignPos(),
+      quadrents.assignPos(),
+    ];
+    this.rectPos = quadrents.assignPos();
   }
 
-  update() {
-  }
+  update() {}
 
   draw() {
     ctx.fillStyle = "#4c1227";
@@ -17,12 +25,20 @@ class BackgroundHill {
     ctx.strokeStyle = "#291221";
     ctx.lineWidth = 5;
 
-    ctx.fillRect(this.x + 40, this.y + 30, 5, 5);
+    this.dot(this.dots[0].x, this.dots[0].y, 5);
+    this.dot(this.dots[1].x, this.dots[1].y, 6);
+    this.dot(this.dots[2].x, this.dots[2].y, 6);
+    this.dot(this.dots[3].x, this.dots[3].y, 10);
 
-    ctx.fillRect(this.x + 43, this.y + 140, 10, 10);
-    ctx.fillRect(this.x + 64, this.y + 136, 6, 6);
-    ctx.fillRect(this.x + 124, this.y + 176, 6, 6);
-
-    ctx.strokeRect(this.x + 100, this.y + 80, 15, 8);
+    this.rect(this.rectPos.x, this.rectPos.y, 6);
   }
+
+  dot(x, y, size) {
+    ctx.fillRect(x, y, size, size);
+  }
+
+  rect(x, y) {
+    ctx.strokeRect(x, y, 15, 8);
+  }
+
 }
