@@ -18,7 +18,7 @@ class BackgroundHill {
   update() {}
 
   draw() {
-    ctx.fillStyle = "#4c1227";
+    ctx.fillStyle = "#37134d";
     ctx.fillRect(this.x, this.y, this.width, this.height);
 
     ctx.fillStyle = "#291221";
