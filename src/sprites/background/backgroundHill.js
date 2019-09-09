@@ -18,8 +18,8 @@ class BackgroundHill {
   update() {}
 
   draw() {
-    ctx.fillStyle = "#37134d";
-    ctx.fillRect(this.x, this.y, this.width, this.height);
+    this.hill();
+    this.shadow();
 
     ctx.fillStyle = "#291221";
     ctx.strokeStyle = "#291221";
@@ -31,6 +31,16 @@ class BackgroundHill {
     this.dot(this.dots[3].x, this.dots[3].y, 10);
 
     this.rect(this.rectPos.x, this.rectPos.y, 6);
+  }
+
+  hill() {
+    ctx.fillStyle = "#37134d";
+    ctx.fillRect(this.x, this.y, this.width, this.height);
+  }
+
+  shadow() {
+    ctx.fillStyle = "#000";
+    ctx.fillRect(this.x - 10, this.y + 10, 10, this.height);
   }
 
   dot(x, y, size) {
