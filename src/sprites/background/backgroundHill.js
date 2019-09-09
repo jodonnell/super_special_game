@@ -30,7 +30,8 @@ class BackgroundHill {
     this.dot(this.dots[2].x, this.dots[2].y, 6);
     this.dot(this.dots[3].x, this.dots[3].y, 10);
 
-    this.rect(this.rectPos.x, this.rectPos.y, 6);
+    if (this.width > 100 && this.height > 100)
+      this.rect(this.rectPos.x, this.rectPos.y, 6);
   }
 
   hill() {
@@ -40,7 +41,7 @@ class BackgroundHill {
 
   shadow() {
     ctx.fillStyle = "#000";
-    ctx.fillRect(this.x - 10, this.y + 10, 10, this.height);
+    ctx.fillRect(this.x - 10, this.y + 10, 10, this.height - 10);
   }
 
   dot(x, y, size) {

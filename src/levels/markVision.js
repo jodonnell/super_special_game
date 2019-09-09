@@ -15,6 +15,7 @@ class LevelMarkVision {
     bg.push(
       new BackgroundHill(-10, 120, 160, 250),
       new BackgroundHill(350, 120, 165, 250),
+      new BackgroundHill(380, 30, 80, 90),
       new Dither(0, 354, canvas.width, 354, '#00000055', 10),
       new Dither(0, 5, canvas.width, 5, '#00000055', 10, false),
     );
