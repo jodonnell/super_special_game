@@ -13,6 +13,12 @@ class LevelMarkVision {
 
   background(bg) {
     bg.push(
+      new BackgroundSquare(10, 10, 150, 2),
+      new BackgroundSquare(160, 60, 100, 1, 10),
+      new BackgroundSquare(360, 160, 100, -1, 10),
+      new BackgroundSquare(500, 280, 80, -2, 40, 6),
+      new BackgroundSquare(560, 80, 120, -2, 40, 6),
+      new BackgroundSquare(760, 280, 120, -2, 40, 6),
       new BackgroundHill(-10, 120, 160, 250),
       new BackgroundHill(350, 120, 165, 250),
       new BackgroundHill(380, 30, 80, 90),
