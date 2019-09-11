@@ -25,6 +25,11 @@ class LevelMarkVision {
       new Dither(0, canvas.height, canvas.width, canvas.height, '#00000055', 10),
       new Dither(0, 5, canvas.width, 5, '#00000055', 10, false),
       new Mushrooms(20, 360, 150, 2),
+      new Mushrooms(34, 360, 150, 2),
+      new Mushrooms(48, 360, 150, 2),
+
+      new Mushrooms(400, 360, 150, 2),
+      new Mushrooms(430, 360, 150, 2),
     );
   }
 
